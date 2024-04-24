@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Activity_Change_Setting extends AppCompatActivity {
     private TextView birthErr, genderErr, phoneNumErr, addressErr, passErr;     //Hiển thị thông báo nhập sai dữ liệu
@@ -40,9 +41,43 @@ public class Activity_Change_Setting extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //M xử lý nhập xuất dữ liệu xong, nếu có lỗi thì mấy biến TextView
-                // thêm .setVisibility(View.VISIBLE); để nó báo lỗi
-                finish();
+                boolean acceptSwitch = true;    //Đúng thì mới trả về Fragmen_Setting
+
+                String regexBirth = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
+                String birth = birthInp.getText().toString();
+                if (!birth.matches(regexBirth)) {
+                    acceptSwitch = false;
+                    birthErr.setVisibility(View.VISIBLE);
+                } else birthErr.setVisibility(View.GONE);
+
+                String gender = genderInp.getText().toString();
+                if (!gender.equals("Nam") && !gender.equals("Nữ")) {
+                    acceptSwitch = false;
+                    genderErr.setVisibility(View.VISIBLE);
+                } else genderErr.setVisibility(View.GONE);
+
+                String regexPhone = "^(\\+[0-9]{1,3}[- ]?)?([0-9]{10,12})$";
+                String phone = phoneInp.getText().toString();
+                if (!phone.matches(regexPhone)) {
+                    acceptSwitch = false;
+                    phoneNumErr.setVisibility(View.VISIBLE);
+                } else phoneNumErr.setVisibility(View.GONE);
+
+                String address = addrInp.getText().toString();
+                if (address.equals("")) {
+                    acceptSwitch = false;
+                    addressErr.setVisibility(View.VISIBLE);
+                } else addressErr.setVisibility(View.GONE);
+
+                String pass = passInp.getText().toString();
+                if (pass.length() < 8) {
+                    acceptSwitch = false;
+                    passErr.setVisibility(View.VISIBLE);
+                } else passErr.setVisibility(View.GONE);
+
+                if (acceptSwitch)
+                    finish();
+                else Toast.makeText(Activity_Change_Setting.this, "Nhập lại", Toast.LENGTH_SHORT).show();
             }
         });
     }

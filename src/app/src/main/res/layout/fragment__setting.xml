@@ -70,7 +70,7 @@
                 android:text="11/11/1111"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="24dp"/>
+                android:textSize="20dp"/>
         </LinearLayout>
 
         <View
@@ -99,7 +99,7 @@
                 android:text="Nam"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="24dp"/>
+                android:textSize="20dp"/>
         </LinearLayout>
 
         <View
@@ -128,7 +128,7 @@
                 android:text="0900000000"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="24dp"/>
+                android:textSize="20dp"/>
         </LinearLayout>
 
         <View
@@ -157,7 +157,7 @@
                 android:text="KTX Khu A, ĐHQG"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="24dp"/>
+                android:textSize="20dp"/>
         </LinearLayout>
 
         <View
@@ -168,13 +168,13 @@
 
         <ImageButton
             android:id="@+id/setting_btn"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_marginTop="18dp"
             android:layout_gravity="center"
+            android:layout_marginTop="18dp"
             android:background="@drawable/rounded_btn"
-            android:src="@drawable/baseline_settings_24"
-            android:contentDescription="Cài đặt"/>
+            android:contentDescription="Cài đặt"
+            android:src="@drawable/baseline_manage_accounts_24" />
 
     </LinearLayout>
 
