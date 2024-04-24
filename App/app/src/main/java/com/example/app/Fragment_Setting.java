@@ -1,0 +1,40 @@
+package com.example.app;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+
+public class Fragment_Setting extends Fragment {
+    private ImageButton settingBtn;
+    private View view;
+    private Activity context;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        context = getActivity();
+        return inflater.inflate(R.layout.fragment__setting, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        settingBtn = context.findViewById(R.id.setting_btn);
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo Intent để chuyển sang Activity Change_Setting
+                Intent intent = new Intent(getActivity(), Activity_Change_Setting.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
