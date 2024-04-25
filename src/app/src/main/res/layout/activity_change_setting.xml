@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_Change_Setting">
+    tools:context=".activity.Activity_Change_Setting">
 
     <ImageView
         android:layout_width="match_parent"

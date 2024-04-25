@@ -1,4 +1,4 @@
-package com.example.app;
+package com.example.app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.app.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class Activity_Main_Screen extends AppCompatActivity {

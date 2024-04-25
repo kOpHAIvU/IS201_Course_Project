@@ -1,4 +1,4 @@
-package com.example.app;
+package com.example.app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.app.R;
 
 public class Activity_Change_Setting extends AppCompatActivity {
     private TextView birthErr, genderErr, phoneNumErr, addressErr, passErr;     //Hiển thị thông báo nhập sai dữ liệu
