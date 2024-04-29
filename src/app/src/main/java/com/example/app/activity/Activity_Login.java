@@ -3,6 +3,7 @@ package com.example.app.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,12 +31,10 @@ public class Activity_Login extends AppCompatActivity {
             public void onClick(View view) {
 
                 // Initialize database
+
                 DataProvider database = new DataProvider(Activity_Login.this);
-                if (database.isDatabaseExists(Activity_Login.this)) {
-                    Log.d("Connect to database", "successfully");
-                } else {
-                    Log.d("Connect to database", "failed");
-                }
+                Log.d("Database Path: ", database.isDatabaseExists(Activity_Login.this));
+
 
                 // handle login event
                 String username = usernameInput.getText().toString();

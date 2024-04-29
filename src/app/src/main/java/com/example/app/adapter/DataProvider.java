@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
 
 public class DataProvider extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT";
+    private static final String DATABASE_NAME = "EnglishCenterManagement.db";
     private static final int DATABASE_VERSION = 1;
 
     public DataProvider(Context context) {
@@ -18,20 +19,26 @@ public class DataProvider extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Create tables here
-        db.execSQL("CREATE TABLE IF NOT EXISTS ACCOUNT (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "username TEXT NOT NULL, " +
-                "password TEXT NOT NULL)");
+        try {
+            db.execSQL("CREATE TABLE IF NOT EXISTS ACCOUNT (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "username TEXT NOT NULL, " +
+                    "password TEXT NOT NULL)");
+            Log.d("Database Creation", "Database created successfully");
+        } catch ( Exception e) {
+            Log.d("Database Creation",  e.getMessage());
+        }
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Xử lý việc nâng cấp cơ sở dữ liệu
+        // Xử lý việc nâng cấp cơ sở dữ liệu12
     }
 
-    public boolean isDatabaseExists(Context context) {
-        File dbFile = context.getDatabasePath("ENGLISH_CENTER_MANAGEMENT");
-        return dbFile.exists();
+    public String isDatabaseExists(Context context) {
+        File dbFile = context.getDatabasePath(DATABASE_NAME);
+        return dbFile.toString();
     }
+
 }
