@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.app.R;
+import com.example.app.adapter.DataProvider;
 
 public class Activity_Login extends AppCompatActivity {
     EditText usernameInput, passwordInput;
@@ -26,13 +28,24 @@ public class Activity_Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Initialize database
+                DataProvider database = new DataProvider(Activity_Login.this);
+                if (database.isDatabaseExists(Activity_Login.this)) {
+                    Log.d("Connect to database", "successfully");
+                } else {
+                    Log.d("Connect to database", "failed");
+                }
+
+                // handle login event
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
                 if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(Activity_Login.this, "All fileds are mandatory", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_Login.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 startActivity(new Intent(Activity_Login.this, Activity_Main_Screen.class));
+
             }
         });
     }
