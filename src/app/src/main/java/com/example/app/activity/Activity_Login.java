@@ -26,15 +26,13 @@ public class Activity_Login extends AppCompatActivity {
         passwordInput = findViewById(R.id.input_password);
         loginBtn = findViewById(R.id.login_btn);
 
+        // Initialize database
+
+        DataProvider database = new DataProvider(Activity_Login.this);
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // Initialize database
-
-                DataProvider database = new DataProvider(Activity_Login.this);
-                Log.d("Database Path: ", database.isDatabaseExists(Activity_Login.this));
-
 
                 // handle login event
                 String username = usernameInput.getText().toString();

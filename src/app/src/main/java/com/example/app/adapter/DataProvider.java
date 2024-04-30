@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class DataProvider extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "EnglishCenterManagement.db";
+    private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static final int DATABASE_VERSION = 1;
 
     public DataProvider(Context context) {
@@ -28,7 +28,6 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("Database Creation",  e.getMessage());
         }
-
     }
 
     @Override
