@@ -41,7 +41,9 @@ public class Activity_Login extends AppCompatActivity {
                     Toast.makeText(Activity_Login.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                startActivity(new Intent(Activity_Login.this, Activity_Main_Screen.class));
+                Intent intent = new Intent(Activity_Login.this, Activity_Main_Screen.class);
+                //intent.putExtra("chucvu", usernameInput.getText().toString());
+                startActivity(intent);
 
             }
         });

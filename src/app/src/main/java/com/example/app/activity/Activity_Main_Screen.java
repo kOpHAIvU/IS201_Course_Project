@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.app.R;
+import com.example.app.adapter.View_Pager_Adapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class Activity_Main_Screen extends AppCompatActivity {
@@ -16,6 +17,9 @@ public class Activity_Main_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+
+        /*Intent intent = getIntent();
+        String value = intent.getStringExtra("chucvu");*/
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPage);

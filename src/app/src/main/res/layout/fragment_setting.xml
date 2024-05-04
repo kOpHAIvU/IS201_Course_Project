@@ -54,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="3dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -83,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="3dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -112,6 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="3dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -155,6 +158,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="KTX Khu A, ĐHQG"
+                android:layout_marginBottom="3dp"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:textSize="20dp"/>
@@ -165,16 +169,31 @@
             android:layout_height="2dp"
             android:layout_marginTop="5dp"
             android:background="#A8A7A7"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center">
 
         <ImageButton
             android:id="@+id/setting_btn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="18dp"
             android:background="@drawable/rounded_btn"
             android:contentDescription="Cài đặt"
             android:src="@drawable/baseline_manage_accounts_24" />
+        <ImageButton
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_btn"
+            android:contentDescription="Đăng xuất"
+            android:src="@drawable/baseline_logout_24" />
+    </LinearLayout>
+
 
     </LinearLayout>
 
