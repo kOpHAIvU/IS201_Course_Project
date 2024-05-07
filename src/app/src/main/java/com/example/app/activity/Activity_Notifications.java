@@ -8,12 +8,12 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
-import com.example.app.adapter.List_Adapter;
-import com.example.app.adapter.List_Class;
-import com.example.app.adapter.List_Education_Program;
-import com.example.app.adapter.List_Notifications;
-import com.example.app.adapter.List_Score;
-import com.example.app.adapter.List_Talented_Student;
+import com.example.app.model.List_Adapter;
+import com.example.app.model.ClassroomDTO;
+import com.example.app.model.CertificateDTO;
+import com.example.app.model.List_Notifications;
+import com.example.app.model.ExamScoreDTO;
+import com.example.app.model.PotentialStudentDTO;
 
 import java.util.ArrayList;
 
@@ -48,12 +48,12 @@ public class Activity_Notifications extends AppCompatActivity {
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_notification_item, dataArrayList);
                 break;
             case "Tra cứu điểm":
-                dataArrayList.add(new List_Score("IS201", "10","9","8","9"));
-                dataArrayList.add(new List_Score("NT106", "9","8","10","10"));
+                dataArrayList.add(new ExamScoreDTO("IS201", "10","9","8","9"));
+                dataArrayList.add(new ExamScoreDTO("NT106", "9","8","10","10"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_score_item, dataArrayList);
                 break;
             case "Tra cứu chương trình đào tạo":
-                dataArrayList.add(new List_Education_Program("IS201",
+                dataArrayList.add(new CertificateDTO("IS201",
                         "Hê hê",
                         "10", "10", "10", "10",
                         "Còn chỗ",
@@ -61,7 +61,7 @@ public class Activity_Notifications extends AppCompatActivity {
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_education_program_item, dataArrayList);
                 break;
             case "Tra cứu lớp học":
-                dataArrayList.add(new List_Class("IS201","Môn gì đó",
+                dataArrayList.add(new ClassroomDTO("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
                         "B4.04","Đoán coi","Nhật Quỳnh"));
@@ -69,7 +69,7 @@ public class Activity_Notifications extends AppCompatActivity {
                 break;
             //Nhân viên ghi danh
             case "Quản lý thông tin học viên":
-                dataArrayList.add(new List_Talented_Student("Tuyết Loan", "0912345678"
+                dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
                         , "Nam", "Ký túc xá khu A"
                         , "Chưa học", "10"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_talented_student_item, dataArrayList);

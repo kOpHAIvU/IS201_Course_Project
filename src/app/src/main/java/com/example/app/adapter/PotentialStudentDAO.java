@@ -2,8 +2,6 @@ package com.example.app.adapter;
 
 import android.content.Context;
 
-import com.example.app.model.PotentialStudentDTO;
-
 public class PotentialStudentDAO {
     public static PotentialStudentDAO instance;
     private DataProvider dbHelper;

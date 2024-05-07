@@ -7,7 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.app.R;
-import com.example.app.adapter.View_Pager_Adapter;
+import com.example.app.model.View_Pager_Adapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class Activity_Main_Screen extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.app.adapter;
+package com.example.app.model;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

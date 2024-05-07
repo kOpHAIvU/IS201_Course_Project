@@ -1,4 +1,4 @@
-package com.example.app.adapter;
+package com.example.app.model;
 
 public class List_Notifications {
     String title, poster, description;

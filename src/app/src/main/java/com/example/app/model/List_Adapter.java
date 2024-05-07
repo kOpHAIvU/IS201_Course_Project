@@ -1,4 +1,4 @@
-package com.example.app.adapter;
+package com.example.app.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -81,7 +81,7 @@ public class List_Adapter extends ArrayAdapter {
                 listen = convertView.findViewById(R.id.listening_score);
                 read = convertView.findViewById(R.id.reading_score);
 
-                List_Score listScore = (List_Score) arrayDataList.get(position);
+                ExamScoreDTO listScore = (ExamScoreDTO) arrayDataList.get(position);
 
                 courseID.setText(listScore.courseID);
                 speak.setText(listScore.speak);
@@ -100,7 +100,7 @@ public class List_Adapter extends ArrayAdapter {
                 state = convertView.findViewById(R.id.state);
                 programDescrip = convertView.findViewById(R.id.program_description);
 
-                List_Education_Program listEducationProgram = (List_Education_Program) arrayDataList.get(position);
+                CertificateDTO listEducationProgram = (CertificateDTO) arrayDataList.get(position);
 
                 programID.setText(listEducationProgram.programID);
                 programName.setText(listEducationProgram.programName);
@@ -123,7 +123,7 @@ public class List_Adapter extends ArrayAdapter {
                 programID1 = convertView.findViewById(R.id.programID);
                 staffID = convertView.findViewById(R.id.staffID);
 
-                List_Class listClass = (List_Class) arrayDataList.get(position);
+                ClassroomDTO listClass = (ClassroomDTO) arrayDataList.get(position);
 
                 classID.setText(listClass.classID);
                 className.setText(listClass.className);
@@ -144,7 +144,7 @@ public class List_Adapter extends ArrayAdapter {
                 address = convertView.findViewById(R.id.state);
                 appointmentNumber = convertView.findViewById(R.id.appointment_number);
 
-                List_Talented_Student listTalentedStudent = (List_Talented_Student) arrayDataList.get(position);
+                PotentialStudentDTO listTalentedStudent = (PotentialStudentDTO) arrayDataList.get(position);
 
                 studentName.setText(listTalentedStudent.studentName);
                 phoneNumber.setText(listTalentedStudent.phoneNumber);
@@ -165,13 +165,13 @@ public class List_Adapter extends ArrayAdapter {
             return 0;
         else if (item instanceof  List_Notifications)
             return 1;
-        else if (item instanceof  List_Score)
+        else if (item instanceof ExamScoreDTO)
             return 2;
-        else if (item instanceof  List_Education_Program)
+        else if (item instanceof CertificateDTO)
             return 3;
-        else if (item instanceof  List_Class)
+        else if (item instanceof ClassroomDTO)
             return 4;
-        else if (item instanceof  List_Talented_Student)
+        else if (item instanceof PotentialStudentDTO)
             return 5;
         else
             throw new IllegalArgumentException("Unknown data type: " + item.getClass().getName());

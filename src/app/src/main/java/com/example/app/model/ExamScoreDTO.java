@@ -1,6 +1,6 @@
-package com.example.app.adapter;
+package com.example.app.model;
 
-public class List_Score {
+public class ExamScoreDTO {
     String courseID, speak, write, listen, read;
 
     public String getCourseID() {
@@ -23,7 +23,7 @@ public class List_Score {
         return read;
     }
 
-    public List_Score(String courseID, String speak, String write, String listen, String read) {
+    public ExamScoreDTO(String courseID, String speak, String write, String listen, String read) {
         this.courseID = courseID;
         this.speak = speak;
         this.write = write;

@@ -12,8 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.app.R;
-import com.example.app.adapter.List_Adapter;
-import com.example.app.adapter.List_Information;
+import com.example.app.model.List_Adapter;
+import com.example.app.model.List_Information;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
-package com.example.app.adapter;
+package com.example.app.model;
 
-public class List_Class {
+public class ClassroomDTO {
     String classID, className, level, lectureName, schoolTime, tuition, roomID, programID, staffID;
 
     public String getClassID() {
@@ -39,7 +39,7 @@ public class List_Class {
         return staffID;
     }
 
-    public List_Class(String classID, String className, String level, String lectureName, String schoolTime, String tuition, String roomID, String programID, String staffID) {
+    public ClassroomDTO(String classID, String className, String level, String lectureName, String schoolTime, String tuition, String roomID, String programID, String staffID) {
         this.classID = classID;
         this.className = className;
         this.level = level;

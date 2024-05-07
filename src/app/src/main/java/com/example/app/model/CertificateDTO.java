@@ -1,6 +1,6 @@
-package com.example.app.adapter;
+package com.example.app.model;
 
-public class List_Education_Program {
+public class CertificateDTO {
     String programID, programName, speak, write, read, listen, state, description;
 
     public String getProgramID() {
@@ -35,7 +35,7 @@ public class List_Education_Program {
         return description;
     }
 
-    public List_Education_Program(String programID, String programName, String speak, String write, String read, String listen, String state, String description) {
+    public CertificateDTO(String programID, String programName, String speak, String write, String read, String listen, String state, String description) {
         this.programID = programID;
         this.programName = programName;
         this.speak = speak;
