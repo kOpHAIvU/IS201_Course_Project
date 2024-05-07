@@ -2,6 +2,7 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -12,7 +13,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -210,7 +211,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "USERNAME TEXT, " +
                     "PASSWORD TEXT," +
                     "FOREIGN KEY (ID_USER) REFERENCES OFFICAL_STUDENT(ID_STUDENT)," +
-                    "FOREIGN KEY (ID_USER) REFERENCES TEACHER(ID_TEACHER)," +
+                    "FOREIGN KEY (ID_USER) REFERENCES TEACHERS(ID_TEACHER)," +
                     "FOREIGN KEY (ID_USER) REFERENCES STAFF(ID_STAFF) )");
             Log.d("CREATE ACCOUNT", "Database created successfully");
         } catch ( Exception e) {
@@ -262,28 +263,10 @@ public class DataProvider extends SQLiteOpenHelper {
         return rowsUpdated;
     }
 
-    /*public void insertAccount(String idAccount, String idUser, String username, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("ID_ACCOUNT", idAccount);
-        values.put("ID_USER", idUser);
-        values.put("USERNAME", username);
-        values.put("PASSWORD", password);
-        long newRowId = db.insert("ACCOUNT", null, values);
-        db.close();
-    }*/
-
-    /*public void insertOfficialStudentDAO(String idStudent, String fullName, String address, String phoneNumber, String gender, int status) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("ID_STUDENT", idStudent);
-        values.put("FULLNAME", fullName);
-        values.put("ADDRESS", address);
-        values.put("PHONE_NUMBER", phoneNumber);
-        values.put("GENDER", gender);
-        values.put("STATUS", status);
-        long newRowId = db.insert("OFFICIAL_STUDENT", null, values);
-        db.close();
-    }*/
+    public Cursor selectData (String tableName, String[] columns, String whereClause, String[] whereArgs, String groupBy) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(tableName, columns, whereClause, whereArgs, groupBy, null, null);
+        return cursor;
+    }
 
 }

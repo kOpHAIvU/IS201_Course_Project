@@ -3,6 +3,7 @@ package com.example.app.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,10 +48,20 @@ public class Activity_Login extends AppCompatActivity {
                 String password = passwordInput.getText().toString();
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(Activity_Login.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
-                    return;
+                } else {
+
+                    String whereClause = "USERNAME = ? AND PASSWORD = ?";
+                    String[] whereArgs = new String[] {username, password};
+                    Cursor cursor = AccountDAO.getInstance(Activity_Login.this).selectAccount(Activity_Login.this, whereClause, whereArgs);
+
+                    if (cursor!= null && cursor.getCount() > 0) {
+                        Intent intent = new Intent(Activity_Login.this, Activity_Main_Screen.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(Activity_Login.this, "Please enter correct username and password", Toast.LENGTH_SHORT).show();
+                    }
+                    cursor.close();
                 }
-                Intent intent = new Intent(Activity_Login.this, Activity_Main_Screen.class);
-                startActivity(intent);
 
             }
         });
@@ -82,7 +93,20 @@ public class Activity_Login extends AppCompatActivity {
         // Insert data ACCOUNT
 
         AccountDTO account1 = new AccountDTO("ACC1", "STA1", "nguyenthic", "thic123");
+        AccountDTO account2 = new AccountDTO("ACC2", "STA2", "nguyenthid", "thid123");
+        AccountDTO account3 = new AccountDTO("ACC3", "TEA1", "nguyenthie", "thie123");
+        AccountDTO account4 = new AccountDTO("ACC4", "TEA2", "nguyenthig", "thig123");
+        AccountDTO account5 = new AccountDTO("ACC5", "STA1", "nguyenthia", "thia123");
+        AccountDTO account6 = new AccountDTO("ACC6", "STA2", "nguyenthib", "thib123");
 
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account1);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account2);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account3);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account4);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account5);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account6);
+
+        //Cursor selectAccount(Context context, String whereClause, String[] whereArgs)
 
     }
 }

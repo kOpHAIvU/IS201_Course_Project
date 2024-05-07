@@ -2,6 +2,7 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.example.app.model.AccountDTO;
@@ -17,15 +18,11 @@ public class AccountDAO {
     }
 
     public void insertAccount(Context context, AccountDTO accountDTO) {
-        String idAccount = accountDTO.getIdAccount();
-        String username = accountDTO.getIdUser();
-        String password = accountDTO.getPassWord();
-        String idUser = accountDTO.getIdUser();
         ContentValues values = new ContentValues();
-        values.put("ID_ACCOUNT", idAccount);
-        values.put("ID_USER", idUser);
-        values.put("USERNAME", username);
-        values.put("PASSWORD", password);
+        values.put("ID_ACCOUNT", accountDTO.getIdAccount());
+        values.put("ID_USER", accountDTO.getIdUser());
+        values.put("USERNAME", accountDTO.getUserName());
+        values.put("PASSWORD", accountDTO.getPassWord());
         try {
             int rowEffect = DataProvider.getInstance(context).insertData("ACCOUNT", values);
             if (rowEffect > 0 ) {
@@ -47,7 +44,7 @@ public class AccountDAO {
                 Log.d("Delete Account: ", "Fail");
             }
         } catch (Exception e) {
-            Log.d("Insert Account Error: ", e.getMessage());
+            Log.d("Delete Account Error: ", e.getMessage());
         }
     }
 
@@ -68,6 +65,16 @@ public class AccountDAO {
         } catch (Exception e) {
             Log.e("Update Account Error: ", e.getMessage());
         }
+    }
+    //String tableName, String[] columns, String whereClause, String[] whereArgs, String groupBy
+    public Cursor selectAccount(Context context, String whereClause, String[] whereArgs) {
+        Cursor cursor = null;
+        try {
+            cursor = DataProvider.getInstance(context).selectData("ACCOUNT", new String[]{"*"},  whereClause, whereArgs, null);
+        }catch(Exception e) {
+            Log.d("Select Account: ", e.getMessage());
+        }
+        return cursor;
     }
 
 }
