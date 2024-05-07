@@ -1,5 +1,6 @@
 package com.example.app.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,28 +10,25 @@ import java.io.File;
 import java.io.IOException;
 
 public class DataProvider extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "ENGLISH_CENTER.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
+    private static DataProvider instance;
+    private static final int DATABASE_VERSION = 8;
+    private DataProvider(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    public static synchronized DataProvider getInstance(Context context) {
+        if (instance == null) {
+            instance = new DataProvider(context);
+        }
+        return instance;
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
 
-    public DataProvider(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        // Create tables here
-        /*try {
-            db.execSQL("CREATE TABLE IF NOT EXISTS ACCOUNT (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "username TEXT NOT NULL, " +
-                    "password TEXT NOT NULL)");
-            Log.d("Database Creation", "Database created successfully");
-        } catch ( Exception e) {
-            Log.d("Database Creation",  e.getMessage());
-        }*/
-
-        db.execSQL("DROP TABLE IF EXISTS ACCOUNT");
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS CERTIFICATE (" +
                     "ID_CERTIFICATE TEXT PRIMARY KEY, " +
@@ -40,12 +38,12 @@ public class DataProvider extends SQLiteOpenHelper {
                     "STATUS INTEGER)");
             Log.d("CREATE CERTIFICATE", "Database created successfully");
         } catch ( Exception e) {
-            Log.d("CREATE CERTIFICATE",  e.getMessage());
+            Log.d("EXCEPTION CREATE CERTIFICATE",  e.getMessage());
         }
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS STAFF (" +
-                    "ID_STUDENT TEXT PRIMARY KEY, " +
+                    "ID_STAFF TEXT PRIMARY KEY, " +
                     "FULLNAME TEXT, " +
                     "ADDRESS TEXT, " +
                     "PHONE_NUMBER TEXT, " +
@@ -55,7 +53,6 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("CREATE STAFF",  e.getMessage());
         }
-
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS TEACHERS (" +
@@ -232,14 +229,61 @@ public class DataProvider extends SQLiteOpenHelper {
 
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Xử lý việc nâng cấp cơ sở dữ liệu12
+    public void recreateDatabase(Context context) {
+        File dbFile = new File(getWritableDatabase().getPath());
+        Log.d("Database path: ", dbFile.toString());
+        if (!dbFile.exists()) {
+            // Nếu file không tồn tại, khởi tạo lại cơ sở dữ liệu
+            SQLiteDatabase db = getWritableDatabase();
+            onCreate(db);
+        }
     }
 
-    public String isDatabaseExists(Context context) {
-        File dbFile = context.getDatabasePath(DATABASE_NAME);
-        return dbFile.toString();
+    public int insertData(String tableName, ContentValues contentValues) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int newRowId = (int)db.insert(tableName, null, contentValues);
+        db.close();
+
+        return newRowId;
     }
+
+    public int deleteData(String tableName, String whereClause, String[] whereArgs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(tableName, whereClause, whereArgs);
+        db.close();
+
+        return rowsDeleted;
+    }
+
+    public int updateData(String tableName, ContentValues contentValues, String whereClause, String[] whereArgs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsUpdated = db.update(tableName, contentValues, whereClause, whereArgs);
+        db.close();
+        return rowsUpdated;
+    }
+
+    /*public void insertAccount(String idAccount, String idUser, String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("ID_ACCOUNT", idAccount);
+        values.put("ID_USER", idUser);
+        values.put("USERNAME", username);
+        values.put("PASSWORD", password);
+        long newRowId = db.insert("ACCOUNT", null, values);
+        db.close();
+    }*/
+
+    /*public void insertOfficialStudentDAO(String idStudent, String fullName, String address, String phoneNumber, String gender, int status) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("ID_STUDENT", idStudent);
+        values.put("FULLNAME", fullName);
+        values.put("ADDRESS", address);
+        values.put("PHONE_NUMBER", phoneNumber);
+        values.put("GENDER", gender);
+        values.put("STATUS", status);
+        long newRowId = db.insert("OFFICIAL_STUDENT", null, values);
+        db.close();
+    }*/
 
 }
