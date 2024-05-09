@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -66,13 +67,6 @@ public class Activity_Notifications extends AppCompatActivity {
                         "10 buổi", "10.000.000",
                         "B4.04","Đoán coi","Nhật Quỳnh"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_class_item, dataArrayList);
-                break;
-            //Nhân viên ghi danh
-            case "Quản lý thông tin học viên":
-                dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
-                        , "Nam", "Ký túc xá khu A"
-                        , "Chưa học", "10"));
-                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_talented_student_item, dataArrayList);
                 break;
             //Nhân viên học vụ
             case "Quản lý lớp học":

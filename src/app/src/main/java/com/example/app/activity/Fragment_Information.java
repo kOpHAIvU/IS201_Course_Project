@@ -60,8 +60,14 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         List_Information selectedData = (List_Information) listAdapter.getItem(position);
         String selectedText = selectedData.getName();
-        Intent intent = new Intent(getContext(), Activity_Notifications.class);
-        intent.putExtra("message", selectedText);
+        Intent intent;
+        if (selectedText == "Thông báo hệ thống" || selectedText == "Tra cứu điểm" || selectedText == "Tra cứu chương trình đào tạo" || selectedText == "Tra cứu lớp học") {
+            intent = new Intent(getContext(), Activity_Notifications.class);
+            intent.putExtra("message", selectedText);
+        } else {
+            intent = new Intent(getContext(), Activity_Notifications_ToolBars.class);
+            intent.putExtra("message", selectedText);
+        }
         startActivity(intent);
     }
 }

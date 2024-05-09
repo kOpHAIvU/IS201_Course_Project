@@ -1,10 +1,15 @@
 package com.example.app.model;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,12 +17,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.app.R;
+import com.example.app.activity.Activity_Add_Potential_Student;
+import com.example.app.activity.Activity_Notifications_ToolBars;
 
 import java.util.ArrayList;
 
 public class List_Adapter extends ArrayAdapter {
     private Context mContext;
     private ArrayList<Object> arrayDataList;
+
     public List_Adapter(@NonNull Context context,int idLayout, ArrayList<Object> arrayDataList) {
         super(context, idLayout, arrayDataList);
         mContext = context;
@@ -46,7 +54,7 @@ public class List_Adapter extends ArrayAdapter {
                     convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_class_item, parent, false);
                     break;
                 case 5:
-                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_talented_student_item, parent, false);
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_potential_student_item, parent, false);
                     break;
             }
         }
@@ -135,13 +143,14 @@ public class List_Adapter extends ArrayAdapter {
                 programID1.setText(listClass.programID);
                 staffID.setText(listClass.staffID);
                 break;
-            case 5:     //Kiểu List_Talented_Student
-                TextView studentName, phoneNumber, gender, address, state1, appointmentNumber;
+            case 5:     //Kiểu PotentialStudentDTO
+                TextView studentName, phoneNumber, gender, address, state1, level1, appointmentNumber;
                 studentName = convertView.findViewById(R.id.student_name);
                 phoneNumber = convertView.findViewById(R.id.phone_number);
                 gender = convertView.findViewById(R.id.gender);
                 state1 = convertView.findViewById(R.id.state);
-                address = convertView.findViewById(R.id.state);
+                level1 = convertView.findViewById(R.id.level);
+                address = convertView.findViewById(R.id.address);
                 appointmentNumber = convertView.findViewById(R.id.appointment_number);
 
                 PotentialStudentDTO listTalentedStudent = (PotentialStudentDTO) arrayDataList.get(position);
@@ -150,10 +159,62 @@ public class List_Adapter extends ArrayAdapter {
                 phoneNumber.setText(listTalentedStudent.phoneNumber);
                 gender.setText(listTalentedStudent.gender);
                 state1.setText(listTalentedStudent.state);
+                level1.setText(listTalentedStudent.level);
                 address.setText(listTalentedStudent.address);
                 appointmentNumber.setText(listTalentedStudent.appointmentNumber);
-                break;
 
+                Button removePotentialStudent, editPotentialStudent;
+
+                removePotentialStudent = convertView.findViewById(R.id.remove_potential_student);
+                removePotentialStudent.setTag(position);
+                removePotentialStudent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setTitle("Xác nhận xóa");
+                        builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                        // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int position = (int) v.getTag();
+                                arrayDataList.remove(position);
+                                notifyDataSetChanged();
+                            }
+                        });
+
+                        // Nút "Hủy": Không làm gì cả, đóng dialog
+                        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        // Tạo và hiển thị AlertDialog
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                });
+
+                editPotentialStudent = convertView.findViewById(R.id.edit_potential_student);
+                editPotentialStudent.setTag(position);
+                editPotentialStudent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = (int) v.getTag();
+                        Intent addPotential = new Intent(getContext(), Activity_Add_Potential_Student.class);
+                        addPotential.putExtra("studentName", studentName.getText());
+                        addPotential.putExtra("phoneNumber", phoneNumber.getText());
+                        addPotential.putExtra("gender", gender.getText());
+                        addPotential.putExtra("state", state1.getText());
+                        addPotential.putExtra("level", level1.getText());
+                        addPotential.putExtra("address", address.getText());
+                        addPotential.putExtra("appointmentNumber", appointmentNumber.getText());
+                        mContext.startActivity(addPotential);
+                    }
+                });
+                break;
         }
         return convertView;
     }
