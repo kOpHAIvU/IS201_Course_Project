@@ -26,7 +26,9 @@ import com.example.app.model.TeacherDTO;
 public class Activity_Login extends AppCompatActivity {
     EditText usernameInput, passwordInput;
     Button loginBtn;
-
+    public static String idUser;
+    public static String password;
+    public static String username;
     public static String idAccount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,8 @@ public class Activity_Login extends AppCompatActivity {
             public void onClick(View view) {
 
                 // handle login event
-                String username = usernameInput.getText().toString();
-                String password = passwordInput.getText().toString();
+                username = usernameInput.getText().toString();
+                password = passwordInput.getText().toString();
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(Activity_Login.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
                 } else {
@@ -67,7 +69,11 @@ public class Activity_Login extends AppCompatActivity {
                         do {
                             int idIndex = cursor.getColumnIndex("ID_USER");
                             if (idIndex!= -1) {
-                                idAccount = cursor.getString(idIndex);
+                                idUser = cursor.getString(idIndex);
+                            }
+                            int idAccIndex = cursor.getColumnIndex("ID_ACCOUNT");
+                            if (idAccIndex!= -1) {
+                                idAccount= cursor.getString(idAccIndex);
                             }
 
                         } while (cursor.moveToNext());

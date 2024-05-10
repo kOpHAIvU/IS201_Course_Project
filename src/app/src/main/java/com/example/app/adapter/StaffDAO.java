@@ -54,7 +54,7 @@ public class StaffDAO {
         }
     }
 
-    public void updateStaff(Context context, StaffDTO staff, String whereClause, String[] whereArgs) {
+    public int updateStaff(Context context, StaffDTO staff, String whereClause, String[] whereArgs) {
         ContentValues values = new ContentValues();
         values.put("ID_STAFF", staff.getIdStaff());
         values.put("FULLNAME", staff.getFullName());
@@ -66,14 +66,11 @@ public class StaffDAO {
 
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("STAFF", values, whereClause, whereArgs);
-            if (rowsUpdated > 0) {
-                Log.d("Update Staff: ", "Success");
-            } else {
-                Log.d("Update Staff: ", "No rows updated");
-            }
+            return rowsUpdated;
         } catch (Exception e) {
             Log.e("Update Staff Error: ", e.getMessage());
         }
+        return 0;
     }
 
     public Cursor SelectStaff(Context context, String whereClause, String[] whereArgs) {

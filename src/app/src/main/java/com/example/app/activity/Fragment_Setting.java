@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.app.R;
 import com.example.app.adapter.AccountDAO;
+import com.example.app.adapter.OfficialStudentDAO;
+import com.example.app.adapter.StaffDAO;
 import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.StaffDTO;
 
@@ -28,9 +30,9 @@ public class Fragment_Setting extends Fragment {
     private ImageButton settingBtn, logoutBtn;
     private View view;
     private Activity context;
-    TextView gender;
-    TextView phoneNumber;
-    TextView address;
+    TextView genderText;
+    TextView phoneNumberText;
+    TextView addressText;
     TextView name;
     TextView position;
     @Override
@@ -46,27 +48,98 @@ public class Fragment_Setting extends Fragment {
     public void onStart() {
         super.onStart();
 
-        gender = context.findViewById(R.id.gender);
-        phoneNumber = context.findViewById(R.id.phone_number);
-        address = context.findViewById(R.id.address);
+        genderText = context.findViewById(R.id.gender);
+        phoneNumberText = context.findViewById(R.id.phone_number);
+        addressText = context.findViewById(R.id.address);
         name = context.findViewById(R.id.name);
         position = context.findViewById(R.id.position);
 
-        if (Activity_Main_Screen.flag == 1) {
-            OfficialStudentDTO student = Activity_Main_Screen.student;
-            gender.setText(student.getGender());
-            phoneNumber.setText(student.getPhoneNumber());
-            address.setText(student.getAddress());
-            name.setText(student.getFullName());
-            position.setText("Học viên");
-        } else {
-            StaffDTO staff = Activity_Main_Screen.staff;
-            gender.setText(staff.getGender());
-            phoneNumber.setText(staff.getPhoneNumber());
-            address.setText(staff.getAddress());
-            name.setText(staff.getFullName());
-            position.setText("Nhân viên");
+        String idUser = Activity_Login.idUser;
+        String titleIdAccount = idUser.substring(0, idUser.length() - 1) ;
+
+        String fullName = "";
+        String address = "";
+        String phoneNumber = "";
+        String gender = "";
+        int type = 0;
+        String positionText = "";
+
+        if (titleIdAccount.equals("STU")) {
+            Log.d("Student Yeah", "success");
+
+            String whereClause = "ID_STUDENT = ?";
+            String[] whereArgs = new String[] {idUser};
+            Cursor cursor = OfficialStudentDAO.getInstance(context).SelectStudent(context, whereClause, whereArgs);
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    int fullNameIndex = cursor.getColumnIndex("FULLNAME");
+                    if (fullNameIndex!= -1) {
+                        fullName = cursor.getString(fullNameIndex);
+                    }
+                    int addressIndex = cursor.getColumnIndex("ADDRESS");
+                    if (addressIndex!= -1) {
+                        address = cursor.getString(addressIndex);
+                    }
+                    int phoneNumberIndex = cursor.getColumnIndex("PHONE_NUMBER");
+                    if (phoneNumberIndex != -1) {
+                        phoneNumber = cursor.getString(phoneNumberIndex);
+                    }
+                    int genderIndex = cursor.getColumnIndex("GENDER");
+                    if (genderIndex != -1) {
+                        gender = cursor.getString(genderIndex);
+                    }
+                    positionText = "Học viên";
+                    Log.d("Find Student", fullName + " " + address + " " + phoneNumber + " " + gender);
+
+                } while (cursor.moveToNext());
+            }
+
+        }else {
+            Log.d("Shift Staff X", "success");
+            String whereClause = "ID_STAFF = ?";
+            String[] whereArgs = new String[] {idUser};
+            Cursor cursor = StaffDAO.getInstance(context).SelectStaff(context, whereClause, whereArgs);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    int fullNameIndex = cursor.getColumnIndex("FULLNAME");
+                    if (fullNameIndex!= -1) {
+                        fullName = cursor.getString(fullNameIndex);
+                    }
+                    int addressIndex = cursor.getColumnIndex("ADDRESS");
+                    if (addressIndex!= -1) {
+                        address = cursor.getString(addressIndex);
+                    }
+                    int phoneNumberIndex = cursor.getColumnIndex("PHONE_NUMBER");
+                    if (phoneNumberIndex != -1) {
+                        phoneNumber = cursor.getString(phoneNumberIndex);
+                    }
+                    int genderIndex = cursor.getColumnIndex("GENDER");
+                    if (genderIndex != -1) {
+                        gender = cursor.getString(genderIndex);
+                    }
+                    int typeIndex = cursor.getColumnIndex("TYPE");
+                    if (typeIndex != -1) {
+                        type = cursor.getInt(typeIndex);
+                        if (type == 1) {
+                            positionText = "Quản lý";
+                        } else if (type == 2) {
+                            positionText = "Nhân viên học vụ";
+                        } else {
+                            positionText = "Nhân viên điểm danh";
+                        }
+                    }
+                } while (cursor.moveToNext());
+            }
         }
+
+        genderText.setText(gender);
+        phoneNumberText.setText(phoneNumber);
+        addressText.setText(address);
+        name.setText(fullName);
+        position.setText(positionText);
 
         settingBtn = context.findViewById(R.id.setting_btn);
         logoutBtn = context.findViewById(R.id.logout_btn);

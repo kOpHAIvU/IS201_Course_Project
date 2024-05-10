@@ -60,7 +60,7 @@ public class OfficialStudentDAO {
         }
     }
 
-    public void updateOfficialStudent(Context context, OfficialStudentDTO student, String whereClause, String[] whereArgs) {
+    public int updateOfficialStudent(Context context, OfficialStudentDTO student, String whereClause, String[] whereArgs) {
         String idStudent = student.getIdStudent();
         String fullName = student.getFullName();
         String address = student.getFullName();
@@ -78,14 +78,11 @@ public class OfficialStudentDAO {
 
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("OFFICIAL_STUDENT", values, whereClause, whereArgs);
-            if (rowsUpdated > 0) {
-                Log.d("Update Official Student: ", "Success");
-            } else {
-                Log.d("Update Official Student: ", "No rows updated");
-            }
+            return rowsUpdated;
         } catch (Exception e) {
             Log.e("Update Official Student Error: ", e.getMessage());
         }
+        return 0;
     }
 
     public Cursor SelectStudent (Context context, String whereClause, String[] whereArgs) {

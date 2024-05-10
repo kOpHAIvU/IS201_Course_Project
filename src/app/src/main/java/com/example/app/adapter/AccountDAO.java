@@ -35,20 +35,17 @@ public class AccountDAO {
         }
     }
 
-    public void deleteAccount(Context context, String whereClause, String[] whereArgs)  {
+    public int deleteAccount(Context context, String whereClause, String[] whereArgs)  {
         try {
             int rowEffect = DataProvider.getInstance(context).deleteData("ACCOUNT",whereClause, whereArgs);
-            if (rowEffect > 0) {
-                Log.d("Delete Account: ", "success");
-            } else {
-                Log.d("Delete Account: ", "Fail");
-            }
+            return rowEffect;
         } catch (Exception e) {
             Log.d("Delete Account Error: ", e.getMessage());
         }
+        return 0;
     }
 
-    public void updateAccount(Context context, AccountDTO accountDTO, String whereClause, String[] whereArgs) {
+    public int updateAccount(Context context, AccountDTO accountDTO, String whereClause, String[] whereArgs) {
         ContentValues values = new ContentValues();
         values.put("ID_ACCOUNT", accountDTO.getIdAccount());
         values.put("ID_USER", accountDTO.getIdUser());
@@ -57,15 +54,13 @@ public class AccountDAO {
 
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("ACCOUNT", values, whereClause, whereArgs);
-            if (rowsUpdated > 0) {
-                Log.d("Update Account: ", "Success");
-            } else {
-                Log.d("Update Account: ", "No rows updated");
-            }
+            return rowsUpdated;
         } catch (Exception e) {
             Log.e("Update Account Error: ", e.getMessage());
         }
+        return 0;
     }
+
     //String tableName, String[] columns, String whereClause, String[] whereArgs, String groupBy
     public Cursor selectAccount(Context context, String whereClause, String[] whereArgs) {
         Cursor cursor = null;
