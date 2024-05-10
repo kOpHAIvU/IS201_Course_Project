@@ -2,6 +2,7 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.example.app.model.OfficialStudentDTO;
@@ -24,6 +25,7 @@ public class StaffDAO {
         values.put("FULLNAME", staff.getFullName());
         values.put("ADDRESS",staff.getAddress());
         values.put("PHONE_NUMBER", staff.getPhoneNumber());
+        values.put("GENDER", staff.getGender());
         values.put("TYPE", staff.getType());
         values.put("STATUS", staff.getStatus());
 
@@ -58,6 +60,7 @@ public class StaffDAO {
         values.put("FULLNAME", staff.getFullName());
         values.put("ADDRESS",staff.getAddress());
         values.put("PHONE_NUMBER", staff.getPhoneNumber());
+        values.put("GENDER", staff.getGender());
         values.put("TYPE", staff.getType());
         values.put("STATUS", staff.getStatus());
 
@@ -71,5 +74,15 @@ public class StaffDAO {
         } catch (Exception e) {
             Log.e("Update Staff Error: ", e.getMessage());
         }
+    }
+
+    public Cursor SelectStaff(Context context, String whereClause, String[] whereArgs) {
+        Cursor cursor = null;
+        try {
+            cursor = DataProvider.getInstance(context).selectData("STAFF", new String[]{"*"},  whereClause, whereArgs, null);
+        }catch(Exception e) {
+            Log.d("Select Staff: ", e.getMessage());
+        }
+        return cursor;
     }
 }

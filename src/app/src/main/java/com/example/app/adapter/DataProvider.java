@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 20;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -48,6 +48,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "FULLNAME TEXT, " +
                     "ADDRESS TEXT, " +
                     "PHONE_NUMBER TEXT, " +
+                    "GENDER TEXT, " +
                     "TYPE TEXT," +
                     "STATUS INTEGER)");
             Log.d("CREATE STAFF", "Database created successfully");
@@ -227,6 +228,7 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("CREATE REPORT",  e.getMessage());
         }
+        db.execSQL("delete from OFFICIAL_STUDENT");
 
     }
 

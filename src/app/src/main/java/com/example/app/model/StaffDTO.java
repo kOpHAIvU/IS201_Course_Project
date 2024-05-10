@@ -7,14 +7,16 @@ public class StaffDTO {
     private String phoneNumber;
     private String type;
     private int status;
+    private String gender;
 
-    public StaffDTO(String id, String fullName, String address, String phoneNumber, String type, int status) {
-        this.idStaff = id;
+    public StaffDTO(String idStaff, String fullName, String address, String phoneNumber, String gender, String type, int status) {
+        this.idStaff = idStaff;
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.type = type;
         this.status = status;
+        this.gender = gender;
     }
 
 
@@ -36,6 +38,9 @@ public class StaffDTO {
 
     public String getType() {
         return type;
+    }
+    public String getGender() {
+        return gender;
     }
 
     public int getStatus() {
@@ -64,5 +69,26 @@ public class StaffDTO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public void setIdStaff(String idStaff) {
+        this.idStaff = idStaff;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "StaffDTO{" +
+                "idStaff='" + idStaff + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", status=" + status +
+                ", gender='" + gender + '\'' +
+                '}';
     }
 }

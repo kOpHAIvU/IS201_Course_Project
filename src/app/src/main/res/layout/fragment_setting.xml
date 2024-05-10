@@ -41,6 +41,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/position"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Học viên"
@@ -50,35 +51,7 @@
             android:textSize="16dp"
             android:textStyle="bold"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="3dp"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="25dp"
-                android:src="@drawable/birth_icon"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="11/11/1111"
-                android:textColor="@color/black"
-                android:layout_gravity="center"
-                android:textSize="20dp"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-            android:background="#A8A7A7"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,6 +69,7 @@
                 android:src="@drawable/gender"/>
 
             <TextView
+                android:id="@+id/gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nam"
@@ -119,6 +93,7 @@
             android:orientation="horizontal">
 
             <ImageView
+
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
@@ -126,6 +101,7 @@
                 android:src="@drawable/phone"/>
 
             <TextView
+                android:id="@+id/phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0900000000"
@@ -155,6 +131,7 @@
                 android:src="@drawable/address"/>
 
             <TextView
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="KTX Khu A, ĐHQG"

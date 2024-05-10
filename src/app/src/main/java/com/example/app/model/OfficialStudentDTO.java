@@ -63,4 +63,16 @@ public class OfficialStudentDTO {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "OfficialStudentDTO{" +
+                "idStudent='" + idStudent + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", gender='" + gender + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

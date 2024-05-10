@@ -2,6 +2,7 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.example.app.model.AccountDTO;
@@ -21,9 +22,9 @@ public class OfficialStudentDAO {
     public void insertOfficialStudent(Context context, OfficialStudentDTO student) {
         String idStudent = student.getIdStudent();
         String fullName = student.getFullName();
-        String address = student.getFullName();
+        String address = student.getAddress();
         String phoneNumber = student.getPhoneNumber();
-        String gender = student.getPhoneNumber();
+        String gender = student.getGender();
         int status = student.getStatus();
 
         ContentValues values = new ContentValues();
@@ -85,5 +86,15 @@ public class OfficialStudentDAO {
         } catch (Exception e) {
             Log.e("Update Official Student Error: ", e.getMessage());
         }
+    }
+
+    public Cursor SelectStudent (Context context, String whereClause, String[] whereArgs) {
+        Cursor cursor = null;
+        try {
+            cursor = DataProvider.getInstance(context).selectData("OFFICIAL_STUDENT", new String[]{"*"},  whereClause, whereArgs, null);
+        }catch(Exception e) {
+            Log.d("Select Student: ", e.getMessage());
+        }
+        return cursor;
     }
 }
