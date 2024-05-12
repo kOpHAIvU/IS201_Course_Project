@@ -232,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Vui lòng không để trống thông tin"
+                android:text="Nhập 'Còn hoạt động' hoặc 'Đã rời'"
                 android:textColor="#D10101"
                 android:textSize="12dp" />
         </LinearLayout>

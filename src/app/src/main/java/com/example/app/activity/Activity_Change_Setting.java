@@ -155,7 +155,7 @@ public class Activity_Change_Setting extends AppCompatActivity {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragment_Setting
 
                 String status = statusInp.getText().toString();
-                if (status.equals("")) {
+                if (!status.equals("Còn hoạt động") && !status.equals("Đã rời")) {
                     acceptSwitch = false;
                     statusErr.setVisibility(View.VISIBLE);
                 } else statusErr.setVisibility(View.GONE);
