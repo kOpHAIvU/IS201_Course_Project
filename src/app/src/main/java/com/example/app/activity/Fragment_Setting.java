@@ -35,6 +35,7 @@ public class Fragment_Setting extends Fragment {
     TextView addressText;
     TextView name;
     TextView position;
+    TextView status;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class Fragment_Setting extends Fragment {
         addressText = context.findViewById(R.id.address);
         name = context.findViewById(R.id.name);
         position = context.findViewById(R.id.position);
+        status = context.findViewById(R.id.status);
 
         String idUser = Activity_Login.idUser;
         String titleIdAccount = idUser.substring(0, idUser.length() - 1) ;
@@ -63,6 +65,7 @@ public class Fragment_Setting extends Fragment {
         String gender = "";
         int type = 0;
         String positionText = "";
+        String status1 = "";
 
         if (titleIdAccount.equals("STU")) {
             Log.d("Student Yeah", "success");
@@ -73,7 +76,6 @@ public class Fragment_Setting extends Fragment {
 
             if (cursor.moveToFirst()) {
                 do {
-
                     int fullNameIndex = cursor.getColumnIndex("FULLNAME");
                     if (fullNameIndex!= -1) {
                         fullName = cursor.getString(fullNameIndex);
@@ -96,7 +98,7 @@ public class Fragment_Setting extends Fragment {
                 } while (cursor.moveToNext());
             }
 
-        }else {
+        } else {
             Log.d("Shift Staff X", "success");
             String whereClause = "ID_STAFF = ?";
             String[] whereArgs = new String[] {idUser};
@@ -135,11 +137,19 @@ public class Fragment_Setting extends Fragment {
             }
         }
 
-        genderText.setText(gender);
-        phoneNumberText.setText(phoneNumber);
-        addressText.setText(address);
-        name.setText(fullName);
-        position.setText(positionText);
+        if (!gender.equals(""))
+            genderText.setText(gender);
+        if (!phoneNumber.equals(""))
+            phoneNumberText.setText(phoneNumber);
+        if (!address.equals(""))
+            addressText.setText(address);
+        if (!fullName.equals(""))
+            name.setText(fullName);
+        if (!positionText.equals(""))
+            position.setText(positionText);
+        if (!status1.equals(""))
+            status.setText(status1);
+
 
         settingBtn = context.findViewById(R.id.setting_btn);
         logoutBtn = context.findViewById(R.id.logout_btn);

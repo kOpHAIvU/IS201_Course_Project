@@ -23,9 +23,9 @@ import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.StaffDTO;
 
 public class Activity_Change_Setting extends AppCompatActivity {
-    private TextView birthErr, genderErr, phoneNumErr, addressErr, passErr;     //Hiển thị thông báo nhập sai dữ liệu
+    private TextView statusErr, genderErr, phoneNumErr, addressErr, passErr;     //Hiển thị thông báo nhập sai dữ liệu
     private Button done;
-    private EditText birthInp, genderInp, phoneInp, addrInp, passInp;
+    private EditText genderInp, phoneInp, statusInp, addrInp, passInp;
     TextView nameInp, position;
     private int flag;
 
@@ -40,19 +40,19 @@ public class Activity_Change_Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_setting);
 
-        birthErr = findViewById(R.id.wrong_birth);
+        statusErr = findViewById(R.id.wrong_status);
         genderErr = findViewById(R.id.wrong_gender);
         phoneNumErr = findViewById(R.id.wrong_number);
         addressErr = findViewById(R.id.wrong_address);
         passErr = findViewById(R.id.wrong_password);
 
-        birthErr.setVisibility(View.GONE);
+        statusErr.setVisibility(View.GONE);
         genderErr.setVisibility(View.GONE);
         phoneNumErr.setVisibility(View.GONE);
         addressErr.setVisibility(View.GONE);
         passErr.setVisibility(View.GONE);
 
-        birthInp = findViewById(R.id.input_birth);
+        statusInp = findViewById(R.id.input_status);
         genderInp = findViewById(R.id.input_gender);
         phoneInp = findViewById(R.id.input_phone);
         addrInp = findViewById(R.id.input_addr);
@@ -154,15 +154,14 @@ public class Activity_Change_Setting extends AppCompatActivity {
             public void onClick(View v) {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragment_Setting
 
-                String regexBirth = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
-                String birth = birthInp.getText().toString();
-                if (!birth.matches(regexBirth)) {
+                String status = statusInp.getText().toString();
+                if (status.equals("")) {
                     acceptSwitch = false;
-                    birthErr.setVisibility(View.VISIBLE);
-                } else birthErr.setVisibility(View.GONE);
+                    statusErr.setVisibility(View.VISIBLE);
+                } else statusErr.setVisibility(View.GONE);
 
                 String gender = genderInp.getText().toString();
-                if (!gender.equals("Nam") && !gender.equals("Nu")) {
+                if (!gender.equals("Nam") && !gender.equals("Nữ")) {
                     acceptSwitch = false;
                     genderErr.setVisibility(View.VISIBLE);
                 } else genderErr.setVisibility(View.GONE);
