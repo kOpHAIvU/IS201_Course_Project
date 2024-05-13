@@ -8,8 +8,9 @@ public class StaffDTO {
     private String type;
     private int status;
     private String gender;
+    private String birthday;
 
-    public StaffDTO(String idStaff, String fullName, String address, String phoneNumber, String gender, String type, int status) {
+    public StaffDTO(String idStaff, String fullName, String address, String phoneNumber, String gender, String birthday, String type, int status) {
         this.idStaff = idStaff;
         this.fullName = fullName;
         this.address = address;
@@ -17,6 +18,7 @@ public class StaffDTO {
         this.type = type;
         this.status = status;
         this.gender = gender;
+        this.birthday = birthday;
     }
 
 
@@ -79,6 +81,14 @@ public class StaffDTO {
         this.gender = gender;
     }
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "StaffDTO{" +
@@ -89,6 +99,7 @@ public class StaffDTO {
                 ", type='" + type + '\'' +
                 ", status=" + status +
                 ", gender='" + gender + '\'' +
+                ", birthday='" + birthday + '\'' +
                 '}';
     }
 }

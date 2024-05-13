@@ -7,15 +7,17 @@ public class TeacherDTO {
     private String phoneNumber;
     private String gender;
     private int salary;
+    private String birthday;
     private int status;
 
-    public TeacherDTO(String id, String fullName, String address, String phoneNumber, String gender, int salary, int status) {
+    public TeacherDTO(String id, String fullName, String address, String phoneNumber, String gender, String birthday, int salary, int status) {
         this.idTeacher = id;
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.salary = salary;
+        this.birthday = birthday;
         this.status = status;
     }
 
@@ -73,5 +75,27 @@ public class TeacherDTO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "TeacherDTO{" +
+                "idTeacher='" + idTeacher + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", gender='" + gender + '\'' +
+                ", salary=" + salary +
+                ", birthday='" + birthday + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

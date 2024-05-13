@@ -33,9 +33,9 @@ public class Fragment_Setting extends Fragment {
     TextView genderText;
     TextView phoneNumberText;
     TextView addressText;
-    TextView name;
-    TextView position;
-    TextView status;
+    TextView nameText;
+    TextView positionText;
+    TextView birthdayText;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,9 +52,9 @@ public class Fragment_Setting extends Fragment {
         genderText = context.findViewById(R.id.gender);
         phoneNumberText = context.findViewById(R.id.phone_number);
         addressText = context.findViewById(R.id.address);
-        name = context.findViewById(R.id.name);
-        position = context.findViewById(R.id.position);
-        status = context.findViewById(R.id.status);
+        nameText = context.findViewById(R.id.name);
+        positionText = context.findViewById(R.id.position);
+        birthdayText = context.findViewById(R.id.birthday);
 
         String idUser = Activity_Login.idUser;
         String titleIdAccount = idUser.substring(0, idUser.length() - 1) ;
@@ -64,8 +64,8 @@ public class Fragment_Setting extends Fragment {
         String phoneNumber = "";
         String gender = "";
         int type = 0;
-        String positionText = "";
-        String status1 = "";
+        String position = "";
+        String birthday = "";
 
         if (titleIdAccount.equals("STU")) {
             Log.d("Student Yeah", "success");
@@ -92,18 +92,20 @@ public class Fragment_Setting extends Fragment {
                     if (genderIndex != -1) {
                         gender = cursor.getString(genderIndex);
                     }
-                    positionText = "Học viên";
+                    int birthdayIndex = cursor.getColumnIndex("BIRTHDAY");
+                    if (birthdayIndex != -1) {
+                        birthday = cursor.getString(birthdayIndex);
+                    }
+                    position = "Học viên";
                     Log.d("Find Student", fullName + " " + address + " " + phoneNumber + " " + gender);
 
                 } while (cursor.moveToNext());
             }
 
         } else {
-            Log.d("Shift Staff X", "success");
             String whereClause = "ID_STAFF = ?";
             String[] whereArgs = new String[] {idUser};
             Cursor cursor = StaffDAO.getInstance(context).SelectStaff(context, whereClause, whereArgs);
-
             if (cursor.moveToFirst()) {
                 do {
                     int fullNameIndex = cursor.getColumnIndex("FULLNAME");
@@ -126,12 +128,17 @@ public class Fragment_Setting extends Fragment {
                     if (typeIndex != -1) {
                         type = cursor.getInt(typeIndex);
                         if (type == 1) {
-                            positionText = "Quản lý";
+                            position = "Quản lý";
                         } else if (type == 2) {
-                            positionText = "Nhân viên học vụ";
+                            position = "Nhân viên học vụ";
                         } else {
-                            positionText = "Nhân viên điểm danh";
+                            position = "Nhân viên điểm danh";
                         }
+                    }
+                    int birthdayIndex = cursor.getColumnIndex("BIRTHDAY");
+                    if (birthdayIndex != -1) {
+                        birthday = cursor.getString(birthdayIndex);
+                        Log.d("Shift birthday", birthday.toString());
                     }
                 } while (cursor.moveToNext());
             }
@@ -144,12 +151,13 @@ public class Fragment_Setting extends Fragment {
         if (!address.equals(""))
             addressText.setText(address);
         if (!fullName.equals(""))
-            name.setText(fullName);
+            nameText.setText(fullName);
         if (!positionText.equals(""))
-            position.setText(positionText);
-        if (!status1.equals(""))
-            status.setText(status1);
+            positionText.setText(position);
+        if (!birthdayText.equals(""))
+            birthdayText.setText(birthday);
 
+        Log.d("Birthday text:", birthday);
 
         settingBtn = context.findViewById(R.id.setting_btn);
         logoutBtn = context.findViewById(R.id.logout_btn);
@@ -167,9 +175,8 @@ public class Fragment_Setting extends Fragment {
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Bạn có chắc chắn muốn đăng xuất không?");
+                builder.setTitle("Bạn có chắc chắn muốn đăng xuất không ?");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getActivity(), Activity_Login.class);
                         startActivity(intent);

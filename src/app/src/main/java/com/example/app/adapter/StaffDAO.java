@@ -19,18 +19,20 @@ public class StaffDAO {
         return instance;
     }
 
-    public void insertOfficialStudent(Context context, StaffDTO staff) {
+    public void insertStaff(Context context, StaffDTO staff) {
         ContentValues values = new ContentValues();
         values.put("ID_STAFF", staff.getIdStaff());
         values.put("FULLNAME", staff.getFullName());
         values.put("ADDRESS",staff.getAddress());
         values.put("PHONE_NUMBER", staff.getPhoneNumber());
         values.put("GENDER", staff.getGender());
+        values.put("BIRTHDAY", staff.getBirthday());
         values.put("TYPE", staff.getType());
         values.put("STATUS", staff.getStatus());
 
         try {
             int rowEffect = DataProvider.getInstance(context).insertData("STAFF", values);
+            Log.d("Staff information: ", staff.toString());
             if (rowEffect > 0 ) {
                 Log.d("Insert Staff: ", "success");
             } else {
@@ -61,6 +63,7 @@ public class StaffDAO {
         values.put("ADDRESS",staff.getAddress());
         values.put("PHONE_NUMBER", staff.getPhoneNumber());
         values.put("GENDER", staff.getGender());
+        values.put("BIRTHDAY", staff.getBirthday());
         values.put("TYPE", staff.getType());
         values.put("STATUS", staff.getStatus());
 

@@ -23,9 +23,9 @@ import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.StaffDTO;
 
 public class Activity_Change_Setting extends AppCompatActivity {
-    private TextView statusErr, genderErr, phoneNumErr, addressErr, passErr;     //Hiển thị thông báo nhập sai dữ liệu
+    private TextView birthdayErr, genderErr, phoneNumErr, addressErr, passErr;     //Hiển thị thông báo nhập sai dữ liệu
     private Button done;
-    private EditText genderInp, phoneInp, statusInp, addrInp, passInp;
+    private EditText genderInp, phoneInp, birthdayInp, addrInp, passInp;
     TextView nameInp, position;
     private int flag;
 
@@ -35,24 +35,25 @@ public class Activity_Change_Setting extends AppCompatActivity {
     String gender = "";
     boolean isUpdate;
     int type;
+    String birthday = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_setting);
 
-        statusErr = findViewById(R.id.wrong_status);
+        birthdayErr = findViewById(R.id.wrong_status);
         genderErr = findViewById(R.id.wrong_gender);
         phoneNumErr = findViewById(R.id.wrong_number);
         addressErr = findViewById(R.id.wrong_address);
         passErr = findViewById(R.id.wrong_password);
 
-        statusErr.setVisibility(View.GONE);
+        birthdayErr.setVisibility(View.GONE);
         genderErr.setVisibility(View.GONE);
         phoneNumErr.setVisibility(View.GONE);
         addressErr.setVisibility(View.GONE);
         passErr.setVisibility(View.GONE);
 
-        statusInp = findViewById(R.id.input_status);
+        birthdayInp = findViewById(R.id.input_birthday);
         genderInp = findViewById(R.id.input_gender);
         phoneInp = findViewById(R.id.input_phone);
         addrInp = findViewById(R.id.input_addr);
@@ -82,6 +83,10 @@ public class Activity_Change_Setting extends AppCompatActivity {
                     int fullNameIndex = cursor.getColumnIndex("FULLNAME");
                     if (fullNameIndex!= -1) {
                         fullName = cursor.getString(fullNameIndex);
+                    }
+                    int birthdaysIndex = cursor.getColumnIndex("BIRTHDAY");
+                    if (birthdaysIndex!= -1) {
+                        birthday = cursor.getString(birthdaysIndex);
                     }
                     int addressIndex = cursor.getColumnIndex("ADDRESS");
                     if (addressIndex!= -1) {
@@ -113,6 +118,10 @@ public class Activity_Change_Setting extends AppCompatActivity {
                     int fullNameIndex = cursor.getColumnIndex("FULLNAME");
                     if (fullNameIndex!= -1) {
                         fullName = cursor.getString(fullNameIndex);
+                    }
+                    int birthdayIndex = cursor.getColumnIndex("BIRTHDAY");
+                    if (birthdayIndex!= -1) {
+                        birthday = cursor.getString(birthdayIndex);
                     }
                     int addressIndex = cursor.getColumnIndex("ADDRESS");
                     if (addressIndex!= -1) {
@@ -146,6 +155,7 @@ public class Activity_Change_Setting extends AppCompatActivity {
         addrInp.setText(address);
         passInp.setText(Activity_Login.password);
         nameInp.setText(fullName);
+        birthdayInp.setText(birthday);
         position.setText(positionText);
 
 
@@ -154,11 +164,11 @@ public class Activity_Change_Setting extends AppCompatActivity {
             public void onClick(View v) {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragment_Setting
 
-                String status = statusInp.getText().toString();
-                if (!status.equals("Còn hoạt động") && !status.equals("Đã rời")) {
+                if (birthday.equals("")) {
                     acceptSwitch = false;
-                    statusErr.setVisibility(View.VISIBLE);
-                } else statusErr.setVisibility(View.GONE);
+                    birthdayErr.setVisibility(View.VISIBLE);
+                } else birthdayErr.setVisibility(View.GONE);
+
 
                 String gender = genderInp.getText().toString();
                 if (!gender.equals("Nam") && !gender.equals("Nữ")) {
@@ -189,60 +199,64 @@ public class Activity_Change_Setting extends AppCompatActivity {
 
                     // Handle updating user information
 
-                    String genderUpdate = genderInp.getText().toString();
-                    String phoneNumberUpdate = phoneInp.getText().toString();
-                    String addressUpdate = addrInp.getText().toString();
-
-                         // Update password
-
-                    AccountDTO updateAccount = new AccountDTO(Activity_Login.idAccount,
-                            Activity_Login.idUser, Activity_Login.username, passInp.getText().toString());
-                    String whereClause = "ID_ACCOUNT = ?";
-                    String[] whereArg =  new String[]{Activity_Login.idAccount};
-
-                    Activity_Login.password = passInp.getText().toString();
-
-                    int rowEffect = AccountDAO.getInstance(Activity_Change_Setting.this).updateAccount(Activity_Change_Setting.this,
-                            updateAccount, whereClause, whereArg);
-                    Log.d("Change account: ", String.valueOf(rowEffect));
-                    if (rowEffect > 0) {
-                        isUpdate = true;
-                    }
-
-                        // Update individual information
-
-                    if (flag == 1) {
-                        OfficialStudentDTO student = new OfficialStudentDTO(idUser,
-                                fullName, addressUpdate, phoneNumberUpdate, genderUpdate, 0);
-                        String whereClauseUpdateInf = "ID_STUDENT = ?";
-                        String[] whereArgUpdateInf =  new String[]{Activity_Login.idUser};
-
-                        int rowEffectStudent = OfficialStudentDAO.getInstance(Activity_Change_Setting.this).updateOfficialStudent(Activity_Change_Setting.this,
-                                student, whereClauseUpdateInf, whereArgUpdateInf);
-                        if (rowEffectStudent > 0) {
-                            isUpdate = true;
-                        }
-                    } else {
-                        StaffDTO staff = new StaffDTO(idUser, fullName, addressUpdate, phoneNumberUpdate,
-                                genderUpdate, String.valueOf(type), 0);
-                        String whereClauseUpdateInf = "ID_STAFF = ?";
-                        String[] whereArgUpdateInf =  new String[]{Activity_Login.idUser};
-
-                         int rowEffectStaff = StaffDAO.getInstance(Activity_Change_Setting.this).updateStaff(Activity_Change_Setting.this,
-                                 staff, whereClauseUpdateInf, whereArgUpdateInf);
-                         if(rowEffectStaff > 0) {
-                             isUpdate = true;
-                         }
-                    }
-
                     AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Change_Setting.this);
-                    builder.setTitle("Cập nhật dữ liệu thành công!");
+                    builder.setTitle("Bạn có chắc chắn muốn cập nhật dữ liệu không ?");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            String genderUpdate = genderInp.getText().toString();
+                            String phoneNumberUpdate = phoneInp.getText().toString();
+                            String addressUpdate = addrInp.getText().toString();
+                            String birthdayUpdate = birthdayInp.getText().toString();
+
+                            // Update password
+
+                            AccountDTO updateAccount = new AccountDTO(Activity_Login.idAccount,
+                                    Activity_Login.idUser, Activity_Login.username, passInp.getText().toString());
+                            String whereClause = "ID_ACCOUNT = ?";
+                            String[] whereArg =  new String[]{Activity_Login.idAccount};
+
+                            Activity_Login.password = passInp.getText().toString();
+
+                            int rowEffect = AccountDAO.getInstance(Activity_Change_Setting.this).updateAccount(Activity_Change_Setting.this,
+                                    updateAccount, whereClause, whereArg);
+                            Log.d("Change account: ", String.valueOf(rowEffect));
+                            if (rowEffect > 0) {
+                                isUpdate = true;
+                            }
+
+                            // Update individual information
+
+                            if (flag == 1) {
+                                OfficialStudentDTO student = new OfficialStudentDTO(idUser,
+                                        fullName, addressUpdate, phoneNumberUpdate, genderUpdate, birthdayUpdate, 0);
+                                String whereClauseUpdateInf = "ID_STUDENT = ?";
+                                String[] whereArgUpdateInf =  new String[]{Activity_Login.idUser};
+
+                                int rowEffectStudent = OfficialStudentDAO.getInstance(Activity_Change_Setting.this).updateOfficialStudent(Activity_Change_Setting.this,
+                                        student, whereClauseUpdateInf, whereArgUpdateInf);
+                                if (rowEffectStudent > 0) {
+                                    isUpdate = true;
+                                }
+                            } else {
+                                StaffDTO staff = new StaffDTO(idUser, fullName, addressUpdate, phoneNumberUpdate,
+                                        genderUpdate, birthdayUpdate, String.valueOf(type), 0);
+                                String whereClauseUpdateInf = "ID_STAFF = ?";
+                                String[] whereArgUpdateInf =  new String[]{Activity_Login.idUser};
+
+                                int rowEffectStaff = StaffDAO.getInstance(Activity_Change_Setting.this).updateStaff(Activity_Change_Setting.this,
+                                        staff, whereClauseUpdateInf, whereArgUpdateInf);
+                                if(rowEffectStaff > 0) {
+                                    isUpdate = true;
+                                }
+                            }
+                            Toast.makeText(Activity_Change_Setting.this, "Cập nhật dữ liệu thành công !", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });
+
+                    builder.setNegativeButton("Hủy", null);
+
                     builder.show();
 
                 }

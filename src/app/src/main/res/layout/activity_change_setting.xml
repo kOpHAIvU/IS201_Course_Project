@@ -206,7 +206,7 @@
                 android:src="@drawable/baseline_indeterminate_check_box_24" />
 
             <EditText
-                android:id="@+id/input_status"
+                android:id="@+id/input_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

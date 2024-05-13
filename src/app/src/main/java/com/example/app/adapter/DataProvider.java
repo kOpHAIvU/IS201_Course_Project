@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 27;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -30,6 +30,7 @@ public class DataProvider extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS CERTIFICATE (" +
                     "ID_CERTIFICATE TEXT PRIMARY KEY, " +
@@ -49,6 +50,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "ADDRESS TEXT, " +
                     "PHONE_NUMBER TEXT, " +
                     "GENDER TEXT, " +
+                    "BIRTHDAY TEXT," +
                     "TYPE TEXT," +
                     "STATUS INTEGER)");
             Log.d("CREATE STAFF", "Database created successfully");
@@ -63,6 +65,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "ADDRESS TEXT, " +
                     "PHONE_NUMBER TEXT, " +
                     "GENDER TEXT, " +
+                    "BIRTHDAY TEXT," +
                     "SALARY INTEGER, " +
                     "STATUS INTEGER)");
             Log.d("CREATE TEACHERS", "Database created successfully");
@@ -102,6 +105,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "ADDRESS TEXT, " +
                     "PHONE_NUMBER TEXT, " +
                     "GENDER TEXT," +
+                    "BIRTHDAY TEXT," +
                     "STATUS INTEGER)");
             Log.d("CREATE OFFICIAL_STUDENTS", "Database created successfully");
         } catch ( Exception e) {
@@ -228,7 +232,7 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("CREATE REPORT",  e.getMessage());
         }
-        db.execSQL("delete from OFFICIAL_STUDENT");
+        db.execSQL("delete from STAFF");
 
     }
 

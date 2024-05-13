@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -12,9 +11,8 @@ import com.example.app.R;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.ClassroomDTO;
 import com.example.app.model.CertificateDTO;
-import com.example.app.model.List_Notifications;
+import com.example.app.model.NotificationDTO;
 import com.example.app.model.ExamScoreDTO;
-import com.example.app.model.PotentialStudentDTO;
 
 import java.util.ArrayList;
 
@@ -44,8 +42,8 @@ public class Activity_Notifications extends AppCompatActivity {
         switch (message) {
             //Học viên
             case "Thông báo hệ thống":
-                dataArrayList.add(new List_Notifications("Test", "Vũ","Test thông báo đầu tiên"));
-                dataArrayList.add(new List_Notifications("Test", "Thiện","Test thông báo thứ 2"));
+                dataArrayList.add(new NotificationDTO("Test", "Vũ","Test thông báo đầu tiên"));
+                dataArrayList.add(new NotificationDTO("Test", "Thiện","Test thông báo thứ 2"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_notification_item, dataArrayList);
                 break;
             case "Tra cứu điểm":

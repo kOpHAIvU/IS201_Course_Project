@@ -33,6 +33,7 @@ public class OfficialStudentDAO {
         values.put("ADDRESS", address);
         values.put("PHONE_NUMBER", phoneNumber);
         values.put("GENDER", gender);
+        values.put("BIRTHDAY", student.getBirthday());
         values.put("STATUS", status);
 
         try {
@@ -63,9 +64,9 @@ public class OfficialStudentDAO {
     public int updateOfficialStudent(Context context, OfficialStudentDTO student, String whereClause, String[] whereArgs) {
         String idStudent = student.getIdStudent();
         String fullName = student.getFullName();
-        String address = student.getFullName();
+        String address = student.getAddress();
         String phoneNumber = student.getPhoneNumber();
-        String gender = student.getPhoneNumber();
+        String gender = student.getGender();
         int status = student.getStatus();
 
         ContentValues values = new ContentValues();
@@ -74,6 +75,7 @@ public class OfficialStudentDAO {
         values.put("ADDRESS", address);
         values.put("PHONE_NUMBER", phoneNumber);
         values.put("GENDER", gender);
+        values.put("BIRTHDAY", student.getBirthday());
         values.put("STATUS", status);
 
         try {

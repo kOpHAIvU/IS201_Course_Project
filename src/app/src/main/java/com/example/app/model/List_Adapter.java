@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,7 +17,6 @@ import androidx.annotation.Nullable;
 
 import com.example.app.R;
 import com.example.app.activity.Activity_Add_Potential_Student;
-import com.example.app.activity.Activity_Notifications_ToolBars;
 
 import java.util.ArrayList;
 
@@ -75,11 +73,11 @@ public class List_Adapter extends ArrayAdapter {
                 poster = convertView.findViewById(R.id.poster);
                 description = convertView.findViewById(R.id.description);
 
-                List_Notifications listNotifications = (List_Notifications) arrayDataList.get(position);
+                NotificationDTO listNotifications = (NotificationDTO) arrayDataList.get(position);
 
-                title.setText(listNotifications.title);
-                poster.setText(listNotifications.poster);
-                description.setText(listNotifications.description);
+                title.setText(listNotifications.getTitle());
+                poster.setText(listNotifications.getPoster());
+                description.setText(listNotifications.getDescription());
                 break;
             case 2:     //Kiểu List_Score
                 TextView courseID, speak, write, listen, read;
@@ -224,7 +222,7 @@ public class List_Adapter extends ArrayAdapter {
         Object item = arrayDataList.get(position);
         if (item instanceof List_Information)
             return 0;
-        else if (item instanceof  List_Notifications)
+        else if (item instanceof NotificationDTO)
             return 1;
         else if (item instanceof ExamScoreDTO)
             return 2;

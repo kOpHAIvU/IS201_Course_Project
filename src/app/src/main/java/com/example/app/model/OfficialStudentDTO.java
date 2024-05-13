@@ -6,13 +6,15 @@ public class OfficialStudentDTO {
     private String address;
     private String phoneNumber;
     private String gender;
+    private String birthday;
     private int status;
-    public OfficialStudentDTO(String idStudent, String fullName, String address, String phoneNumber, String gender, int status) {
+    public OfficialStudentDTO(String idStudent, String fullName, String address, String phoneNumber, String gender, String birthday, int status) {
         this.idStudent = idStudent;
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
+        this.birthday = birthday;
         this.status = status;
     }
 
@@ -64,6 +66,14 @@ public class OfficialStudentDTO {
         this.status = status;
     }
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "OfficialStudentDTO{" +
@@ -72,6 +82,7 @@ public class OfficialStudentDTO {
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", gender='" + gender + '\'' +
+                ", birthday='" + birthday + '\'' +
                 ", status=" + status +
                 '}';
     }

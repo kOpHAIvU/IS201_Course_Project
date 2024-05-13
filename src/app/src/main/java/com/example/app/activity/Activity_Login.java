@@ -86,26 +86,26 @@ public class Activity_Login extends AppCompatActivity {
         });
 
         // Insert data in OFFICIAL_STUDENT
-        OfficialStudentDTO student1 = new OfficialStudentDTO("STU1", "Nguyen Van A", "Binh Dinh", "034343434", "Nam", 0);
+        OfficialStudentDTO student1 = new OfficialStudentDTO("STU1", "Nguyen Van A", "Binh Dinh", "034343434", "Nam", "22/2/2022", 0);
         OfficialStudentDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, student1);
 
-        OfficialStudentDTO student2 = new OfficialStudentDTO("STU2", "Le Thi B", "Binh Duong","0232323222", "Nữ", 0 );
+        OfficialStudentDTO student2 = new OfficialStudentDTO("STU2", "Le Thi B", "Binh Duong","0232323222", "Nữ", "22/2/2022", 0 );
         OfficialStudentDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, student2);
 
         // Insert data in STAFF
 
-        StaffDTO staff1 = new StaffDTO("STA1", "Nguyen Thi C", "TP HCM", "0343333333", "Nữ", "1", 0);
-        StaffDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, staff1);
+        StaffDTO staff1 = new StaffDTO("STA1", "Nguyen Thi C", "TP HCM", "0343333333", "Nữ", "22/2/2022", "1", 0);
+        StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff1);
 
-        StaffDTO staff2 = new StaffDTO("STA2", "Nguyen Thi D", "TP HCM", "03435555333", "Nữ","2", 0);
-        StaffDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, staff2);
+        StaffDTO staff2 = new StaffDTO("STA2", "Nguyen Thi D", "TP HCM", "03435555333", "Nữ","22/2/2022", "2", 0);
+        StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff2);
 
         // Insert data in TEACHERS
 
-        TeacherDTO teacher1 = new TeacherDTO("TEA1", "Nguyen Thi E", "Binh Duong", "0346655566", "Nữ", 50000000, 0);
+        TeacherDTO teacher1 = new TeacherDTO("TEA1", "Nguyen Thi E", "Binh Duong", "0346655566", "Nữ", "22/2/2022", 50000000, 0);
         TeacherDAO.getInstance(Activity_Login.this).insertTeacher(Activity_Login.this, teacher1);
 
-        TeacherDTO teacher2 = new TeacherDTO("TEA2", "Nguyen Thi G", "Binh Duong", "0346699966", "Nam", 50000000, 0);
+        TeacherDTO teacher2 = new TeacherDTO("TEA2", "Nguyen Thi G", "Binh Duong", "0346699966", "Nam", "23/2/2022", 50000000, 0);
         TeacherDAO.getInstance(Activity_Login.this).insertTeacher(Activity_Login.this, teacher2);
 
         // Insert data ACCOUNT
