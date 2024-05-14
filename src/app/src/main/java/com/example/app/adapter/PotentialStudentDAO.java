@@ -4,7 +4,6 @@ import android.content.Context;
 
 public class PotentialStudentDAO {
     public static PotentialStudentDAO instance;
-    private DataProvider dbHelper;
     private PotentialStudentDAO(Context context) {}
     public static synchronized PotentialStudentDAO getInstance(Context context) {
         if (instance == null) {

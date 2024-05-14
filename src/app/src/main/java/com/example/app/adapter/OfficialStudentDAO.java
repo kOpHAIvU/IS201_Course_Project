@@ -10,7 +10,6 @@ import com.example.app.model.OfficialStudentDTO;
 
 public class OfficialStudentDAO {
     public static OfficialStudentDAO instance;
-    private DataProvider dbHelper;
     private OfficialStudentDAO(Context context) {}
     public static synchronized OfficialStudentDAO getInstance(Context context) {
         if (instance == null) {

@@ -40,4 +40,17 @@ public class PotentialStudentDTO {
         this.level = level;
         this.appointmentNumber = appointmentNumber;
     }
+
+    @Override
+    public String toString() {
+        return "PotentialStudentDTO{" +
+                "studentName='" + studentName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", gender='" + gender + '\'' +
+                ", address='" + address + '\'' +
+                ", state='" + state + '\'' +
+                ", level='" + level + '\'' +
+                ", appointmentNumber='" + appointmentNumber + '\'' +
+                '}';
+    }
 }

@@ -15,10 +15,12 @@ import android.widget.Toast;
 import com.example.app.R;
 import com.example.app.adapter.AccountDAO;
 import com.example.app.adapter.DataProvider;
+import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.OfficialStudentDAO;
 import com.example.app.adapter.StaffDAO;
 import com.example.app.adapter.TeacherDAO;
 import com.example.app.model.AccountDTO;
+import com.example.app.model.NotificationDTO;
 import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.StaffDTO;
 import com.example.app.model.TeacherDTO;
@@ -120,7 +122,12 @@ public class Activity_Login extends AppCompatActivity {
         AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account5);
         AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account6);
 
-        //Cursor selectAccount(Context context, String whereClause, String[] whereArgs)
+        // Insert data in NOTIFICATION
 
+        NotificationDTO notification1 =  new NotificationDTO("NOT1", "ACC1", "Thông báo nghi học", "Nghỉ học từ ngày 13/4/2024 đến hết ngày 30/5/2024");
+        NotificationDAO.getInstance(Activity_Login.this).InsertNotification(Activity_Login.this, notification1);
+
+        NotificationDTO notification2 =  new NotificationDTO("NOT2", "ACC2", "Thông báo học bù", "Học bù từ ngày 13/4/2024 đến hết ngày 30/5/2024");
+        NotificationDAO.getInstance(Activity_Login.this).InsertNotification(Activity_Login.this, notification2);
     }
 }

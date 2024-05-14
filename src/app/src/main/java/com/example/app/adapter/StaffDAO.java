@@ -10,7 +10,6 @@ import com.example.app.model.StaffDTO;
 
 public class StaffDAO {
     public static StaffDAO instance;
-    private DataProvider dbHelper;
     private StaffDAO(Context context) {}
     public static synchronized StaffDAO getInstance(Context context) {
         if (instance == null) {
