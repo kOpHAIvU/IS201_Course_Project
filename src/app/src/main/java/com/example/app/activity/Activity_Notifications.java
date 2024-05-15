@@ -73,7 +73,7 @@ public class Activity_Notifications extends AppCompatActivity {
                         "Hê hê",
                         "10", "10", "Đào tạo tiếng Anh", "10",
                         "10",
-                        "10", "10", "CER1"));
+                        "10", "10"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_education_program_item, dataArrayList);
                 break;
             case "Tra cứu lớp học":

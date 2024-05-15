@@ -16,17 +16,6 @@ public class ProgramDAO {
         return instance;
     }
 
-    /*ID_PROGRAM TEXT PRIMARY KEY, " +
-            "NAME TEXT, " +
-            "INPUT_SCORE REAL, " +
-            "OUTPUT_SCORE REAL, " +
-            "CONTENT TEXT, " +
-            "SPEAKING_SCORE REAL, " +
-            "WRITING_SCORE REAL, " +
-            "LISTENING_SCORE REAL, " +
-            "READING_SCORE REAL, " +
-            "ID_CERTIFICATE REAL, " +
-            "STATUS INTEGER," +*/
     public int InsertProgram(Context context, ProgramDTO program) {
         int rowEffect = -1;
 
@@ -43,7 +32,6 @@ public class ProgramDAO {
         values.put("WRITING_SCORE", program.getWritingScore());
         values.put("LISTENING_SCORE", program.getListeningScore());
         values.put("READING_SCORE", program.getReadingScore());
-        values.put("ID_CERTIFICATE", program.getIdCertificate());
 
         try {
             rowEffect = DataProvider.getInstance(context).insertData("PROGRAM", values);
@@ -76,7 +64,6 @@ public class ProgramDAO {
         values.put("WRITING_SCORE", program.getWritingScore());
         values.put("LISTENING_SCORE", program.getListeningScore());
         values.put("READING_SCORE", program.getReadingScore());
-        values.put("ID_CERTIFICATE", program.getIdCertificate());
 
         try {
             rowEffect = DataProvider.getInstance(context).updateData("PROGRAM", values, whereClause, whereArgs);
