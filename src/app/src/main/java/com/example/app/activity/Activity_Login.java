@@ -131,23 +131,6 @@ public class Activity_Login extends AppCompatActivity {
         AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account5);
         AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account6);
 
-        // Insert data in CLASSROOM
-
-        ClassroomDTO classroom1 = new ClassroomDTO("CLA1", "B1.11");
-        ClassroomDTO classroom2 = new ClassroomDTO("CLA22", "B1.12");
-
-        ClassroomDAO.getInstance(Activity_Login.this).InsertNewClassroom(Activity_Login.this, classroom1);
-        ClassroomDAO.getInstance(Activity_Login.this).InsertNewClassroom(Activity_Login.this, classroom2);
-
-        // Insert data in CLASS
-
-        ClassDTO class1 = new ClassDTO("CLS1", "Lớp Toeic 4 kỹ năng", "200-400",
-                "Nguyen Thi C", "10 buổi", "20000000", "B1.11", "PRO1", "STA1");
-        ClassDTO class2 = new ClassDTO("CLS2", "Lớp Ielts", "5.5-6.5",
-                "Nguyen Thi C", "20 buổi", "20000000", "B1.12", "PRO2", "STA2");
-        ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class2);
-        ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class1);
-
         // Insert potential student
 
         PotentialStudentDTO pStudent1 = new PotentialStudentDTO("Nguyễn Văn H", "0343884343",
@@ -177,7 +160,7 @@ public class Activity_Login extends AppCompatActivity {
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent1);
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent2);
 */
-      /*  ProgramDTO program1 = new ProgramDTO("PRO2", "Đào tạo tiếng anh chuyên sâu",
+    /*   ProgramDTO program1 = new ProgramDTO("PRO2", "Đào tạo tiếng anh chuyên sâu",
                 "6.5", "8.5", "Đào tạo chuyên sâu dành cho các bạn có nhu cầu theo các" +
                 "khối ngành ngôn ngữ hoặc có dự định đi du học", "6.5", "7.5",
                 "7", "7");
@@ -190,5 +173,26 @@ public class Activity_Login extends AppCompatActivity {
                 "7", "7");
         ProgramDAO.getInstance(Activity_Login.this).InsertProgram(Activity_Login.this, program2);
 */
+/*
+
+        // Insert data in CLASSROOM
+
+        ClassroomDTO classroom1 = new ClassroomDTO("CLA1", "B1.11");
+        ClassroomDTO classroom2 = new ClassroomDTO("CLA2", "B1.12");
+
+        ClassroomDAO.getInstance(Activity_Login.this).InsertNewClassroom(Activity_Login.this, classroom1);
+        ClassroomDAO.getInstance(Activity_Login.this).InsertNewClassroom(Activity_Login.this, classroom2);
+*/
+
+        /*// Insert data in CLASS
+
+        ClassDTO class1 = new ClassDTO("CLS1", "Lớp Toeic 4 kỹ năng", "200-400",
+                "Nguyen Thi C", "10 buổi", "20000000", "B1.11", "PRO1", "STA1");
+        ClassDTO class2 = new ClassDTO("CLS2", "Lớp Ielts", "5.5-6.5",
+                "Nguyen Thi C", "20 buổi", "20000000", "B1.12", "PRO2", "STA2");
+        ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class2);
+        ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class1);
+*/
+
     }
 }

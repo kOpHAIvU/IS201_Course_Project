@@ -2,9 +2,13 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.example.app.model.ClassDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClassDAO {
     //private String classID, className, level, lectureName, schoolTime, tuition, roomID, programID, staffID;
@@ -31,6 +35,7 @@ public class ClassDAO {
         values.put("ID_PROGRAM", classDTO.getProgramID());
         values.put("ID_TEACHER", classDTO.getLectureName());
         values.put("ID_STAFF", classDTO.getStaffID());
+        values.put("STATUS", "0");
 
         try {
             rowEffect = DataProvider.getInstance(context).insertData("CLASS", values);
@@ -73,5 +78,67 @@ public class ClassDAO {
         }
 
         return rowEffect;
+    }
+
+    public List<ClassDTO> selectClass (Context context, String whereClause, String[] whereArgs) {
+        List<ClassDTO> listClass = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = DataProvider.getInstance(context).selectData("CLASS", new String[]{"*"},  whereClause, whereArgs, null);
+        }catch(Exception e) {
+            Log.d("Select Class: ", e.getMessage());
+        }
+
+        //private String classID, className, level, lecturerName, schoolTime, tuition, roomID, programID, staffID;
+        String id = "", name = "", level = "", lecturer = "", time = "", tuition = "",
+                room = "", program = "", staff = "";
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int idIndex = cursor.getColumnIndex("ID_CLASS");
+                if (idIndex != -1) {
+                    id = cursor.getString(idIndex);
+                }
+                int nameIndex = cursor.getColumnIndex("NAME");
+                if (nameIndex!= -1) {
+                    name = cursor.getString(nameIndex);
+                }
+                int levelIndex = cursor.getColumnIndex("LEVEL");
+                if (levelIndex!= -1) {
+                    level = cursor.getString(levelIndex);
+                }
+                int timeIndex = cursor.getColumnIndex("STUDY_TIME");
+                if (timeIndex!= -1) {
+                    time = cursor.getString(timeIndex);
+                }
+                int tuitionIndex = cursor.getColumnIndex("TUITION_FEES");
+                if (tuitionIndex!= -1) {
+                    tuition = cursor.getString(tuitionIndex);
+                }
+                int roomIndex = cursor.getColumnIndex("ID_CLASSROOM");
+                if (roomIndex!= -1) {
+                    room = cursor.getString(roomIndex);
+                }
+                int programIndex = cursor.getColumnIndex("ID_PROGRAM");
+                if (programIndex!= -1) {
+                    program = cursor.getString(programIndex);
+                }
+                int teacherIndex = cursor.getColumnIndex("ID_TEACHER");
+                if (teacherIndex!= -1) {
+                    lecturer = cursor.getString(teacherIndex);
+                }
+                int staffIndex = cursor.getColumnIndex("ID_STAFF");
+                if (staffIndex!= -1) {
+                    staff = cursor.getString(staffIndex);
+                }
+
+                listClass.add(new ClassDTO(id, name, level, lecturer, time, tuition, room, program, staff));
+
+            } while (cursor.moveToNext());
+        }
+
+        return listClass;
     }
 }

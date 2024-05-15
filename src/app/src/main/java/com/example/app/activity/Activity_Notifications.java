@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.example.app.R;
 import com.example.app.adapter.AccountDAO;
+import com.example.app.adapter.ClassDAO;
 import com.example.app.adapter.DataProvider;
 import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.ProgramDAO;
@@ -91,10 +92,20 @@ public class Activity_Notifications extends AppCompatActivity {
                 break;
 
             case "Tra cứu lớp học":
+                String whereClauseClass = "STATUS = ?";
+                String[] whereArgsClass = new String[] {"0"};
+
+                List<ClassDTO> listClass = ClassDAO.getInstance(Activity_Notifications.this).selectClass(Activity_Notifications.this,
+                        whereClauseClass, whereArgsClass);
+
+                for (int i = 0; i < listClass.size(); i++) {
+                    dataArrayList.add(listClass.get(i));
+                }
+/*
                 dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
-                        "B4.04","Đoán coi","Nhật Quỳnh"));
+                        "B4.04","Đoán coi","Nhật Quỳnh"));*/
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_class_item, dataArrayList);
                 break;
             //Nhân viên học vụ
