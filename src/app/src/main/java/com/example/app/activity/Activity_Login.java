@@ -169,7 +169,7 @@ public class Activity_Login extends AppCompatActivity {
 */
         // Insert potential student
 
-        /*PotentialStudentDTO pStudent1 = new PotentialStudentDTO("Nguyễn Văn H", "0343884343",
+       /* PotentialStudentDTO pStudent1 = new PotentialStudentDTO("Nguyễn Văn H", "0343884343",
                 "Nam", "Bình Dương", "0", "5.5-6", "10");
         PotentialStudentDTO pStudent2 = new PotentialStudentDTO("Nguyen Thị I", "0977748343",
                 "Nữ", "Bình Dương", "0", "5.5-6", "10");
@@ -177,7 +177,7 @@ public class Activity_Login extends AppCompatActivity {
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent1);
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent2);
 */
-        ProgramDTO program1 = new ProgramDTO("PRO2", "Đào tạo tiếng anh chuyên sâu",
+      /*  ProgramDTO program1 = new ProgramDTO("PRO2", "Đào tạo tiếng anh chuyên sâu",
                 "6.5", "8.5", "Đào tạo chuyên sâu dành cho các bạn có nhu cầu theo các" +
                 "khối ngành ngôn ngữ hoặc có dự định đi du học", "6.5", "7.5",
                 "7", "7");
@@ -189,6 +189,6 @@ public class Activity_Login extends AppCompatActivity {
                 "xét tuyển vào các trường đại học", "6.5", "7.5",
                 "7", "7");
         ProgramDAO.getInstance(Activity_Login.this).InsertProgram(Activity_Login.this, program2);
-
+*/
     }
 }

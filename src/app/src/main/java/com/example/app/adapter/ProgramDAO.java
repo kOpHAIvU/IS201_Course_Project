@@ -36,6 +36,7 @@ public class ProgramDAO {
         values.put("WRITING_SCORE", program.getWritingScore());
         values.put("LISTENING_SCORE", program.getListeningScore());
         values.put("READING_SCORE", program.getReadingScore());
+        values.put("STATUS", 0);
 
         try {
             rowEffect = DataProvider.getInstance(context).insertData("PROGRAM", values);

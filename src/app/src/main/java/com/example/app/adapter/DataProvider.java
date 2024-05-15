@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 42;
+    private static final int DATABASE_VERSION = 43;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -245,7 +245,7 @@ public class DataProvider extends SQLiteOpenHelper {
             Log.d("CREATE NOTIFICATION: ", e.getMessage());
         }
 
-        db.execSQL("DELETE FROM POTENTIAL_STUDENT");
+        db.execSQL("DELETE FROM PROGRAM");
 
     }
 
