@@ -1,7 +1,7 @@
 package com.example.app.model;
 
 public class PotentialStudentDTO {
-    String studentName, phoneNumber, gender, address, state, level, appointmentNumber;
+    private String studentName, phoneNumber, gender, address, state, level, appointmentNumber;
 
     public String getStudentName() {
         return studentName;
@@ -52,5 +52,33 @@ public class PotentialStudentDTO {
                 ", level='" + level + '\'' +
                 ", appointmentNumber='" + appointmentNumber + '\'' +
                 '}';
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public void setAppointmentNumber(String appointmentNumber) {
+        this.appointmentNumber = appointmentNumber;
     }
 }

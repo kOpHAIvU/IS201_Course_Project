@@ -3,6 +3,7 @@ package com.example.app.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.app.R;
+import com.example.app.adapter.PotentialStudentDAO;
+import com.example.app.model.PotentialStudentDTO;
+
+import java.time.LocalDate;
 
 public class Activity_Add_Potential_Student extends AppCompatActivity {
     EditText name, address, phoneNum, gender, state, level, appointmentNum;
@@ -86,7 +91,7 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                 if (name.getText().toString() == "") {
                     acceptSwitch = false;
                     nameErr.setText("Không để trống tên");
-                } else nameErr.setText("Học viên tài năng");
+                } else nameErr.setText("Học viên tiềm năng");
 
                 String genderInp = gender.getText().toString();
                 if (!genderInp.equals("Nam") && !genderInp.equals("Nữ")) {
@@ -112,8 +117,32 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                     stateLevelAppointErr.setVisibility(View.VISIBLE);
                 } else stateLevelAppointErr.setVisibility(View.GONE);
 
-                if (acceptSwitch)
-                    finish();
+                if (acceptSwitch) {
+                    try {
+                        int rowEffect = PotentialStudentDAO.getInstance(Activity_Add_Potential_Student.this).InsertPotentialStudent(
+                                Activity_Add_Potential_Student.this, new PotentialStudentDTO(
+                                        name.getText().toString(), phoneNum.getText().toString(), gender.getText().toString(),
+                                        address.getText().toString(), "0", level.getText().toString(), appointmentNum.getText().toString()));
+
+                        if (rowEffect > 0) {
+                            Toast.makeText(Activity_Add_Potential_Student.this,
+                                    "Thêm học viên tiềm năng mới thành công", Toast.LENGTH_SHORT).show();
+                            Log.d("Add potential student:", "success");
+                        }else {
+                            Log.d("Add potential student:", "fail");
+                        }
+                        name.setText(null);
+                        address.setText(null);
+                        phoneNum.setText(null);
+                        gender.setText(null);
+                        state.setText(null);
+                        level.setText(null);
+                        appointmentNum.setText(null);
+
+                    } catch (Exception e) {
+                        Log.d("Add potential student error:", "fail");
+                    }
+                }
                 else Toast.makeText(Activity_Add_Potential_Student.this, "Nhập lại", Toast.LENGTH_SHORT).show();
             }
         });

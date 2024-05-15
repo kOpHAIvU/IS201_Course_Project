@@ -26,8 +26,10 @@ public class OfficialStudentDAO {
         String gender = student.getGender();
         int status = student.getStatus();
 
+        int maxId = DataProvider.getInstance(context).getMaxId("OFFICIAL_STUDENT", "ID_STUDENT");
+
         ContentValues values = new ContentValues();
-        values.put("ID_STUDENT", idStudent);
+        values.put("ID_STUDENT", "STU" + String.valueOf(maxId + 1));
         values.put("FULLNAME", fullName);
         values.put("ADDRESS", address);
         values.put("PHONE_NUMBER", phoneNumber);

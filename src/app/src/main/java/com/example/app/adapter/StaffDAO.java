@@ -20,7 +20,10 @@ public class StaffDAO {
 
     public void insertStaff(Context context, StaffDTO staff) {
         ContentValues values = new ContentValues();
-        values.put("ID_STAFF", staff.getIdStaff());
+
+        int maxId = DataProvider.getInstance(context).getMaxId("STAFF", "ID_STAFF");
+
+        values.put("ID_STAFF", "STA" + String.valueOf(maxId + 1));
         values.put("FULLNAME", staff.getFullName());
         values.put("ADDRESS",staff.getAddress());
         values.put("PHONE_NUMBER", staff.getPhoneNumber());

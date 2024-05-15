@@ -19,7 +19,10 @@ public class AccountDAO {
 
     public void insertAccount(Context context, AccountDTO accountDTO) {
         ContentValues values = new ContentValues();
-        values.put("ID_ACCOUNT", accountDTO.getIdAccount());
+
+        int maxId = DataProvider.getInstance(context).getMaxId("ACCOUNT", "ID_ACCOUNT");
+
+        values.put("ID_ACCOUNT", "ACC" + String.valueOf(maxId + 1));
         values.put("ID_USER", accountDTO.getIdUser());
         values.put("USERNAME", accountDTO.getUserName());
         values.put("PASSWORD", accountDTO.getPassWord());

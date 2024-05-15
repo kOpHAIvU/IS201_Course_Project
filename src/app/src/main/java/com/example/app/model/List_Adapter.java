@@ -106,16 +106,16 @@ public class List_Adapter extends ArrayAdapter {
                 state = convertView.findViewById(R.id.state);
                 programDescrip = convertView.findViewById(R.id.program_description);
 
-                CertificateDTO listEducationProgram = (CertificateDTO) arrayDataList.get(position);
+                ProgramDTO listEducationProgram = (ProgramDTO) arrayDataList.get(position);
 
-                programID.setText(listEducationProgram.programID);
-                programName.setText(listEducationProgram.programName);
-                speak1.setText(listEducationProgram.speak);
-                write1.setText(listEducationProgram.write);
-                listen1.setText(listEducationProgram.listen);
-                read1.setText(listEducationProgram.read);
-                state.setText(listEducationProgram.state);
-                programDescrip.setText(listEducationProgram.description);
+                programID.setText(listEducationProgram.getIdProgram());
+                programName.setText(listEducationProgram.getNameProgram());
+                speak1.setText(listEducationProgram.getSpeakingScore());
+                write1.setText(listEducationProgram.getWritingScore());
+                listen1.setText(listEducationProgram.getListeningScore());
+                read1.setText(listEducationProgram.getReadingScore());
+                state.setText("Còn tồn tại");
+                programDescrip.setText(listEducationProgram.getContent());
                 break;
             case 4:     //Kiểu List_Class
                 TextView classID, className, level, lectureName, schoolTime, tuition, roomID, programID1, staffID;
@@ -129,17 +129,17 @@ public class List_Adapter extends ArrayAdapter {
                 programID1 = convertView.findViewById(R.id.programID);
                 staffID = convertView.findViewById(R.id.staffID);
 
-                ClassroomDTO listClass = (ClassroomDTO) arrayDataList.get(position);
+                ClassDTO listClass = (ClassDTO) arrayDataList.get(position);
 
-                classID.setText(listClass.classID);
-                className.setText(listClass.className);
-                level.setText(listClass.level);
-                lectureName.setText(listClass.lectureName);
-                schoolTime.setText(listClass.schoolTime);
-                tuition.setText(listClass.tuition);
-                roomID.setText(listClass.roomID);
-                programID1.setText(listClass.programID);
-                staffID.setText(listClass.staffID);
+                classID.setText(listClass.getClassID());
+                className.setText(listClass.getClassName());
+                level.setText(listClass.getLevel());
+                lectureName.setText(listClass.getLectureName());
+                schoolTime.setText(listClass.getSchoolTime());
+                tuition.setText(listClass.getTuition());
+                roomID.setText(listClass.getRoomID());
+                programID1.setText(listClass.getProgramID());
+                staffID.setText(listClass.getStaffID());
                 break;
             case 5:     //Kiểu PotentialStudentDTO
                 TextView studentName, phoneNumber, gender, address, state1, level1, appointmentNumber;
@@ -153,13 +153,13 @@ public class List_Adapter extends ArrayAdapter {
 
                 PotentialStudentDTO listTalentedStudent = (PotentialStudentDTO) arrayDataList.get(position);
 
-                studentName.setText(listTalentedStudent.studentName);
-                phoneNumber.setText(listTalentedStudent.phoneNumber);
-                gender.setText(listTalentedStudent.gender);
-                state1.setText(listTalentedStudent.state);
-                level1.setText(listTalentedStudent.level);
-                address.setText(listTalentedStudent.address);
-                appointmentNumber.setText(listTalentedStudent.appointmentNumber);
+                studentName.setText(listTalentedStudent.getStudentName());
+                phoneNumber.setText(listTalentedStudent.getPhoneNumber());
+                gender.setText(listTalentedStudent.getGender());
+                state1.setText(listTalentedStudent.getState());
+                level1.setText(listTalentedStudent.getLevel());
+                address.setText(listTalentedStudent.getAddress());
+                appointmentNumber.setText(listTalentedStudent.getAppointmentNumber());
 
                 Button removePotentialStudent, editPotentialStudent;
 
@@ -226,9 +226,9 @@ public class List_Adapter extends ArrayAdapter {
             return 1;
         else if (item instanceof ExamScoreDTO)
             return 2;
-        else if (item instanceof CertificateDTO)
+        else if (item instanceof ProgramDTO)
             return 3;
-        else if (item instanceof ClassroomDTO)
+        else if (item instanceof ClassDTO)
             return 4;
         else if (item instanceof PotentialStudentDTO)
             return 5;

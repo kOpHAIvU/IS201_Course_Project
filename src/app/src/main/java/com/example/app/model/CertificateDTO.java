@@ -1,48 +1,63 @@
 package com.example.app.model;
 
 public class CertificateDTO {
-    String programID, programName, speak, write, read, listen, state, description;
-
-    public String getProgramID() {
-        return programID;
+    private String idCertificate, name, content,  minimumScore, status;
+    public CertificateDTO(String idCertificate, String name, String content, String minimumScore, String status) {
+        this.idCertificate = idCertificate;
+        this.name = name;
+        this.content = content;
+        this.minimumScore = minimumScore;
+        this.status = status;
     }
 
-    public String getProgramName() {
-        return programName;
+    public String getIdCertificate() {
+        return idCertificate;
     }
 
-    public String getSpeak() {
-        return speak;
+    public String getName() {
+        return name;
     }
 
-    public String getWrite() {
-        return write;
+    public String getContent() {
+        return content;
     }
 
-    public String getRead() {
-        return read;
+    public String getMinimumScore() {
+        return minimumScore;
     }
 
-    public String getListen() {
-        return listen;
+    public String getStatus() {
+        return status;
     }
 
-    public String getState() {
-        return state;
+    public void setIdCertificate(String idCertificate) {
+        this.idCertificate = idCertificate;
     }
 
-    public String getDescription() {
-        return description;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public CertificateDTO(String programID, String programName, String speak, String write, String read, String listen, String state, String description) {
-        this.programID = programID;
-        this.programName = programName;
-        this.speak = speak;
-        this.write = write;
-        this.read = read;
-        this.listen = listen;
-        this.state = state;
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setMinimumScore(String minimumScore) {
+        this.minimumScore = minimumScore;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "CertificateDTO{" +
+                "idCertificate='" + idCertificate + '\'' +
+                ", name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                ", minimumScore='" + minimumScore + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

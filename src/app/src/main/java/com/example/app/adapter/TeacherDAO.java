@@ -19,7 +19,10 @@ public class TeacherDAO {
 
     public void insertTeacher(Context context, TeacherDTO teacher) {
         ContentValues values = new ContentValues();
-        values.put("ID_TEACHER", teacher.getIdTeacher());
+
+        int maxId = DataProvider.getInstance(context).getMaxId("TEACHER", "ID_TEACHER");
+
+        values.put("ID_TEACHER", "TEA" + String.valueOf(maxId + 1));
         values.put("FULLNAME", teacher.getFullName());
         values.put("ADDRESS",teacher.getAddress());
         values.put("PHONE_NUMBER", teacher.getPhoneNumber());

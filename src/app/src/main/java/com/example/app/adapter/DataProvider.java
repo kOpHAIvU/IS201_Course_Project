@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 33;
+    private static final int DATABASE_VERSION = 41;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -28,7 +29,7 @@ public class DataProvider extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE NOTIFICATION");
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS CERTIFICATE (" +
                     "ID_CERTIFICATE TEXT PRIMARY KEY, " +
@@ -83,7 +84,7 @@ public class DataProvider extends SQLiteOpenHelper {
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS POTENTIAL_STUDENT (" +
-                    "ID_STUDENT INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "ID_STUDENT TEXT PRIMARY KEY, " +
                     "FULLNAME TEXT, " +
                     "ADDRESS TEXT, " +
                     "PHONE_NUMBER TEXT, " +
@@ -238,11 +239,14 @@ public class DataProvider extends SQLiteOpenHelper {
                     "ID_ACCOUNT TEXT," +
                     "TITLE TEXT," +
                     "CONTENT TEXT," +
+                    "STATUS TEXT," +
                     " FOREIGN KEY (ID_ACCOUNT) REFERENCES ACCOUNT(ID_ACCOUNT))");
             Log.d("CREATE NOTIFICATION: ", "Success");
         } catch (Exception e ) {
             Log.d("CREATE NOTIFICATION: ", e.getMessage());
         }
+
+        db.execSQL("DELETE FROM POTENTIAL_STUDENT");
 
     }
 
@@ -284,5 +288,36 @@ public class DataProvider extends SQLiteOpenHelper {
         Cursor cursor = db.query(tableName, columns, whereClause, whereArgs, groupBy, null, null);
         return cursor;
     }
+
+    public int getMaxId(String tableName, String column) {
+        int maxId = 0;
+
+        // Xác minh tableName và column để tránh SQL Injection
+        if (tableName!= null &&!tableName.isEmpty() && column!= null &&!column.isEmpty()) {
+            try {
+                SQLiteDatabase db = this.getReadableDatabase();
+                String selection = "1"; // Điều kiện lọc mặc định để lấy tất cả các bản ghi
+                String orderByClause = "ORDER BY abs(cast(substr(" + column + ", 4, length(" + column + ") - 3) as integer)) DESC";
+
+                Cursor cursor = db.rawQuery("SELECT " + column + " FROM " + tableName + " WHERE " + selection + " " + orderByClause, null);
+
+                if (cursor.moveToFirst()) {
+                    int columnIndex = cursor.getColumnIndex(column);
+                    if (columnIndex!= -1) {
+                        String maxIdString = cursor.getString(columnIndex);
+                        String substring = maxIdString.substring(3); // Giả định rằng chuỗi bắt đầu bằng 'ID_' và số sau đó là ID thực tế
+                        maxId = Integer.parseInt(substring);
+                        Log.d("Get max id in DataProvider: ", String.valueOf(maxId));
+                    }
+                }
+            } catch (NumberFormatException | SQLException e) {
+                Log.d("Select max id: ", e.getMessage());
+            }
+        }
+
+        return maxId;
+    }
+
+
 
 }
