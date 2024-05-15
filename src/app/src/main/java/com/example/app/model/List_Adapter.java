@@ -235,7 +235,6 @@ public class List_Adapter extends ArrayAdapter {
         else
             throw new IllegalArgumentException("Unknown data type: " + item.getClass().getName());
     }
-
     @Override
     public int getViewTypeCount() {
         return 8;

@@ -20,6 +20,7 @@ import com.example.app.adapter.DataProvider;
 import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.OfficialStudentDAO;
 import com.example.app.adapter.PotentialStudentDAO;
+import com.example.app.adapter.ProgramDAO;
 import com.example.app.adapter.StaffDAO;
 import com.example.app.adapter.TeacherDAO;
 import com.example.app.model.AccountDTO;
@@ -28,6 +29,7 @@ import com.example.app.model.ClassroomDTO;
 import com.example.app.model.NotificationDTO;
 import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.PotentialStudentDTO;
+import com.example.app.model.ProgramDTO;
 import com.example.app.model.StaffDTO;
 import com.example.app.model.TeacherDTO;
 
@@ -175,7 +177,18 @@ public class Activity_Login extends AppCompatActivity {
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent1);
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent2);
 */
+        ProgramDTO program1 = new ProgramDTO("PRO2", "Đào tạo tiếng anh chuyên sâu",
+                "6.5", "8.5", "Đào tạo chuyên sâu dành cho các bạn có nhu cầu theo các" +
+                "khối ngành ngôn ngữ hoặc có dự định đi du học", "6.5", "7.5",
+                "7", "7");
+        ProgramDAO.getInstance(Activity_Login.this).InsertProgram(Activity_Login.this, program1);
 
+        ProgramDTO program2 = new ProgramDTO("PRO3", "Đào tạo tiếng anh mức trung bình",
+                "6.5", "8.5", "Đào tạo mức trung bình dành" +
+                "cho các bạn sinh viên sắp ra trường hoặc các bạn học sinh cần chứng chỉ để" +
+                "xét tuyển vào các trường đại học", "6.5", "7.5",
+                "7", "7");
+        ProgramDAO.getInstance(Activity_Login.this).InsertProgram(Activity_Login.this, program2);
 
     }
 }
