@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.activity.Activity_Notifications;
@@ -23,7 +24,6 @@ public class NotificationDAO {
     }
     public int InsertNotification(Context context, NotificationDTO notification) {
         int rowEffect = -1;
-
         ContentValues values = new ContentValues();
         int maxId = DataProvider.getInstance(context).getMaxId("NOTIFICATION", "ID_NOTIFICATION");
 
@@ -40,7 +40,7 @@ public class NotificationDAO {
             } else {
                 Log.d("Insert Notification: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Notification Error: ", e.getMessage());
         }
 
@@ -57,7 +57,7 @@ public class NotificationDAO {
             } else {
                 Log.d("Delete Notification: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Notification: ", e.getMessage());
         }
 
@@ -76,7 +76,7 @@ public class NotificationDAO {
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("NOTIFICATION", values, whereClause, whereArgs);
             return rowsUpdated;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.e("Update Notification: ", e.getMessage());
         }
 
@@ -88,7 +88,7 @@ public class NotificationDAO {
 
         try {
             cursor = DataProvider.getInstance(context).selectData("NOTIFICATION", new String[]{"*"},  whereClause, whereArgs, null);
-        } catch(Exception e) {
+        } catch(SQLException e) {
             Log.d("Select Notification: ", e.getMessage());
         }
         String fullName = "";

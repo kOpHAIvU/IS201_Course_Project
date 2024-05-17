@@ -2,6 +2,7 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.ClassroomDTO;
@@ -33,7 +34,7 @@ public class ClassroomDAO {
             } else {
                 Log.d("Insert New Classroom: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert New Classroom: ", e.getMessage());
         }
 
@@ -50,7 +51,7 @@ public class ClassroomDAO {
         try {
             rowEffect = DataProvider.getInstance(context).updateData("CLASSROOM", values, whereClauses, whereArgs);
             return rowEffect;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.e("Update Classroom: ", e.getMessage());
         }
 

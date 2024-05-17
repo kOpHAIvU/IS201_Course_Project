@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.AccountDTO;
@@ -33,7 +34,7 @@ public class AccountDAO {
             } else {
                 Log.d("Insert Account: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Account Error: ", e.getMessage());
         }
     }
@@ -58,7 +59,7 @@ public class AccountDAO {
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("ACCOUNT", values, whereClause, whereArgs);
             return rowsUpdated;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.e("Update Account Error: ", e.getMessage());
         }
         return 0;
@@ -69,7 +70,7 @@ public class AccountDAO {
         Cursor cursor = null;
         try {
             cursor = DataProvider.getInstance(context).selectData("ACCOUNT", new String[]{"*"},  whereClause, whereArgs, null);
-        }catch(Exception e) {
+        }catch(SQLException e) {
             Log.d("Select Account: ", e.getMessage());
         }
         return cursor;

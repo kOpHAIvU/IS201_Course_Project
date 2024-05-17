@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.ProgramDTO;
@@ -32,6 +33,7 @@ public class ScheduleDAO {
         values.put("END_TIME", schedule.getEnd());
         values.put("ID_CLASS", schedule.getIdClass());
         values.put("ID_CLASSROOM", schedule.getIdClassroom());
+        values.put("STATUS", 0);
 
         try {
             rowEffect = DataProvider.getInstance(context).insertData("SCHEDULE", values);
@@ -41,7 +43,7 @@ public class ScheduleDAO {
             } else {
                 Log.d("Insert Schedule: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Schedule Error: ", e.getMessage());
         }
 
@@ -52,14 +54,14 @@ public class ScheduleDAO {
         int rowEffect = -1;
 
         ContentValues values = new ContentValues();
-        int maxId = DataProvider.getInstance(context).getMaxId("SCHEDULE", "ID_SCHEDULE");
 
-        values.put("ID_SCHEDULE", "SCH" + String.valueOf(maxId + 1));
+        values.put("ID_SCHEDULE", schedule.getIdSchedule());
         values.put("DAY_OF_WEEK", schedule.getDay());
         values.put("START_TIME",schedule.getStart());
         values.put("END_TIME", schedule.getEnd());
         values.put("ID_CLASS", schedule.getIdClass());
         values.put("ID_CLASSROOM", schedule.getIdClassroom());
+        values.put("STATUS", 0);
 
         try {
             rowEffect = DataProvider.getInstance(context).updateData("SCHEDULE", values, whereClause, whereArg);
@@ -69,7 +71,7 @@ public class ScheduleDAO {
             } else {
                 Log.d("Update Schedule: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Update Schedule Error: ", e.getMessage());
         }
 
@@ -82,10 +84,10 @@ public class ScheduleDAO {
 
         try {
             cursor = DataProvider.getInstance(context).selectData("SCHEDULE", new String[]{"*"},  whereClause, whereArgs, null);
-        }catch(Exception e) {
+        }catch(SQLException e) {
             Log.d("Select Program: ", e.getMessage());
         }
-//    private String idSchedule, day, start, end, idClass, idClassroom;
+
        String idSchedule = "", day = "", start = "", end = "", idClass = "", idClassroom = "";
 
         if (cursor.moveToFirst()) {

@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.ClassDTO;
@@ -42,7 +43,7 @@ public class ClassDAO {
             } else {
                 Log.d("Insert Class: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Class Error: ", e.getMessage());
         }
 
@@ -70,7 +71,7 @@ public class ClassDAO {
             } else {
                 Log.d("Update Class: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Update Class Error: ", e.getMessage());
         }
 
@@ -83,7 +84,7 @@ public class ClassDAO {
 
         try {
             cursor = DataProvider.getInstance(context).selectData("CLASS", new String[]{"*"},  whereClause, whereArgs, null);
-        }catch(Exception e) {
+        }catch(SQLException e) {
             Log.d("Select Class: ", e.getMessage());
         }
 

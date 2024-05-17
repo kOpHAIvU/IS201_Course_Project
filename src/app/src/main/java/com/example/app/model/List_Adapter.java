@@ -102,11 +102,11 @@ public class List_Adapter extends ArrayAdapter {
 
         ExamScoreDTO listScore = (ExamScoreDTO) arrayDataList.get(position);
 
-        courseID.setText(listScore.courseID);
+/*        courseID.setText(listScore.courseID);
         speak.setText(listScore.speak);
         write.setText(listScore.write);
         listen.setText(listScore.listen);
-        read.setText(listScore.read);
+        read.setText(listScore.read);*/
     }
 
     private void List_Education_Program_View (@Nullable View convertView, int position) {

@@ -67,8 +67,8 @@ public class Activity_Notifications extends AppCompatActivity {
                 break;
 
             case "Tra cứu điểm":
-                dataArrayList.add(new ExamScoreDTO("IS201", "10","9","8","9"));
-                dataArrayList.add(new ExamScoreDTO("NT106", "9","8","10","10"));
+                //dataArrayList.add(new ExamScoreDTO("IS201", "10","9","8","9"));
+                //dataArrayList.add(new ExamScoreDTO("NT106", "9","8","10","10"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_score_item, dataArrayList);
                 break;
 

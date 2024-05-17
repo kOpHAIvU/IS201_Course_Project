@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.OfficialStudentDTO;
@@ -45,7 +46,7 @@ public class PotentialStudentDAO {
             } else {
                 Log.d("Insert Potential: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Potential Error: ", e.getMessage());
         }
         return rowEffect;
@@ -65,7 +66,7 @@ public class PotentialStudentDAO {
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("POTENTIAL_STUDENT", values, whereClause, whereArgs);
             return rowsUpdated;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.e("Update Potential Student Error: ", e.getMessage());
         }
         return 0;
@@ -77,7 +78,7 @@ public class PotentialStudentDAO {
 
         try {
             cursor = DataProvider.getInstance(context).selectData("POTENTIAL_STUDENT", new String[]{"*"},  whereClause, whereArgs, null);
-        }catch(Exception e) {
+        }catch(SQLException e) {
             Log.d("Select Potential Student: ", e.getMessage());
         }
 

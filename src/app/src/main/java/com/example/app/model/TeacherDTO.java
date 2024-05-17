@@ -8,9 +8,8 @@ public class TeacherDTO {
     private String gender;
     private int salary;
     private String birthday;
-    private int status;
 
-    public TeacherDTO(String id, String fullName, String address, String phoneNumber, String gender, String birthday, int salary, int status) {
+    public TeacherDTO(String id, String fullName, String address, String phoneNumber, String gender, String birthday, int salary) {
         this.idTeacher = id;
         this.fullName = fullName;
         this.address = address;
@@ -18,7 +17,6 @@ public class TeacherDTO {
         this.gender = gender;
         this.salary = salary;
         this.birthday = birthday;
-        this.status = status;
     }
 
     public String getIdTeacher() {
@@ -45,10 +43,6 @@ public class TeacherDTO {
         return salary;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
     public void setIdTeacher(String idTeacher) {
         this.idTeacher = idTeacher;
     }
@@ -73,9 +67,6 @@ public class TeacherDTO {
         this.salary = salary;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public String getBirthday() {
         return birthday;
@@ -95,7 +86,6 @@ public class TeacherDTO {
                 ", gender='" + gender + '\'' +
                 ", salary=" + salary +
                 ", birthday='" + birthday + '\'' +
-                ", status=" + status +
                 '}';
     }
 }

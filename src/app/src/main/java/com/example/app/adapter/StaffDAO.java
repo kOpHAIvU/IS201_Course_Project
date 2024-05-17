@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.OfficialStudentDTO;
@@ -40,7 +41,7 @@ public class StaffDAO {
             } else {
                 Log.d("Insert Staff: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Staff Error: ", e.getMessage());
         }
     }
@@ -53,7 +54,7 @@ public class StaffDAO {
             } else {
                 Log.d("Delete Staff: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Staff Error: ", e.getMessage());
         }
     }
@@ -72,7 +73,7 @@ public class StaffDAO {
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("STAFF", values, whereClause, whereArgs);
             return rowsUpdated;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.e("Update Staff Error: ", e.getMessage());
         }
         return 0;
@@ -82,7 +83,7 @@ public class StaffDAO {
         Cursor cursor = null;
         try {
             cursor = DataProvider.getInstance(context).selectData("STAFF", new String[]{"*"},  whereClause, whereArgs, null);
-        }catch(Exception e) {
+        }catch(SQLException e) {
             Log.d("Select Staff: ", e.getMessage());
         }
         return cursor;

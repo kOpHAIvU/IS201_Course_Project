@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.ProgramDTO;
@@ -49,7 +50,7 @@ public class ProgramDAO {
             } else {
                 Log.d("Insert program ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert program Error: ", e.getMessage());
         }
 
@@ -59,9 +60,8 @@ public class ProgramDAO {
     public int UpdateProgram(Context context, ProgramDTO program, String whereClause, String[] whereArgs ) {
         int rowEffect = -1;
         ContentValues values = new ContentValues();
-        int maxId = DataProvider.getInstance(context).getMaxId("PROGRAM", "ID_PROGRAM");
 
-        values.put("ID_PROGRAM", "PRO" + String.valueOf(maxId + 1));
+        values.put("ID_PROGRAM", program.getIdProgram());
         values.put("NAME", program.getNameProgram());
         values.put("INPUT_SCORE", program.getInputScore());
         values.put("OUTPUT_SCORE", program.getOutputScore());
@@ -83,7 +83,7 @@ public class ProgramDAO {
             } else {
                 Log.d("Update program ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Update program Error: ", e.getMessage());
         }
 
@@ -96,7 +96,7 @@ public class ProgramDAO {
 
         try {
             cursor = DataProvider.getInstance(context).selectData("PROGRAM", new String[]{"*"},  whereClause, whereArgs, null);
-        }catch(Exception e) {
+        }catch(SQLException e) {
             Log.d("Select Program: ", e.getMessage());
         }
 
