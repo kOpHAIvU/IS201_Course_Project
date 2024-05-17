@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.example.app.R;
 import com.example.app.adapter.PotentialStudentDAO;
+import com.example.app.model.ClassDTO;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
 
@@ -55,16 +56,25 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 dataArrayList.add(new PotentialStudentDTO("Hoàng Thiện", "0912345678"
                         , "Nữ", "Ký túc xá khu A"
                         , "Chưa học", "Mẫu giáo","10"));*/
-                String[] whereArgs = new String[] {"0"};
+                /*String[] whereArgs = new String[] {"0"};
                 List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
                         Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
                 );
                 for (int i = 0; i < listPotentialStudent.size(); i++) {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
-                }
+                }*/
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
+                break;
+            //Nhân viên học vụ
+            case "Quản lý lớp học":
+                toolbar.setTitle("Lớp học");
+                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "B4.04","Đoán coi","Nhật Quỳnh"));
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 break;
         }
         listView.setAdapter(listAdapter);
@@ -74,29 +84,36 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
         dataArrayList.clear();
 
         switch (message) {
             //Nhân viên ghi danh
             case "Quản lý thông tin học viên":
-                toolbar.setTitle("Danh sách học viên tiềm năng");
+                toolbar.setTitle("Học viên tiềm năng");
                 /*dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
                         , "Nam", "Ký túc xá khu A"
-                        , "Chưa học", "Đại học","10"));
-                dataArrayList.add(new PotentialStudentDTO("Hoàng Thiện", "0912345678"
+                        , "Chưa học", "Đại học","10"));*/
+                dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
                         , "Nữ", "Ký túc xá khu A"
-                        , "Chưa học", "Mẫu giáo","10"));*/
-                String[] whereArgs = new String[] {"0"};
+                        , "Mẫu giáo","10"));
+                /*String[] whereArgs = new String[] {"0"};
                 List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
                         Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
                 );
                 for (int i = 0; i < listPotentialStudent.size(); i++) {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
-                }
+                }*/
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
+                break;
+            case "Quản lý lớp học":
+                toolbar.setTitle("Lớp học");
+                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "B4.04","Đoán coi","Nhật Quỳnh"));
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 break;
         }
         listView.setAdapter(listAdapter);
@@ -116,6 +133,8 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
             case "Quản lý thông tin học viên":
                 Intent addPotential = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Potential_Student.class);
                 startActivity(addPotential);
+                break;
+            case "Quản lý lớp học":
                 break;
         }
         return super.onOptionsItemSelected(item);

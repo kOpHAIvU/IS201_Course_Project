@@ -1,7 +1,11 @@
 package com.example.app.model;
 
 public class PotentialStudentDTO {
-    private String studentName, phoneNumber, gender, address, state, level, appointmentNumber;
+    private String studentID, studentName, phoneNumber, gender, address, level, appointmentNumber;
+
+    public String getStudentID() {
+        return studentID;
+    }
 
     public String getStudentName() {
         return studentName;
@@ -19,10 +23,6 @@ public class PotentialStudentDTO {
         return address;
     }
 
-    public String getState() {
-        return state;
-    }
-
     public String getAppointmentNumber() {
         return appointmentNumber;
     }
@@ -31,12 +31,12 @@ public class PotentialStudentDTO {
         return level;
     }
 
-    public PotentialStudentDTO(String studentName, String phoneNumber, String gender, String address, String state, String level, String appointmentNumber) {
+    public PotentialStudentDTO(String studentID, String studentName, String phoneNumber, String gender, String address, String level, String appointmentNumber) {
+        this.studentID = studentID;
         this.studentName = studentName;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.address = address;
-        this.state = state;
         this.level = level;
         this.appointmentNumber = appointmentNumber;
     }
@@ -44,11 +44,11 @@ public class PotentialStudentDTO {
     @Override
     public String toString() {
         return "PotentialStudentDTO{" +
+                "studentID='" + studentID + '\'' +
                 "studentName='" + studentName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", gender='" + gender + '\'' +
                 ", address='" + address + '\'' +
-                ", state='" + state + '\'' +
                 ", level='" + level + '\'' +
                 ", appointmentNumber='" + appointmentNumber + '\'' +
                 '}';
@@ -70,8 +70,8 @@ public class PotentialStudentDTO {
         this.address = address;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 
     public void setLevel(String level) {

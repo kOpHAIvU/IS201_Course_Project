@@ -15,7 +15,6 @@
         android:background="#475CCD"
         app:titleTextColor="@color/white"
         app:title="Toolbar" >
-
     </androidx.appcompat.widget.Toolbar>
 
     <ListView

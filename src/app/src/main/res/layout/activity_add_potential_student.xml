@@ -58,6 +58,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="24dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="ID:"/>
+
+            <EditText
+                android:id="@+id/studentID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:gravity="center"
             android:orientation="horizontal">
@@ -83,6 +106,52 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="24dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="Trình độ:"/>
+
+            <EditText
+                android:id="@+id/input_level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="24dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="Cuộc hẹn:"/>
+
+            <EditText
+                android:id="@+id/input_appointment_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -92,11 +161,11 @@
                 android:layout_gravity="center"/>
 
             <TextView
-                android:id="@+id/wrong_address"
+                android:id="@+id/field_need_mandatory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Vui lòng nhập địa chỉ"
+                android:text="Không để trống các ô trên"
                 android:textColor="#D10101"
                 android:textSize="12dp" />
         </LinearLayout>
@@ -187,96 +256,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Nhập Nam hoặc Nữ"
-                android:textColor="#D10101"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="24dp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textSize="15dp"
-                android:text="Tình trạng:"/>
-
-            <EditText
-                android:id="@+id/input_state"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="24dp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textSize="15dp"
-                android:text="Trình độ:"/>
-
-            <EditText
-                android:id="@+id/input_level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="24dp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textSize="15dp"
-                android:text="Cuộc hẹn:"/>
-
-            <EditText
-                android:id="@+id/input_appointment_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="83dp"
-                android:layout_height="12dp"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:id="@+id/wrong_state_level_appointment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Không được để trống các ô trên"
                 android:textColor="#D10101"
                 android:textSize="12dp" />
         </LinearLayout>

@@ -17,53 +17,27 @@ import com.example.app.model.PotentialStudentDTO;
 import java.time.LocalDate;
 
 public class Activity_Add_Potential_Student extends AppCompatActivity {
-    EditText name, address, phoneNum, gender, state, level, appointmentNum;
+    EditText id, name, address, phoneNum, gender, level, appointmentNum;
     Button doneBtn, exitBtn;
-    TextView nameErr, addrErr, phoneErr, genderErr, stateLevelAppointErr;
+    TextView nameErr, addrErr, phoneErr, genderErr, missingField;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_potential_student);
 
-        String message = "";
-        name = findViewById(R.id.input_name);
-        message = getIntent().getStringExtra("studentName");
-        if (message != "")  name.setText(message);
-        message = "";
+        String message = getIntent().getStringExtra("studentID");
+        if (!message.equals("")) {
+            id.setText(message);
+            /*name.setText();
+            address.setText();
+            phoneNum.setText();
+            gender.setText();
+            level.setText();
+            appointmentNum.setText();*/
+        }
 
-        address = findViewById(R.id.input_addr);
-        message = getIntent().getStringExtra("address");
-        if (message != "")  address.setText(message);
-        message = "";
-
-        phoneNum = findViewById(R.id.input_phone);
-        message = getIntent().getStringExtra("phoneNumber");
-        if (message != "")  phoneNum.setText(message);
-        message = "";
-
-        gender = findViewById(R.id.input_gender);
-        message = getIntent().getStringExtra("gender");
-        if (message != "")  gender.setText(message);
-        message = "";
-
-        state = findViewById(R.id.input_state);
-        message = getIntent().getStringExtra("state");
-        if (message != "")  state.setText(message);
-        message = "";
-
-        level = findViewById(R.id.input_level);
-        message = getIntent().getStringExtra("level");
-        if (message != "")  level.setText(message);
-        message = "";
-
-        appointmentNum = findViewById(R.id.input_appointment_number);
-        message = getIntent().getStringExtra("appointmentNumber");
-        if (message != "")  appointmentNum.setText(message);
-        message = "";
-
-        nameErr = findViewById(R.id.student_type);
-        addrErr = findViewById(R.id.wrong_address);
-        addrErr.setVisibility(View.GONE);
+        missingField = findViewById(R.id.field_need_mandatory);
+        missingField.setVisibility(View.GONE);
 
         phoneErr = findViewById(R.id.wrong_number);
         phoneErr.setVisibility(View.GONE);
@@ -71,8 +45,6 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
         genderErr = findViewById(R.id.wrong_gender);
         genderErr.setVisibility(View.GONE);
 
-        stateLevelAppointErr = findViewById(R.id.wrong_state_level_appointment);
-        stateLevelAppointErr.setVisibility(View.GONE);
 
         exitBtn = findViewById(R.id.exit_btn);
         exitBtn.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +60,12 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
             public void onClick(View v) {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragmen_Setting
 
-                if (name.getText().toString() == "") {
+                if (id.equals("") || address.equals("") || level.equals("") || appointmentNum.equals("")) {
+                    acceptSwitch = false;
+                    missingField.setVisibility(View.VISIBLE);
+                } else missingField.setVisibility(View.GONE);
+
+                if (name.equals("")) {
                     acceptSwitch = false;
                     nameErr.setText("Không để trống tên");
                 } else nameErr.setText("Học viên tiềm năng");
@@ -112,17 +89,19 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                     addrErr.setVisibility(View.VISIBLE);
                 } else addrErr.setVisibility(View.GONE);
 
-                if (state.getText().toString().equals("") || level.getText().toString().equals("") || appointmentNum.getText().toString().equals("")) {
-                    acceptSwitch = false;
-                    stateLevelAppointErr.setVisibility(View.VISIBLE);
-                } else stateLevelAppointErr.setVisibility(View.GONE);
 
                 if (acceptSwitch) {
                     try {
                         int rowEffect = PotentialStudentDAO.getInstance(Activity_Add_Potential_Student.this).InsertPotentialStudent(
                                 Activity_Add_Potential_Student.this, new PotentialStudentDTO(
-                                        name.getText().toString(), phoneNum.getText().toString(), gender.getText().toString(),
-                                        address.getText().toString(), "0", level.getText().toString(), appointmentNum.getText().toString()));
+                                        id.getText().toString(),
+                                        name.getText().toString(),
+                                        phoneNum.getText().toString(),
+                                        gender.getText().toString(),
+                                        address.getText().toString(),
+                                        level.getText().toString(),
+                                        appointmentNum.getText().toString())
+                        );
 
                         if (rowEffect > 0) {
                             Toast.makeText(Activity_Add_Potential_Student.this,
@@ -131,11 +110,11 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                         }else {
                             Log.d("Add potential student:", "fail");
                         }
+                        id.setText(null);
                         name.setText(null);
                         address.setText(null);
                         phoneNum.setText(null);
                         gender.setText(null);
-                        state.setText(null);
                         level.setText(null);
                         appointmentNum.setText(null);
 
