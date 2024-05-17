@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/login_background">
             <TextView
-                android:id="@+id/programID"
+                android:id="@+id/idProgram"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
@@ -58,7 +58,7 @@
                     android:textSize="15dp"
                     android:text="Điểm đầu vào:"/>
                 <TextView
-                    android:id="@+id/income_score"
+                    android:id="@+id/inputScore"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:text="10"
@@ -71,7 +71,7 @@
                     android:textSize="15dp"
                     android:text="Điểm đầu ra:"/>
                 <TextView
-                    android:id="@+id/outcome_score"
+                    android:id="@+id/outputScore"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:text="10"
@@ -146,21 +146,69 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="15dp"
-                    android:text="Trạng thái: "/>
+                    android:text="Học phí: "/>
+
                 <TextView
-                    android:id="@+id/state"
+                    android:id="@+id/tuitionFees"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp"
+                    android:text="10"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text=" đồng"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:text="Lộ trình: "/>
+
+                <TextView
+                    android:id="@+id/studyPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:text="Chứng chỉ đầu ra: "/>
+
+                <TextView
+                    android:id="@+id/certificate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10"/>
             </LinearLayout>
 
             <LinearLayout
@@ -176,7 +224,7 @@
                     android:text="Nội dung: "/>
             </LinearLayout>
             <TextView
-                android:id="@+id/program_description"
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>

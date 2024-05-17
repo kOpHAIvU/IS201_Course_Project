@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Học viên tài năng"
+            android:text="Học viên chính thức"
             android:textColor="#8F0000"
             android:textSize="14dp"
             android:textStyle="bold" />
@@ -114,33 +114,10 @@
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:textSize="15dp"
-                android:text="Trình độ:"/>
+                android:text="Ngày sinh:"/>
 
             <EditText
-                android:id="@+id/level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="24dp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textSize="15dp"
-                android:text="Cuộc hẹn:"/>
-
-            <EditText
-                android:id="@+id/appointmentNumber"
+                android:id="@+id/birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -196,6 +173,7 @@
                 android:textColor="@color/black"
                 android:textSize="15dp" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

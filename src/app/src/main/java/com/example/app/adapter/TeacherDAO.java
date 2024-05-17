@@ -34,7 +34,7 @@ public class TeacherDAO {
         values.put("PHONE_NUMBER", teacher.getPhoneNumber());
         values.put("GENDER", teacher.getGender());
         values.put("SALARY", teacher.getSalary());
-        values.put("STATUS", teacher.getStatus());
+        //values.put("STATUS", teacher.getStatus());
 
         try {
             int rowEffect = DataProvider.getInstance(context).insertData("TEACHERS", values);
@@ -69,7 +69,7 @@ public class TeacherDAO {
         values.put("PHONE_NUMBER", teacher.getPhoneNumber());
         values.put("GENDER", teacher.getGender());
         values.put("SALARY", teacher.getSalary());
-        values.put("STATUS", teacher.getStatus());
+        //values.put("STATUS", teacher.getStatus());
 
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("TEACHERS", values, whereClause, whereArgs);

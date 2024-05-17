@@ -28,9 +28,9 @@ public class ScheduleDAO {
         int maxId = DataProvider.getInstance(context).getMaxId("SCHEDULE", "ID_SCHEDULE");
 
         values.put("ID_SCHEDULE", "SCH" + String.valueOf(maxId + 1));
-        values.put("DAY_OF_WEEK", schedule.getDay());
-        values.put("START_TIME",schedule.getStart());
-        values.put("END_TIME", schedule.getEnd());
+        values.put("DAY_OF_WEEK", schedule.getDayOfWeek());
+        values.put("START_TIME",schedule.getStartTime());
+        values.put("END_TIME", schedule.getEndTime());
         values.put("ID_CLASS", schedule.getIdClass());
         values.put("ID_CLASSROOM", schedule.getIdClassroom());
         values.put("STATUS", 0);
@@ -56,9 +56,9 @@ public class ScheduleDAO {
         ContentValues values = new ContentValues();
 
         values.put("ID_SCHEDULE", schedule.getIdSchedule());
-        values.put("DAY_OF_WEEK", schedule.getDay());
-        values.put("START_TIME",schedule.getStart());
-        values.put("END_TIME", schedule.getEnd());
+        values.put("DAY_OF_WEEK", schedule.getDayOfWeek());
+        values.put("START_TIME",schedule.getStartTime());
+        values.put("END_TIME", schedule.getEndTime());
         values.put("ID_CLASS", schedule.getIdClass());
         values.put("ID_CLASSROOM", schedule.getIdClassroom());
         values.put("STATUS", 0);

@@ -94,6 +94,7 @@ public class Activity_Login extends AppCompatActivity {
 
             }
         });
+
 /*
 
         // Insert data in OFFICIAL_STUDENT
@@ -121,7 +122,6 @@ public class Activity_Login extends AppCompatActivity {
 
         // Insert data ACCOUNT
 
-        AccountDTO account1 = new AccountDTO("ACC1", "STA1", "nguyenthic", "thic123");
         AccountDTO account2 = new AccountDTO("ACC2", "STA2", "nguyenthid", "thid123");
         AccountDTO account5 = new AccountDTO("ACC5", "STU1", "nguyenthia", "thia123");
         AccountDTO account6 = new AccountDTO("ACC6", "STU2", "nguyenthib", "thib123");

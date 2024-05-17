@@ -19,19 +19,18 @@ import java.time.LocalDate;
 public class Activity_Add_Potential_Student extends AppCompatActivity {
     EditText studentID, studentName, phoneNumber, gender, address, level, appointmentNumber;
     Button doneBtn, exitBtn;
-    TextView nameErr, addrErr, phoneErr, genderErr, missingField;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_potential_student);
 
-        studentID = findViewById(R.id.input_studentID);
-        studentName = findViewById(R.id.input_name);
-        phoneNumber = findViewById(R.id.input_phone);
-        gender = findViewById(R.id.input_gender);
-        level = findViewById(R.id.input_level);
-        address = findViewById(R.id.input_addr);
-        appointmentNumber = findViewById(R.id.input_appointment_number);
+        studentID = findViewById(R.id.idStudent);
+        studentName = findViewById(R.id.fullName);
+        phoneNumber = findViewById(R.id.phoneNumber);
+        gender = findViewById(R.id.gender);
+        level = findViewById(R.id.level);
+        address = findViewById(R.id.address);
+        appointmentNumber = findViewById(R.id.appointmentNumber);
 
         String message = getIntent().getStringExtra("studentID");
         if (!message.equals("")) {
@@ -43,15 +42,6 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
             level.setText();
             appointmentNumber.setText();*/
         }
-
-        missingField = findViewById(R.id.field_need_mandatory);
-        missingField.setVisibility(View.GONE);
-
-        phoneErr = findViewById(R.id.wrong_number);
-        phoneErr.setVisibility(View.GONE);
-
-        genderErr = findViewById(R.id.wrong_gender);
-        genderErr.setVisibility(View.GONE);
 
         exitBtn = findViewById(R.id.exit_btn);
         exitBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,34 +57,11 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
             public void onClick(View v) {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragmen_Setting
 
-                if (studentID.equals("") || address.equals("") || level.equals("") || appointmentNumber.equals("")) {
+                if (studentID.equals("") || address.equals("")
+                        || level.equals("") || appointmentNumber.equals("")
+                        || studentName.equals("") || gender.equals("") || phoneNumber.equals("")) {
                     acceptSwitch = false;
-                    missingField.setVisibility(View.VISIBLE);
-                } else missingField.setVisibility(View.GONE);
-
-                if (studentName.equals("")) {
-                    acceptSwitch = false;
-                    nameErr.setText("Không để trống tên");
-                } else nameErr.setText("Học viên tiềm năng");
-
-                String genderInp = gender.getText().toString();
-                if (!genderInp.equals("Nam") && !genderInp.equals("Nữ")) {
-                    acceptSwitch = false;
-                    genderErr.setVisibility(View.VISIBLE);
-                } else genderErr.setVisibility(View.GONE);
-
-                String regexPhone = "^(\\+[0-9]{1,3}[- ]?)?([0-9]{10,12})$";
-                String phone = phoneNumber.getText().toString();
-                if (!phone.matches(regexPhone)) {
-                    acceptSwitch = false;
-                    phoneErr.setVisibility(View.VISIBLE);
-                } else phoneErr.setVisibility(View.GONE);
-
-                String addressInp = address.getText().toString();
-                if (addressInp.equals("")) {
-                    acceptSwitch = false;
-                    addrErr.setVisibility(View.VISIBLE);
-                } else addrErr.setVisibility(View.GONE);
+                }
 
                 if (acceptSwitch) {
                     try {
