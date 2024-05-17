@@ -106,7 +106,7 @@
                 android:textSize="15dp"
                 android:text="Giảng viên: "/>
             <TextView
-                android:id="@+id/lecturer_name"
+                android:id="@+id/teacher_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>

@@ -132,6 +132,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
         switch (message) {
             case "Quản lý thông tin học viên":
                 Intent addPotential = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Potential_Student.class);
+                addPotential.putExtra("message", "");
                 startActivity(addPotential);
                 break;
             case "Quản lý lớp học":

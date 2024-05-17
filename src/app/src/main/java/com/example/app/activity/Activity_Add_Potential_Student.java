@@ -17,7 +17,7 @@ import com.example.app.model.PotentialStudentDTO;
 import java.time.LocalDate;
 
 public class Activity_Add_Potential_Student extends AppCompatActivity {
-    EditText id, name, address, phoneNum, gender, level, appointmentNum;
+    EditText studentID, studentName, phoneNumber, gender, address, level, appointmentNumber;
     Button doneBtn, exitBtn;
     TextView nameErr, addrErr, phoneErr, genderErr, missingField;
     @Override
@@ -25,15 +25,23 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_potential_student);
 
+        studentID = findViewById(R.id.input_studentID);
+        studentName = findViewById(R.id.input_name);
+        phoneNumber = findViewById(R.id.input_phone);
+        gender = findViewById(R.id.input_gender);
+        level = findViewById(R.id.input_level);
+        address = findViewById(R.id.input_addr);
+        appointmentNumber = findViewById(R.id.input_appointment_number);
+
         String message = getIntent().getStringExtra("studentID");
         if (!message.equals("")) {
-            id.setText(message);
-            /*name.setText();
+            studentID.setText(message);
+            /*studentName.setText();
             address.setText();
-            phoneNum.setText();
+            phoneNumber.setText();
             gender.setText();
             level.setText();
-            appointmentNum.setText();*/
+            appointmentNumber.setText();*/
         }
 
         missingField = findViewById(R.id.field_need_mandatory);
@@ -44,7 +52,6 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
 
         genderErr = findViewById(R.id.wrong_gender);
         genderErr.setVisibility(View.GONE);
-
 
         exitBtn = findViewById(R.id.exit_btn);
         exitBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,12 +67,12 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
             public void onClick(View v) {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragmen_Setting
 
-                if (id.equals("") || address.equals("") || level.equals("") || appointmentNum.equals("")) {
+                if (studentID.equals("") || address.equals("") || level.equals("") || appointmentNumber.equals("")) {
                     acceptSwitch = false;
                     missingField.setVisibility(View.VISIBLE);
                 } else missingField.setVisibility(View.GONE);
 
-                if (name.equals("")) {
+                if (studentName.equals("")) {
                     acceptSwitch = false;
                     nameErr.setText("Không để trống tên");
                 } else nameErr.setText("Học viên tiềm năng");
@@ -77,7 +84,7 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                 } else genderErr.setVisibility(View.GONE);
 
                 String regexPhone = "^(\\+[0-9]{1,3}[- ]?)?([0-9]{10,12})$";
-                String phone = phoneNum.getText().toString();
+                String phone = phoneNumber.getText().toString();
                 if (!phone.matches(regexPhone)) {
                     acceptSwitch = false;
                     phoneErr.setVisibility(View.VISIBLE);
@@ -89,18 +96,17 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                     addrErr.setVisibility(View.VISIBLE);
                 } else addrErr.setVisibility(View.GONE);
 
-
                 if (acceptSwitch) {
                     try {
                         int rowEffect = PotentialStudentDAO.getInstance(Activity_Add_Potential_Student.this).InsertPotentialStudent(
                                 Activity_Add_Potential_Student.this, new PotentialStudentDTO(
-                                        id.getText().toString(),
-                                        name.getText().toString(),
-                                        phoneNum.getText().toString(),
+                                        studentID.getText().toString(),
+                                        studentName.getText().toString(),
+                                        phoneNumber.getText().toString(),
                                         gender.getText().toString(),
                                         address.getText().toString(),
                                         level.getText().toString(),
-                                        appointmentNum.getText().toString())
+                                        appointmentNumber.getText().toString())
                         );
 
                         if (rowEffect > 0) {
@@ -110,13 +116,13 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                         }else {
                             Log.d("Add potential student:", "fail");
                         }
-                        id.setText(null);
-                        name.setText(null);
+                        studentID.setText(null);
+                        studentName.setText(null);
                         address.setText(null);
-                        phoneNum.setText(null);
+                        phoneNumber.setText(null);
                         gender.setText(null);
                         level.setText(null);
-                        appointmentNum.setText(null);
+                        appointmentNumber.setText(null);
 
                     } catch (Exception e) {
                         Log.d("Add potential student error:", "fail");

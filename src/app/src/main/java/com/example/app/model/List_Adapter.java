@@ -137,6 +137,10 @@ public class List_Adapter extends ArrayAdapter {
         level = convertView.findViewById(R.id.level);
         teacherName = convertView.findViewById(R.id.teacher_name);
         schoolTime = convertView.findViewById(R.id.school_time);
+        if (convertView.findViewById(R.id.tuition) != null) {
+            tuition = convertView.findViewById(R.id.tuition);
+            tuition.setText(listClass.getTuition());
+        }
         tuition = convertView.findViewById(R.id.tuition);
         roomID = convertView.findViewById(R.id.roomID);
         programID1 = convertView.findViewById(R.id.programID);
@@ -150,7 +154,6 @@ public class List_Adapter extends ArrayAdapter {
         level.setText(listClass.getLevel());
         teacherName.setText(listClass.getLectureName());
         schoolTime.setText(listClass.getSchoolTime());
-        tuition.setText(listClass.getTuition());
         roomID.setText(listClass.getRoomID());
         programID1.setText(listClass.getProgramID());
 
