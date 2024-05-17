@@ -55,6 +55,10 @@ public class List_Adapter extends ArrayAdapter {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_class_item, parent, false);
             List_Class_View(convertView, position);
         }
+        else if (item instanceof ClassDTO_Manage) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_class_to_manage_item, parent, false);
+            List_Class_Manage_View(convertView, position);
+        }
         else if (item instanceof PotentialStudentDTO) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_potential_student_item, parent, false);
             PotentialStudentDTO_View(convertView, position);
@@ -129,80 +133,90 @@ public class List_Adapter extends ArrayAdapter {
     }
 
     private void List_Class_View (@Nullable View convertView, int position) {
-        TextView classID, className, level, teacherName, schoolTime, tuition, roomID, programID1, staffID;
+        TextView classID, className, startDate, endDate, programID, teacherName;
         ClassDTO listClass = (ClassDTO) arrayDataList.get(position);
 
         classID = convertView.findViewById(R.id.classID);
         className = convertView.findViewById(R.id.class_name);
-        level = convertView.findViewById(R.id.level);
+        startDate = convertView.findViewById(R.id.start_date);
+        endDate = convertView.findViewById(R.id.end_date);
+        programID = convertView.findViewById(R.id.programID);
         teacherName = convertView.findViewById(R.id.teacher_name);
-        schoolTime = convertView.findViewById(R.id.school_time);
-        /*if (convertView.findViewById(R.id.tuition) != null) {
-            tuition = convertView.findViewById(R.id.tuition);
-            tuition.setText(listClass.getTuition());
-        }*/
-        tuition = convertView.findViewById(R.id.tuition);
-        roomID = convertView.findViewById(R.id.roomID);
-        programID1 = convertView.findViewById(R.id.programID);
-        if (convertView.findViewById(R.id.staffID) != null) {
-            staffID = convertView.findViewById(R.id.staffID);
-            staffID.setText(listClass.getIdStaff());
-        }
 
         classID.setText(listClass.getClassID());
         className.setText(listClass.getClassName());
-        /*level.setText(listClass.getLevel());
-        teacherName.setText(listClass.getLectureName());
-        schoolTime.setText(listClass.getSchoolTime());
-        roomID.setText(listClass.getRoomID());
-        programID1.setText(listClass.getProgramID());*/
+        startDate.setText(listClass.getStartDate());
+        endDate.setText(listClass.getEndDate());
+        programID.setText(listClass.getIdProgram());
+        teacherName.setText(listClass.getIdTeacher());
+        teacherName.setText(listClass.getIdTeacher());
+    }
 
-        if (convertView.findViewById(R.id.remove_class) != null) {
-            Button removeClass, editClass;
-            removeClass = convertView.findViewById(R.id.remove_class);
-            removeClass.setTag(position);
-            removeClass.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("Xác nhận xóa");
-                    builder.setMessage("Bạn có chắc chắn muốn xóa không?");
-                    // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
-                    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            int position = (int) v.getTag();
-                            arrayDataList.remove(position);
-                            notifyDataSetChanged();
-                        }
-                    });
+    private void List_Class_Manage_View (@Nullable View convertView, int position) {
+        TextView classID, className, startDate, endDate, programID, teacherName, staffID;
+        ClassDTO_Manage listClass = (ClassDTO_Manage) arrayDataList.get(position);
 
-                    // Nút "Hủy": Không làm gì cả, đóng dialog
-                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+        classID = convertView.findViewById(R.id.classID);
+        className = convertView.findViewById(R.id.class_name);
+        startDate = convertView.findViewById(R.id.start_date);
+        endDate = convertView.findViewById(R.id.end_date);
+        programID = convertView.findViewById(R.id.programID);
+        teacherName = convertView.findViewById(R.id.teacher_name);
+        staffID = convertView.findViewById(R.id.staffID);
 
-                    // Tạo và hiển thị AlertDialog
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                }
-            });
+        classID.setText(listClass.getClassID());
+        className.setText(listClass.getClassName());
+        startDate.setText(listClass.getStartDate());
+        endDate.setText(listClass.getEndDate());
+        programID.setText(listClass.getIdProgram());
+        teacherName.setText(listClass.getIdTeacher());
+        teacherName.setText(listClass.getIdTeacher());
+        staffID.setText(listClass.getIdStaff());
 
-            editClass = convertView.findViewById(R.id.edit_potential_student);
-            editClass.setTag(position);
-            editClass.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = (int) v.getTag();
-                    Intent editClass = new Intent(getContext(), Activity_Add_Class.class);
-                    editClass.putExtra("classID", classID.getText());
-                    mContext.startActivity(editClass);
-                }
-            });
-        }
+        Button removeClass, editClass;
+        removeClass = convertView.findViewById(R.id.remove_class);
+        removeClass.setTag(position);
+        removeClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xác nhận xóa");
+                builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int position = (int) v.getTag();
+                        arrayDataList.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                // Nút "Hủy": Không làm gì cả, đóng dialog
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Tạo và hiển thị AlertDialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        editClass = convertView.findViewById(R.id.edit_class);
+        editClass.setTag(position);
+        editClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (int) v.getTag();
+                Intent editClass = new Intent(getContext(), Activity_Add_Class.class);
+                editClass.putExtra("classID", classID.getText());
+                mContext.startActivity(editClass);
+            }
+        });
     }
 
     private void PotentialStudentDTO_View (@Nullable View convertView, int position) {

@@ -35,7 +35,7 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
 
         String message = getIntent().getStringExtra("studentID");
         if (!message.equals("")) {
-            studentID.setText(message);
+            studentID.setText("1");
             /*studentName.setText();
             address.setText();
             phoneNumber.setText();
@@ -123,7 +123,7 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
                         gender.setText(null);
                         level.setText(null);
                         appointmentNumber.setText(null);
-
+                        finish();
                     } catch (Exception e) {
                         Log.d("Add potential student error:", "fail");
                     }

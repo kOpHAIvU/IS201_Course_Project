@@ -101,11 +101,11 @@ public class Activity_Notifications extends AppCompatActivity {
                 for (int i = 0; i < listClass.size(); i++) {
                     dataArrayList.add(listClass.get(i));
                 }
-/*
+
                 dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
-                        "B4.04","Đoán coi","Nhật Quỳnh"));*/
+                        "B4.04","Đoán coi"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_class_item, dataArrayList);
                 break;
             //Nhân viên học vụ

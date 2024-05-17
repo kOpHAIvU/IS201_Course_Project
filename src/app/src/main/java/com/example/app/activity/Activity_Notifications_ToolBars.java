@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.example.app.R;
 import com.example.app.adapter.PotentialStudentDAO;
 import com.example.app.model.ClassDTO;
+import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
 
@@ -46,34 +47,35 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 finish();
             }
         });
+
         switch (message) {
             //Nhân viên ghi danh
             case "Quản lý thông tin học viên":
                 toolbar.setTitle("Danh sách học viên tiềm năng");
-                /*dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
+                dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
                         , "Nam", "Ký túc xá khu A"
                         , "Chưa học", "Đại học","10"));
                 dataArrayList.add(new PotentialStudentDTO("Hoàng Thiện", "0912345678"
                         , "Nữ", "Ký túc xá khu A"
-                        , "Chưa học", "Mẫu giáo","10"));*/
-                /*String[] whereArgs = new String[] {"0"};
+                        , "Chưa học", "Mẫu giáo","10"));
+                String[] whereArgs = new String[] {"0"};
                 List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
                         Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
                 );
                 for (int i = 0; i < listPotentialStudent.size(); i++) {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
-                }*/
+                }
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
             //Nhân viên học vụ
             case "Quản lý lớp học":
                 toolbar.setTitle("Lớp học");
-                /*dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
-                        "B4.04","Đoán coi","Nhật Quỳnh"));*/
+                        "Hehe","Đoán coi"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 break;
         }
@@ -109,10 +111,10 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 break;
             case "Quản lý lớp học":
                 toolbar.setTitle("Lớp học");
-//                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
-//                        "Đại học", "Tuyết Loan",
-//                        "10 buổi", "10.000.000",
-//                        "B4.04","Đoán coi","Nhật Quỳnh"));
+                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "Hehe","Đoán coi"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 break;
         }
@@ -132,10 +134,13 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
         switch (message) {
             case "Quản lý thông tin học viên":
                 Intent addPotential = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Potential_Student.class);
-                addPotential.putExtra("message", "");
+                addPotential.putExtra("studentID", "");
                 startActivity(addPotential);
                 break;
             case "Quản lý lớp học":
+                Intent addClass = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Class.class);
+                addClass.putExtra("classID", "");
+                startActivity(addClass);
                 break;
         }
         return super.onOptionsItemSelected(item);
