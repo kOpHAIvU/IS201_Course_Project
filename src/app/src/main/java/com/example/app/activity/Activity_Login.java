@@ -193,5 +193,32 @@ public class Activity_Login extends AppCompatActivity {
         ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class2);
         ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class1);
 
+        // Insert data in OFFICIAL_STUDENT
+        OfficialStudentDTO student1 = new OfficialStudentDTO("STU1", "Nguyen Van A", "Binh Dinh", "034343434", "Nam", "22/2/2022", 0);
+        OfficialStudentDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, student1);
+
+        OfficialStudentDTO student2 = new OfficialStudentDTO("STU2", "Le Thi B", "Binh Duong","0232323222", "Nữ", "22/2/2022", 0 );
+        OfficialStudentDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, student2);
+
+        // Insert data in STAFF
+
+        StaffDTO staff1 = new StaffDTO("STA1", "Nguyen Thi C", "TP HCM", "0343333333", "Nữ", "22/2/2022", "1", 0);
+        StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff1);
+
+        StaffDTO staff2 = new StaffDTO("STA2", "Nguyen Thi D", "TP HCM", "03435555333", "Nữ","22/2/2022", "2", 0);
+        StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff2);
+
+        // Insert data ACCOUNT
+
+        AccountDTO account1 = new AccountDTO("ACC1", "STA1", "nguyenthic", "thic123");
+        AccountDTO account2 = new AccountDTO("ACC2", "STA2", "nguyenthid", "thid123");
+        AccountDTO account5 = new AccountDTO("ACC5", "STU1", "nguyenthia", "thia123");
+        AccountDTO account6 = new AccountDTO("ACC6", "STU2", "nguyenthib", "thib123");
+
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account1);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account2);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account5);
+        AccountDAO.getInstance(Activity_Login.this).insertAccount(Activity_Login.this, account6);
+
     }
 }
