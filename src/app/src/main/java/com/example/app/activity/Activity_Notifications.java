@@ -2,27 +2,19 @@ package com.example.app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
-import com.example.app.adapter.AccountDAO;
-import com.example.app.adapter.ClassDAO;
-import com.example.app.adapter.DataProvider;
 import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.ProgramDAO;
-import com.example.app.adapter.StaffDAO;
-import com.example.app.model.ClassDTO;
 import com.example.app.model.List_Adapter;
-import com.example.app.model.ClassroomDTO;
-import com.example.app.model.CertificateDTO;
 import com.example.app.model.NotificationDTO;
 import com.example.app.model.ExamScoreDTO;
 import com.example.app.model.ProgramDTO;
+import com.example.app.model.ScheduleDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,8 +83,8 @@ public class Activity_Notifications extends AppCompatActivity {
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_education_program_item, dataArrayList);
                 break;
 
-            case "Tra cứu lớp học":
-                String whereClauseClass = "STATUS = ?";
+            case "Lịch học":
+                /*String whereClauseClass = "STATUS = ?";
                 String[] whereArgsClass = new String[] {"0"};
 
                 List<ClassDTO> listClass = ClassDAO.getInstance(Activity_Notifications.this).selectClass(Activity_Notifications.this,
@@ -100,13 +92,10 @@ public class Activity_Notifications extends AppCompatActivity {
 
                 for (int i = 0; i < listClass.size(); i++) {
                     dataArrayList.add(listClass.get(i));
-                }
+                }*/
 
-                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
-                        "Đại học", "Tuyết Loan",
-                        "10 buổi", "10.000.000",
-                        "B4.04","Đoán coi"));
-                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_class_item, dataArrayList);
+                dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
+                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_schedule_item, dataArrayList);
                 break;
             //Nhân viên học vụ
 

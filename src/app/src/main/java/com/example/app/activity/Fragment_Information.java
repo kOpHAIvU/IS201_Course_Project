@@ -37,7 +37,7 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
             dataArrayList.add(new List_Information("Thông báo hệ thống", R.drawable.tb_he_thong));
             dataArrayList.add(new List_Information("Tra cứu điểm", R.drawable.score_icon));
             dataArrayList.add(new List_Information("Tra cứu chương trình đào tạo", R.drawable.chuong_trinh_dt));
-            dataArrayList.add(new List_Information("Tra cứu lớp học", R.drawable.lophoc));
+            dataArrayList.add(new List_Information("Lịch học", R.drawable.lophoc));
 
             //Nhân viên ghi danh
             dataArrayList.add(new List_Information("Quản lý thông tin học viên", R.drawable.quanlylophoc));
@@ -62,7 +62,7 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
         List_Information selectedData = (List_Information) listAdapter.getItem(position);
         String selectedText = selectedData.getName();
         Intent intent;
-        if (selectedText == "Thông báo hệ thống" || selectedText == "Tra cứu điểm" || selectedText == "Tra cứu chương trình đào tạo" || selectedText == "Tra cứu lớp học") {
+        if (selectedText == "Thông báo hệ thống" || selectedText == "Tra cứu điểm" || selectedText == "Tra cứu chương trình đào tạo" || selectedText == "Lịch học") {
             intent = new Intent(getContext(), Activity_Notifications.class);
             intent.putExtra("message", selectedText);
         } else {
