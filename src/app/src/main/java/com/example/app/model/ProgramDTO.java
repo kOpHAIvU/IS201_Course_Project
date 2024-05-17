@@ -1,12 +1,17 @@
 package com.example.app.model;
 
+import android.util.Log;
+
 public class ProgramDTO {
     private String idProgram, nameProgram, inputScore, outputScore, content;
     private String speakingScore, writingScore, listeningScore, readingScore;
+    private String study_period, idCertificate;
+    private int tuitionFees;
 
-    public ProgramDTO(String idProgram, String nameProgram, String inputScore,
-                      String outputScore, String content, String speakingScore, String writingScore,
-                      String listeningScore, String readingScore) {
+    public ProgramDTO(String idProgram, String nameProgram,
+                      String inputScore, String outputScore, String content,
+                      String speakingScore, String writingScore, String listeningScore,
+                      String readingScore, int tuitionFees, String study_period, String idCertificate) {
         this.idProgram = idProgram;
         this.nameProgram = nameProgram;
         this.inputScore = inputScore;
@@ -16,7 +21,11 @@ public class ProgramDTO {
         this.writingScore = writingScore;
         this.listeningScore = listeningScore;
         this.readingScore = readingScore;
+        this.tuitionFees = tuitionFees;
+        this.study_period = study_period;
+        this.idCertificate = idCertificate;
     }
+
 
     public String getIdProgram() {
         return idProgram;
@@ -90,6 +99,30 @@ public class ProgramDTO {
         this.readingScore = readingScore;
     }
 
+    public int getTuitionFees() {
+        return tuitionFees;
+    }
+
+    public String getStudy_period() {
+        return study_period;
+    }
+
+    public String getIdCertificate() {
+        return idCertificate;
+    }
+
+    public void setTuitionFees(int tuitionFees) {
+        this.tuitionFees = tuitionFees;
+    }
+
+    public void setStudy_period(String study_period) {
+        this.study_period = study_period;
+    }
+
+    public void setIdCertificate(String idCertificate) {
+        this.idCertificate = idCertificate;
+    }
+
     @Override
     public String toString() {
         return "ProgramDTO{" +
@@ -102,6 +135,9 @@ public class ProgramDTO {
                 ", writingScore='" + writingScore + '\'' +
                 ", listeningScore='" + listeningScore + '\'' +
                 ", readingScore='" + readingScore + '\'' +
+                ", tuitionFees='" + tuitionFees + '\'' +
+                ", study_period='" + study_period + '\'' +
+                ", idCertificate='" + idCertificate + '\'' +
                 '}';
     }
 }

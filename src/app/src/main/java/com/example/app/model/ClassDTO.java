@@ -1,53 +1,82 @@
 package com.example.app.model;
 
 public class ClassDTO {
-    private String classID, className, level, lecturerName, schoolTime, tuition, roomID, programID, staffID;
+    private String classID, className, startDate, endDate, idProgram, idTeacher, idStaff, status;
+
+    public ClassDTO(String classID, String className, String startDate,
+                    String endDate, String idProgram, String idTeacher,
+                    String idStaff, String status) {
+        this.classID = classID;
+        this.className = className;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.idProgram = idProgram;
+        this.idTeacher = idTeacher;
+        this.idStaff = idStaff;
+        this.status = status;
+    }
 
     public String getClassID() {
         return classID;
+    }
+
+    public void setClassID(String classID) {
+        this.classID = classID;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public String getLectureName() {
-        return lecturerName;
-    }
-
-    public String getSchoolTime() {
-        return schoolTime;
-    }
-
-    public String getTuition() {
-        return tuition;
-    }
-
-    public String getRoomID() {
-        return roomID;
-    }
-
-    public String getProgramID() {
-        return programID;
-    }
-
-    public String getStaffID() {
-        return staffID;
-    }
-
-    public ClassDTO(String classID, String className, String level, String lectureName, String schoolTime, String tuition, String roomID, String programID, String staffID) {
-        this.classID = classID;
+    public void setClassName(String className) {
         this.className = className;
-        this.level = level;
-        this.lecturerName = lectureName;
-        this.schoolTime = schoolTime;
-        this.tuition = tuition;
-        this.roomID = roomID;
-        this.programID = programID;
-        this.staffID = staffID;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getIdProgram() {
+        return idProgram;
+    }
+
+    public void setIdProgram(String idProgram) {
+        this.idProgram = idProgram;
+    }
+
+    public String getIdTeacher() {
+        return idTeacher;
+    }
+
+    public void setIdTeacher(String idTeacher) {
+        this.idTeacher = idTeacher;
+    }
+
+    public String getIdStaff() {
+        return idStaff;
+    }
+
+    public void setIdStaff(String idStaff) {
+        this.idStaff = idStaff;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

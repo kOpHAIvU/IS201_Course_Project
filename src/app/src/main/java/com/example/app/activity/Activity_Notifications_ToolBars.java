@@ -70,10 +70,10 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
             //Nhân viên học vụ
             case "Quản lý lớp học":
                 toolbar.setTitle("Lớp học");
-                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+                /*dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
-                        "B4.04","Đoán coi","Nhật Quỳnh"));
+                        "B4.04","Đoán coi","Nhật Quỳnh"));*/
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 break;
         }
@@ -109,10 +109,10 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 break;
             case "Quản lý lớp học":
                 toolbar.setTitle("Lớp học");
-                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
-                        "Đại học", "Tuyết Loan",
-                        "10 buổi", "10.000.000",
-                        "B4.04","Đoán coi","Nhật Quỳnh"));
+//                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+//                        "Đại học", "Tuyết Loan",
+//                        "10 buổi", "10.000.000",
+//                        "B4.04","Đoán coi","Nhật Quỳnh"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 break;
         }

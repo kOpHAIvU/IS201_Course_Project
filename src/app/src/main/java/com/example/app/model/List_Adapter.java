@@ -137,25 +137,25 @@ public class List_Adapter extends ArrayAdapter {
         level = convertView.findViewById(R.id.level);
         teacherName = convertView.findViewById(R.id.teacher_name);
         schoolTime = convertView.findViewById(R.id.school_time);
-        if (convertView.findViewById(R.id.tuition) != null) {
+        /*if (convertView.findViewById(R.id.tuition) != null) {
             tuition = convertView.findViewById(R.id.tuition);
             tuition.setText(listClass.getTuition());
-        }
+        }*/
         tuition = convertView.findViewById(R.id.tuition);
         roomID = convertView.findViewById(R.id.roomID);
         programID1 = convertView.findViewById(R.id.programID);
         if (convertView.findViewById(R.id.staffID) != null) {
             staffID = convertView.findViewById(R.id.staffID);
-            staffID.setText(listClass.getStaffID());
+            staffID.setText(listClass.getIdStaff());
         }
 
         classID.setText(listClass.getClassID());
         className.setText(listClass.getClassName());
-        level.setText(listClass.getLevel());
+        /*level.setText(listClass.getLevel());
         teacherName.setText(listClass.getLectureName());
         schoolTime.setText(listClass.getSchoolTime());
         roomID.setText(listClass.getRoomID());
-        programID1.setText(listClass.getProgramID());
+        programID1.setText(listClass.getProgramID());*/
 
         if (convertView.findViewById(R.id.remove_class) != null) {
             Button removeClass, editClass;

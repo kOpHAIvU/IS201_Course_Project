@@ -164,10 +164,12 @@ public class Activity_Change_Setting extends AppCompatActivity {
             public void onClick(View v) {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragment_Setting
 
-                if (birthday.equals("")) {
-                    acceptSwitch = false;
+                if (!birthday.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/([0-2][0-9]{3})$")) {
+                    acceptSwitch = false; // Lưu ý: 'acceptSwitch' nên là một biến boolean, không phải kiểu dữ liệu khác
                     birthdayErr.setVisibility(View.VISIBLE);
-                } else birthdayErr.setVisibility(View.GONE);
+                } else {
+                    birthdayErr.setVisibility(View.GONE);
+                }
 
 
                 String gender = genderInp.getText().toString();

@@ -36,6 +36,9 @@ public class ProgramDAO {
         values.put("WRITING_SCORE", program.getWritingScore());
         values.put("LISTENING_SCORE", program.getListeningScore());
         values.put("READING_SCORE", program.getReadingScore());
+        values.put("TUITION_FEES", program.getTuitionFees());
+        values.put("STUDY_PERIOD", program.getStudy_period());
+        values.put("ID_CERTIFICATE", program.getIdCertificate());
         values.put("STATUS", 0);
 
         try {
@@ -56,6 +59,23 @@ public class ProgramDAO {
     public int UpdateProgram(Context context, ProgramDTO program, String whereClause, String[] whereArgs ) {
         int rowEffect = -1;
 
+        /*    db.execSQL("CREATE TABLE IF NOT EXISTS PROGRAM (" +
+            "ID_PROGRAM TEXT PRIMARY KEY, " +
+            "NAME TEXT, " +
+            "INPUT_SCORE REAL, " +
+            "OUTPUT_SCORE REAL, " +
+            "CONTENT TEXT, " +
+            "SPEAKING_SCORE REAL, " +
+            "WRITING_SCORE REAL, " +
+            "LISTENING_SCORE REAL, " +
+            "READING_SCORE REAL, " +
+            "TUITION_FEES INTEGER, " +
+            "STUDY_PERIOD INTEGER, " + // Lộ trình học kéo dài 6 tháng, 12 tháng,....
+            "ID_CERTIFICATE TEXT, " +
+            "STATUS INTEGER, " +
+            "FOREIGN KEY (ID_CERTIFICATE) REFERENCES CERTIFICATE(ID_CERTIFICATE))");
+            Log.d("CREATE PROGRAM", "Database created successfully");*/
+
         ContentValues values = new ContentValues();
 
         int maxId = DataProvider.getInstance(context).getMaxId("PROGRAM", "ID_PROGRAM");
@@ -69,6 +89,10 @@ public class ProgramDAO {
         values.put("WRITING_SCORE", program.getWritingScore());
         values.put("LISTENING_SCORE", program.getListeningScore());
         values.put("READING_SCORE", program.getReadingScore());
+        values.put("TUITION_FEES", program.getTuitionFees());
+        values.put("STUDY_PERIOD", program.getStudy_period());
+        values.put("ID_CERTIFICATE", program.getIdCertificate());
+        values.put("STATUS", 0);
 
         try {
             rowEffect = DataProvider.getInstance(context).updateData("PROGRAM", values, whereClause, whereArgs);
@@ -96,7 +120,9 @@ public class ProgramDAO {
         }
 
         String id = "", name = "", input = "", output = "", content = "", speaking = "",
-                writing = "", listening = "", reading = "";
+                writing = "", listening = "", reading = "", studyPeriod = "", idCertificate = "";
+        int tuition = 0;
+
         if (cursor.moveToFirst()) {
             do {
                 int idIndex = cursor.getColumnIndex("ID_PROGRAM");
@@ -135,8 +161,20 @@ public class ProgramDAO {
                 if (readingIndex != -1) {
                     reading = cursor.getString(readingIndex);
                 }
+                int tuitionIndex = cursor.getColumnIndex("TUITION_FESS");
+                if (tuitionIndex != -1) {
+                    tuition = cursor.getInt(tuitionIndex);
+                }
+                int periodIndex = cursor.getColumnIndex("STUDY_PERIOD");
+                if (periodIndex != -1) {
+                    studyPeriod = cursor.getString(periodIndex);
+                }
+                int certificateIndex = cursor.getColumnIndex("ID_CERTIFICATE");
+                if (certificateIndex != -1) {
+                    idCertificate = cursor.getString(certificateIndex);
+                }
                 listProgram.add(new ProgramDTO(id, name, input, output, content, speaking, writing,
-                        listening, reading));
+                        listening, reading, tuitionIndex, studyPeriod, idCertificate));
             } while (cursor.moveToNext());
         }
         return listProgram;

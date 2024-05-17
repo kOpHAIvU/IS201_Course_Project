@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 46;
+    private static final int DATABASE_VERSION = 57;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -35,8 +35,6 @@ public class DataProvider extends SQLiteOpenHelper {
                     "ID_CERTIFICATE TEXT PRIMARY KEY, " +
                     "NAME TEXT, " +
                     "CONTENT TEXT, " +
-                    "MINIMUM_SCORE REAL, " +
-                    "ID_PROGRAM REAL, " +
                     "STATUS INTEGER)");
             Log.d("CREATE CERTIFICATE", "Database created successfully");
         } catch ( Exception e) {
@@ -129,21 +127,31 @@ public class DataProvider extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE IF NOT EXISTS CLASS (" +
                     "ID_CLASS TEXT PRIMARY KEY , " +
                     "NAME TEXT, " +
-                    "LEVEL TEXT, " +
-                    "STUDY_TIME TEXT, " +
-                    "TUITION_FEES INTEGER, " +
-                    "ID_CLASSROOM TEXT, " +
+                    "START_DATE TEXT, " +
+                    "END_DATE TEXT, " +
                     "ID_PROGRAM TEXT, " +
                     "ID_TEACHER TEXT, " +
                     "ID_STAFF TEXT, " +
                     "STATUS INTEGER," +
-                    "FOREIGN KEY (ID_CLASSROOM) REFERENCES CLASSROOM(ID_CLASSROOM)," +
                     "FOREIGN KEY (ID_PROGRAM) REFERENCES PROGRAM(ID_PROGRAM)," +
                     "FOREIGN KEY (ID_STAFF) REFERENCES STAFF(ID_STAFF)," +
                     "FOREIGN KEY (ID_TEACHER) REFERENCES TEACHER(ID_TEACHER))");
-            Log.d("CREATE CLASSROOM", "Database created successfully");
-        } catch ( Exception e) {
-            Log.d("CREATE CLASSROOM",  e.getMessage());
+            Log.d("CREATE CLASS", "Database created successfully");
+        } catch ( SQLException e) {
+            Log.d("CREATE CLASS",  e.getMessage());
+        }
+
+        try {
+            db.execSQL("CREATE TABLE IF NOT EXISTS SCHEDULE (" +
+                    "ID_SCHEDULE TEXT PRIMARY KEY," +
+                    "DAY_OF_WEEK INTEGER, " +
+                    "START_TIME TEXT," +
+                    "END_TIME TEXT," +
+                    "ID_CLASS TEXT, " +
+                    "ID_CLASSROOM TEXT, " +
+                    "FOREIGN KEY (ID_CLASSROOM) REFERENCES CLASSROOM(ID_CLASSROOM))");
+        } catch( Exception e) {
+            Log.d("CREATE SCHEDULE ",  e.getMessage());
         }
 
         try {
@@ -181,8 +189,6 @@ public class DataProvider extends SQLiteOpenHelper {
                     "ID_TEACHING INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "ID_STUDENT TEXT , " +
                     "ID_CLASS TEXT, " +
-                    "START_DATE TEXT, " +
-                    "END_DATE TEXT, " +
                     "FOREIGN KEY (ID_STUDENT) REFERENCES OFFICAL_STUDENT(ID_STUDENT)," +
                     "FOREIGN KEY (ID_CLASS) REFERENCES CLASS(ID_CLASS))");
             Log.d("CREATE EXAM_SCORE", "Database created successfully");
@@ -201,7 +207,11 @@ public class DataProvider extends SQLiteOpenHelper {
                     "WRITING_SCORE REAL, " +
                     "LISTENING_SCORE REAL, " +
                     "READING_SCORE REAL, " +
-                    "STATUS INTEGER)" );
+                    "TUITION_FEES INTEGER, " +
+                    "STUDY_PERIOD INTEGER, " + // Lộ trình học kéo dài 6 tháng, 12 tháng,....
+                    "ID_CERTIFICATE TEXT, " +
+                    "STATUS INTEGER, " +
+                    "FOREIGN KEY (ID_CERTIFICATE) REFERENCES CERTIFICATE(ID_CERTIFICATE))");
             Log.d("CREATE PROGRAM", "Database created successfully");
         } catch ( Exception e) {
             Log.d("CREATE PROGRAM",  e.getMessage());

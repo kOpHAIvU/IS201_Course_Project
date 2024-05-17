@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassDAO {
-    //private String classID, className, level, lectureName, schoolTime, tuition, roomID, programID, staffID;
+
     public static ClassDAO instance;
     private ClassDAO(Context context) {}
     public static synchronized ClassDAO getInstance(Context context) {
@@ -26,15 +26,26 @@ public class ClassDAO {
 
         ContentValues values = new ContentValues();
 
+      /*  db.execSQL("CREATE TABLE IF NOT EXISTS CLASS (" +
+                "ID_CLASS TEXT PRIMARY KEY , " +
+                "NAME TEXT, " +
+                "START_DATE TEXT, " +
+                "END_DATE TEXT, " +
+                "ID_PROGRAM TEXT, " +
+                "ID_TEACHER TEXT, " +
+                "ID_STAFF TEXT, " +
+                "STATUS INTEGER," +
+                "FOREIGN KEY (ID_PROGRAM) REFERENCES PROGRAM(ID_PROGRAM)," +
+                "FOREIGN KEY (ID_STAFF) REFERENCES STAFF(ID_STAFF)," +
+                "FOREIGN KEY (ID_TEACHER) REFERENCES TEACHER(ID_TEACHER))");*/
+
         values.put("ID_CLASS", "CLS" + String.valueOf(maxId + 1));
         values.put("NAME", classDTO.getClassName());
-        values.put("LEVEL", classDTO.getLevel());
-        values.put("STUDY_TIME", classDTO.getSchoolTime());
-        values.put("TUITION_FEES", classDTO.getTuition());
-        values.put("ID_CLASSROOM", classDTO.getRoomID());
-        values.put("ID_PROGRAM", classDTO.getProgramID());
-        values.put("ID_TEACHER", classDTO.getLectureName());
-        values.put("ID_STAFF", classDTO.getStaffID());
+        values.put("START_DATE", classDTO.getStartDate());
+        values.put("END_DATE", classDTO.getEndDate());
+        values.put("ID_PROGRAM", classDTO.getIdProgram());
+        values.put("ID_TEACHER", classDTO.getIdTeacher());
+        values.put("ID_STAFF", classDTO.getIdStaff());
         values.put("STATUS", "0");
 
         try {
@@ -58,13 +69,12 @@ public class ClassDAO {
 
         values.put("ID_CLASS", classDTO.getClassID());
         values.put("NAME", classDTO.getClassName());
-        values.put("LEVEL", classDTO.getLevel());
-        values.put("STUDY_TIME", classDTO.getSchoolTime());
-        values.put("TUITION_FEES", classDTO.getTuition());
-        values.put("ID_CLASSROOM", classDTO.getRoomID());
-        values.put("ID_PROGRAM", classDTO.getProgramID());
-        values.put("ID_TEACHER", classDTO.getLectureName());
-        values.put("ID_STAFF", classDTO.getStaffID());
+        values.put("START_DATE", classDTO.getStartDate());
+        values.put("END_DATE", classDTO.getEndDate());
+        values.put("ID_PROGRAM", classDTO.getIdProgram());
+        values.put("ID_TEACHER", classDTO.getIdTeacher());
+        values.put("ID_STAFF", classDTO.getIdStaff());
+        values.put("STATUS", "0");
 
         try {
             rowEffect = DataProvider.getInstance(context).updateData("CLASS", values, whereClause, whereArgs);
@@ -91,12 +101,11 @@ public class ClassDAO {
         }
 
         //private String classID, className, level, lecturerName, schoolTime, tuition, roomID, programID, staffID;
-        String id = "", name = "", level = "", lecturer = "", time = "", tuition = "",
-                room = "", program = "", staff = "";
+        String id = "", name = "", start = "", end = "", idProgram = "", idTeacher = "", idStaff = "";
 
         if (cursor.moveToFirst()) {
             do {
-
+                
                 int idIndex = cursor.getColumnIndex("ID_CLASS");
                 if (idIndex != -1) {
                     id = cursor.getString(idIndex);
@@ -105,40 +114,30 @@ public class ClassDAO {
                 if (nameIndex!= -1) {
                     name = cursor.getString(nameIndex);
                 }
-                int levelIndex = cursor.getColumnIndex("LEVEL");
-                if (levelIndex!= -1) {
-                    level = cursor.getString(levelIndex);
+                int startIndex = cursor.getColumnIndex("START_DATE");
+                if (startIndex!= -1) {
+                    start = cursor.getString(startIndex);
                 }
-                int timeIndex = cursor.getColumnIndex("STUDY_TIME");
-                if (timeIndex!= -1) {
-                    time = cursor.getString(timeIndex);
-                }
-                int tuitionIndex = cursor.getColumnIndex("TUITION_FEES");
-                if (tuitionIndex!= -1) {
-                    tuition = cursor.getString(tuitionIndex);
-                }
-                int roomIndex = cursor.getColumnIndex("ID_CLASSROOM");
-                if (roomIndex!= -1) {
-                    room = cursor.getString(roomIndex);
+                int endIndex = cursor.getColumnIndex("END_DATE");
+                if (endIndex != -1) {
+                    end = cursor.getString(endIndex);
                 }
                 int programIndex = cursor.getColumnIndex("ID_PROGRAM");
                 if (programIndex!= -1) {
-                    program = cursor.getString(programIndex);
+                    idProgram = cursor.getString(programIndex);
                 }
                 int teacherIndex = cursor.getColumnIndex("ID_TEACHER");
-                if (teacherIndex!= -1) {
-                    lecturer = cursor.getString(teacherIndex);
+                if (teacherIndex != -1) {
+                    idTeacher = cursor.getString(teacherIndex);
                 }
                 int staffIndex = cursor.getColumnIndex("ID_STAFF");
-                if (staffIndex!= -1) {
-                    staff = cursor.getString(staffIndex);
+                if (staffIndex != -1) {
+                    idStaff = cursor.getString(staffIndex);
                 }
-
-                listClass.add(new ClassDTO(id, name, level, lecturer, time, tuition, room, program, staff));
+                listClass.add(new ClassDTO(id, name, start, end, idProgram, idTeacher, idStaff, "0"));
 
             } while (cursor.moveToNext());
         }
-
         return listClass;
     }
 }
