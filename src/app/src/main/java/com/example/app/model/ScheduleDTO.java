@@ -10,11 +10,9 @@ public class ScheduleDTO {
         this.idClass = idClass;
         this.idClassroom = idClassroom;
     }
-
     public String getIdSchedule() {
         return idSchedule;
     }
-
     public String getDayOfWeek() {
         return dayOfWeek;
     }
@@ -30,7 +28,6 @@ public class ScheduleDTO {
     public String getIdClass() {
         return idClass;
     }
-
     public String getIdClassroom() {
         return idClassroom;
     }
@@ -54,7 +51,6 @@ public class ScheduleDTO {
     public void setIdClass(String idClass) {
         this.idClass = idClass;
     }
-
     public void setIdClassroom(String idClassroom) {
         this.idClassroom = idClassroom;
     }

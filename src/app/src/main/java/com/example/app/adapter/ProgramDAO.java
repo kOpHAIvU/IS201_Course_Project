@@ -3,6 +3,7 @@ package com.example.app.adapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.ProgramDTO;
@@ -49,7 +50,7 @@ public class ProgramDAO {
             } else {
                 Log.d("Insert program ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert program Error: ", e.getMessage());
         }
 
@@ -58,29 +59,9 @@ public class ProgramDAO {
 
     public int UpdateProgram(Context context, ProgramDTO program, String whereClause, String[] whereArgs ) {
         int rowEffect = -1;
-
-        /*    db.execSQL("CREATE TABLE IF NOT EXISTS PROGRAM (" +
-            "ID_PROGRAM TEXT PRIMARY KEY, " +
-            "NAME TEXT, " +
-            "INPUT_SCORE REAL, " +
-            "OUTPUT_SCORE REAL, " +
-            "CONTENT TEXT, " +
-            "SPEAKING_SCORE REAL, " +
-            "WRITING_SCORE REAL, " +
-            "LISTENING_SCORE REAL, " +
-            "READING_SCORE REAL, " +
-            "TUITION_FEES INTEGER, " +
-            "STUDY_PERIOD INTEGER, " + // Lộ trình học kéo dài 6 tháng, 12 tháng,....
-            "ID_CERTIFICATE TEXT, " +
-            "STATUS INTEGER, " +
-            "FOREIGN KEY (ID_CERTIFICATE) REFERENCES CERTIFICATE(ID_CERTIFICATE))");
-            Log.d("CREATE PROGRAM", "Database created successfully");*/
-
         ContentValues values = new ContentValues();
 
-        int maxId = DataProvider.getInstance(context).getMaxId("PROGRAM", "ID_PROGRAM");
-
-        values.put("ID_PROGRAM", "PRO" + String.valueOf(maxId + 1));
+        values.put("ID_PROGRAM", program.getIdProgram());
         values.put("NAME", program.getNameProgram());
         values.put("INPUT_SCORE", program.getInputScore());
         values.put("OUTPUT_SCORE", program.getOutputScore());
@@ -102,7 +83,7 @@ public class ProgramDAO {
             } else {
                 Log.d("Update program ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Update program Error: ", e.getMessage());
         }
 
@@ -115,7 +96,7 @@ public class ProgramDAO {
 
         try {
             cursor = DataProvider.getInstance(context).selectData("PROGRAM", new String[]{"*"},  whereClause, whereArgs, null);
-        }catch(Exception e) {
+        }catch(SQLException e) {
             Log.d("Select Program: ", e.getMessage());
         }
 

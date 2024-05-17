@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 57;
+    private static final int DATABASE_VERSION = 62;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -149,6 +149,8 @@ public class DataProvider extends SQLiteOpenHelper {
                     "END_TIME TEXT," +
                     "ID_CLASS TEXT, " +
                     "ID_CLASSROOM TEXT, " +
+                    "STATUS INTEGER, " +
+                    "FOREIGN KEY (ID_CLASS) REFERENCES CLASS(ID_CLASS)," +
                     "FOREIGN KEY (ID_CLASSROOM) REFERENCES CLASSROOM(ID_CLASSROOM))");
         } catch( Exception e) {
             Log.d("CREATE SCHEDULE ",  e.getMessage());
@@ -160,8 +162,10 @@ public class DataProvider extends SQLiteOpenHelper {
                     "NAME TEXT, " +
                     "FORMAT TEXT, " +
                     "EXAM_DATE TEXT, " +
+                    "ID_CLASS TEXT, " +
                     "ID_CLASSROOM TEXT, " +
                     "STATUS INTEGER," +
+                    "FOREIGN KEY (ID_CLASS) REFERENCES CLASS(ID_CLASS)," +
                     "FOREIGN KEY (ID_CLASSROOM) REFERENCES CLASSROOM(ID_CLASSROOM))");
             Log.d("CREATE EXAMINATION", "Database created successfully");
         } catch ( Exception e) {
@@ -169,7 +173,7 @@ public class DataProvider extends SQLiteOpenHelper {
         }
 
         try {
-            db.execSQL("CREATE TABLE IF NOT EXISTS EXAM_SCRORE (" +
+            db.execSQL("CREATE TABLE IF NOT EXISTS EXAM_SCORE (" +
                     "ID_EXAM_SCORE INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "ID_EXAM TEXT , " +
                     "ID_STUDENT TEXT, " +
@@ -177,6 +181,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "WRITING_SCORE REAL, " +
                     "LISTENING_SCORE REAL, " +
                     "READING_SCORE REAL," +
+                    "STATUS INTEGER," +
                     "FOREIGN KEY (ID_EXAM) REFERENCES EXAMINATION(ID_EXAM)," +
                     "FOREIGN KEY (ID_STUDENT) REFERENCES OFFICAL_STUDENT(ID_STUDENT) )");
             Log.d("CREATE EXAM_SCORE", "Database created successfully");
@@ -189,6 +194,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "ID_TEACHING INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "ID_STUDENT TEXT , " +
                     "ID_CLASS TEXT, " +
+                    "STATUS INTEGER, " +
                     "FOREIGN KEY (ID_STUDENT) REFERENCES OFFICAL_STUDENT(ID_STUDENT)," +
                     "FOREIGN KEY (ID_CLASS) REFERENCES CLASS(ID_CLASS))");
             Log.d("CREATE EXAM_SCORE", "Database created successfully");
@@ -240,7 +246,6 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("CREATE REPORT",  e.getMessage());
         }
-
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATION (" +
@@ -320,6 +325,8 @@ public class DataProvider extends SQLiteOpenHelper {
             } catch (NumberFormatException | SQLException e) {
                 Log.d("Select max id: ", e.getMessage());
             }
+        }else {
+            return 0;
         }
 
         return maxId;

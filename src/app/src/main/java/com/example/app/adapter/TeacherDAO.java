@@ -2,10 +2,16 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.StaffDTO;
 import com.example.app.model.TeacherDTO;
+import com.example.app.model.TeachingDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeacherDAO {
     public static TeacherDAO instance;
@@ -28,7 +34,7 @@ public class TeacherDAO {
         values.put("PHONE_NUMBER", teacher.getPhoneNumber());
         values.put("GENDER", teacher.getGender());
         values.put("SALARY", teacher.getSalary());
-        values.put("STATUS", teacher.getStatus());
+        //values.put("STATUS", teacher.getStatus());
 
         try {
             int rowEffect = DataProvider.getInstance(context).insertData("TEACHERS", values);
@@ -37,7 +43,7 @@ public class TeacherDAO {
             } else {
                 Log.d("Insert Teacher: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Teacher Error: ", e.getMessage());
         }
     }
@@ -50,7 +56,7 @@ public class TeacherDAO {
             } else {
                 Log.d("Delete Teacher: ", "Fail");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.d("Insert Teacher Error: ", e.getMessage());
         }
     }
@@ -63,7 +69,7 @@ public class TeacherDAO {
         values.put("PHONE_NUMBER", teacher.getPhoneNumber());
         values.put("GENDER", teacher.getGender());
         values.put("SALARY", teacher.getSalary());
-        values.put("STATUS", teacher.getStatus());
+        //values.put("STATUS", teacher.getStatus());
 
         try {
             int rowsUpdated = DataProvider.getInstance(context).updateData("TEACHERS", values, whereClause, whereArgs);
@@ -72,8 +78,57 @@ public class TeacherDAO {
             } else {
                 Log.d("Update Teacher: ", "No rows updated");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Log.e("Update Teacher Error: ", e.getMessage());
         }
+    }
+
+    public List<TeacherDTO> SelectTeacher(Context context, String whereClause, String[] whereArg) {
+        List<TeacherDTO> teachers = new ArrayList<>();
+
+        Cursor cursor = null;
+
+        try {
+            cursor = DataProvider.getInstance(context).selectData("TEACHERS",
+                    new String[]{"*"},  whereClause, whereArg, null);
+        }catch(SQLException e) {
+            Log.d("Select Teacher: ", e.getMessage());
+        }
+
+        String idTeacher = "", fullName = "", address = "", phoneNumber = "", gender = "", birthday = "";
+        int salary = 0;
+
+        if (cursor.moveToFirst()) {
+            do {
+                int idTeacherIndex = cursor.getColumnIndex("ID_TEACHER");
+                if (idTeacherIndex!= -1) {
+                    idTeacher = cursor.getString(idTeacherIndex);
+                }
+                int fullNameIndex = cursor.getColumnIndex("FULLNAME");
+                if (fullNameIndex != -1) {
+                    fullName = cursor.getString(fullNameIndex);
+                }
+                int addressIndex = cursor.getColumnIndex("ADDRESS");
+                if (addressIndex != -1) {
+                    address = cursor.getString(addressIndex);
+                }
+                int phoneNumberIndex = cursor.getColumnIndex("PHONE_NUMBER");
+                if (phoneNumberIndex != -1) {
+                    phoneNumber = cursor.getString(phoneNumberIndex);
+                }int genderIndex = cursor.getColumnIndex("GENDER");
+                if (genderIndex != -1) {
+                    gender = cursor.getString(genderIndex);
+                }
+                int salaryIndex = cursor.getColumnIndex("SALARY");
+                if (salaryIndex != -1) {
+                    salary = cursor.getInt(salaryIndex);
+                }
+
+                teachers.add(new TeacherDTO(idTeacher, fullName, address, phoneNumber,gender, birthday, salary));
+
+            } while (cursor.moveToNext());
+        }
+
+        return teachers;
     }
 }

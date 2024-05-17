@@ -112,11 +112,11 @@ public class List_Adapter extends ArrayAdapter {
 
         ExamScoreDTO listScore = (ExamScoreDTO) arrayDataList.get(position);
 
-        courseID.setText(listScore.courseID);
+/*        courseID.setText(listScore.courseID);
         speak.setText(listScore.speak);
         write.setText(listScore.write);
         listen.setText(listScore.listen);
-        read.setText(listScore.read);
+        read.setText(listScore.read);*/
     }
 
     private void List_Education_Program_View (@Nullable View convertView, int position) {
@@ -378,7 +378,7 @@ public class List_Adapter extends ArrayAdapter {
         startTime = convertView.findViewById(R.id.start_time);
         endTime = convertView.findViewById(R.id.end_time);
         idClass = convertView.findViewById(R.id.idClass);
-        idClassroom = convertView.findViewById(R.id.end_time);
+        idClassroom = convertView.findViewById(R.id.id_classroom);
 
         ScheduleDTO listSchedule = (ScheduleDTO) arrayDataList.get(position);
 
