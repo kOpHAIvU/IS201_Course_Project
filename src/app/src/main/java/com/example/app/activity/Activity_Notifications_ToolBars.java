@@ -95,17 +95,17 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 /*dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
                         , "Nam", "Ký túc xá khu A"
                         , "Chưa học", "Đại học","10"));*/
-                dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
+                /*dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
                         , "Nữ", "Ký túc xá khu A"
-                        , "Mẫu giáo","10"));
-                /*String[] whereArgs = new String[] {"0"};
+                        , "Mẫu giáo","10"));*/
+                String[] whereArgs = new String[] {"0"};
                 List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
                         Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
                 );
                 for (int i = 0; i < listPotentialStudent.size(); i++) {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
-                }*/
+                }
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;

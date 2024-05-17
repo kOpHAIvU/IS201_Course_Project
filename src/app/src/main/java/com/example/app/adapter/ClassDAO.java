@@ -26,19 +26,6 @@ public class ClassDAO {
 
         ContentValues values = new ContentValues();
 
-      /*  db.execSQL("CREATE TABLE IF NOT EXISTS CLASS (" +
-                "ID_CLASS TEXT PRIMARY KEY , " +
-                "NAME TEXT, " +
-                "START_DATE TEXT, " +
-                "END_DATE TEXT, " +
-                "ID_PROGRAM TEXT, " +
-                "ID_TEACHER TEXT, " +
-                "ID_STAFF TEXT, " +
-                "STATUS INTEGER," +
-                "FOREIGN KEY (ID_PROGRAM) REFERENCES PROGRAM(ID_PROGRAM)," +
-                "FOREIGN KEY (ID_STAFF) REFERENCES STAFF(ID_STAFF)," +
-                "FOREIGN KEY (ID_TEACHER) REFERENCES TEACHER(ID_TEACHER))");*/
-
         values.put("ID_CLASS", "CLS" + String.valueOf(maxId + 1));
         values.put("NAME", classDTO.getClassName());
         values.put("START_DATE", classDTO.getStartDate());

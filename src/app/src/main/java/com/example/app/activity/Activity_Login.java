@@ -160,19 +160,18 @@ public class Activity_Login extends AppCompatActivity {
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent1);
         PotentialStudentDAO.getInstance(Activity_Login.this).InsertPotentialStudent(Activity_Login.this, pStudent2);
 */
-    /*   ProgramDTO program1 = new ProgramDTO("PRO2", "Đào tạo tiếng anh chuyên sâu",
-                "6.5", "8.5", "Đào tạo chuyên sâu dành cho các bạn có nhu cầu theo các" +
-                "khối ngành ngôn ngữ hoặc có dự định đi du học", "6.5", "7.5",
-                "7", "7");
+      ProgramDTO program1 = new ProgramDTO("PRO1", "Chứng chỉ ielts từ 5.5-6.0",
+              "5.0", "6.5", "Cải thiện khả năng nghe",
+              "5.5", "6.5", "7.0", "7.0",
+              5000000, "6 tháng", "CER1");
         ProgramDAO.getInstance(Activity_Login.this).InsertProgram(Activity_Login.this, program1);
 
-        ProgramDTO program2 = new ProgramDTO("PRO3", "Đào tạo tiếng anh mức trung bình",
-                "6.5", "8.5", "Đào tạo mức trung bình dành" +
-                "cho các bạn sinh viên sắp ra trường hoặc các bạn học sinh cần chứng chỉ để" +
-                "xét tuyển vào các trường đại học", "6.5", "7.5",
-                "7", "7");
+        ProgramDTO program2 = new ProgramDTO("PRO2", "Chứng chỉ ielts từ 5.5-6.0",
+                "5.0", "6.5", "Cải thiện khả năng nói",
+                "6.5", "6.5", "7.0", "7.0",
+                10000000, "6 tháng", "CER1");
         ProgramDAO.getInstance(Activity_Login.this).InsertProgram(Activity_Login.this, program2);
-*/
+
 /*
 
         // Insert data in CLASSROOM
@@ -184,15 +183,15 @@ public class Activity_Login extends AppCompatActivity {
         ClassroomDAO.getInstance(Activity_Login.this).InsertNewClassroom(Activity_Login.this, classroom2);
 */
 
-        /*// Insert data in CLASS
 
-        ClassDTO class1 = new ClassDTO("CLS1", "Lớp Toeic 4 kỹ năng", "200-400",
-                "Nguyen Thi C", "10 buổi", "20000000", "B1.11", "PRO1", "STA1");
-        ClassDTO class2 = new ClassDTO("CLS2", "Lớp Ielts", "5.5-6.5",
-                "Nguyen Thi C", "20 buổi", "20000000", "B1.12", "PRO2", "STA2");
+        // Insert data in CLASS
+
+        ClassDTO class1 = new ClassDTO("CLS1", "Lớp ielts từ 5.9-6.5 giúp cải thiện kĩ năng nghe",
+                "22/05/2024", "22/12/2024", "PRO1", "TEA1", "STA1", "0");
+        ClassDTO class2 = new ClassDTO("CLS1", "Lớp ielts từ 5.9-6.5 giúp cải thiện kĩ năng đọc",
+                "22/05/2024", "22/12/2024", "PRO1", "TEA1", "STA1", "0");
         ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class2);
         ClassDAO.getInstance(Activity_Login.this).InsertClass(Activity_Login.this, class1);
-*/
 
     }
 }

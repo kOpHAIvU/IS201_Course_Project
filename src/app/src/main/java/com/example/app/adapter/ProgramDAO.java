@@ -58,26 +58,7 @@ public class ProgramDAO {
 
     public int UpdateProgram(Context context, ProgramDTO program, String whereClause, String[] whereArgs ) {
         int rowEffect = -1;
-
-        /*    db.execSQL("CREATE TABLE IF NOT EXISTS PROGRAM (" +
-            "ID_PROGRAM TEXT PRIMARY KEY, " +
-            "NAME TEXT, " +
-            "INPUT_SCORE REAL, " +
-            "OUTPUT_SCORE REAL, " +
-            "CONTENT TEXT, " +
-            "SPEAKING_SCORE REAL, " +
-            "WRITING_SCORE REAL, " +
-            "LISTENING_SCORE REAL, " +
-            "READING_SCORE REAL, " +
-            "TUITION_FEES INTEGER, " +
-            "STUDY_PERIOD INTEGER, " + // Lộ trình học kéo dài 6 tháng, 12 tháng,....
-            "ID_CERTIFICATE TEXT, " +
-            "STATUS INTEGER, " +
-            "FOREIGN KEY (ID_CERTIFICATE) REFERENCES CERTIFICATE(ID_CERTIFICATE))");
-            Log.d("CREATE PROGRAM", "Database created successfully");*/
-
         ContentValues values = new ContentValues();
-
         int maxId = DataProvider.getInstance(context).getMaxId("PROGRAM", "ID_PROGRAM");
 
         values.put("ID_PROGRAM", "PRO" + String.valueOf(maxId + 1));
