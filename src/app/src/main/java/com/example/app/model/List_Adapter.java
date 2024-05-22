@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.app.R;
+import com.example.app.activity.Activity_Add_Account;
 import com.example.app.activity.Activity_Add_Class;
 import com.example.app.activity.Activity_Add_Official_Student;
 import com.example.app.activity.Activity_Add_Potential_Student;
@@ -76,6 +77,10 @@ public class List_Adapter extends ArrayAdapter {
         else if (item instanceof ScheduleDTO) {
             convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             Schedule_View(convertView, position);
+        }
+        else if (item instanceof AccountDTO) {
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+            Account_View(convertView, position);
         }
         else
             throw new IllegalArgumentException("Unknown data type: " + item.getClass().getName());
@@ -488,4 +493,63 @@ public class List_Adapter extends ArrayAdapter {
             });
         }
     }
+    private void Account_View (@Nullable View convertView, int position) {
+        TextView idAccount, idUser, username, password;
+        AccountDTO listAccount = (AccountDTO) arrayDataList.get(position);
+
+        idAccount = convertView.findViewById(R.id.idAccount);
+        idUser = convertView.findViewById(R.id.idUser);
+        username = convertView.findViewById(R.id.username);
+        password = convertView.findViewById(R.id.password);
+
+        idAccount.setText(listAccount.getIdAccount());
+        idUser.setText(listAccount.getIdUser());
+        username.setText(listAccount.getUserName());
+        password.setText(listAccount.getPassWord());
+
+        Button remove = convertView.findViewById(R.id.remove_account);
+        remove.setTag(position);
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xác nhận xóa");
+                builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int position = (int) v.getTag();
+                        arrayDataList.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                // Nút "Hủy": Không làm gì cả, đóng dialog
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Tạo và hiển thị AlertDialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button edit = convertView.findViewById(R.id.edit_account);
+        edit.setTag(position);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Activity_Add_Account.class);
+                intent.putExtra("idAccount", "1");
+                mContext.startActivity(intent);
+            }
+        });
+    }
+
+
 }

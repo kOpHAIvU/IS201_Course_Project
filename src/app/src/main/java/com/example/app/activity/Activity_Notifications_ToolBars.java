@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
+import com.example.app.model.AccountDTO;
+import com.example.app.model.CertificateDTO;
 import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
@@ -45,43 +47,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 finish();
             }
         });
-
-        switch (message) {
-            //Nhân viên ghi danh
-            case "Quản lý thông tin học viên":
-                toolbar.setTitle("Học viên tiềm năng");
-                /*dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
-                        , "Nam", "Ký túc xá khu A"
-                        , "Chưa học", "Đại học","10"));*/
-                dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
-                        , "Nữ", "Ký túc xá khu A"
-                        , "Mẫu giáo","10"));
-                /*String[] whereArgs = new String[] {"0"};
-                List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
-                        Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
-                );
-                for (int i = 0; i < listPotentialStudent.size(); i++) {
-                    Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
-                    dataArrayList.add(listPotentialStudent.get(i));
-                }*/
-
-                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
-                break;
-            case "Quản lý lớp học":
-                toolbar.setTitle("Lớp học");
-                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
-                        "Đại học", "Tuyết Loan",
-                        "10 buổi", "10.000.000",
-                        "Hehe","Đoán coi"));
-                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
-                        "Đại học", "Tuyết Loan",
-                        "10 buổi", "10.000.000",
-                        "Hehe","Đoán coi"));
-                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
-                break;
-        }
-        listView.setAdapter(listAdapter);
-        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -134,13 +99,19 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_schedule_manage_item, dataArrayList);
                 break;
-            case "Quản lý chương trình học":
+            case "Quản lý chứng chỉ":
                 toolbar.setTitle("Chương trình");
-                dataArrayList.add(new ProgramDTO("PRO1", "Hê hê"
+                dataArrayList.add(new CertificateDTO("1", "1", "1"));
+                /*dataArrayList.add(new ProgramDTO("PRO1", "Hê hê"
                         , "10", "10", "Đào tạo tiếng Anh"
                         , "10", "10", "10", "10"
-                        , 10, "10", "10"));
+                        , 10, "10", "10"));*/
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_education_program_manage_item, dataArrayList);
+                break;
+            case "Quản lý tài khoản":
+                toolbar.setTitle("Tài khoản");
+                dataArrayList.add(new AccountDTO("1", "1", "1", "1"));
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_account_item, dataArrayList);
                 break;
         }
         listView.setAdapter(listAdapter);
@@ -177,6 +148,10 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 addProgram.putExtra("idProgram", "");
                 startActivity(addProgram);
                 break;
+            case "Quản lý tài khoản":
+                Intent addAccount = new Intent();
+                addAccount.putExtra("idAccount", "");
+                startActivity(addAccount);
         }
         return super.onOptionsItemSelected(item);
     }
