@@ -57,9 +57,9 @@ public class Activity_Add_Potential_Student extends AppCompatActivity {
             public void onClick(View v) {
                 boolean acceptSwitch = true;    //Đúng thì mới trả về Fragmen_Setting
 
-                if (studentID.equals("") || address.equals("")
-                        || level.equals("") || appointmentNumber.equals("")
-                        || studentName.equals("") || gender.equals("") || phoneNumber.equals("")) {
+                if (studentID.getText().equals("") || address.getText().equals("")
+                        || level.getText().equals("") || appointmentNumber.getText().equals("")
+                        || studentName.getText().equals("") || gender.getText().equals("") || phoneNumber.getText().equals("")) {
                     acceptSwitch = false;
                 }
 

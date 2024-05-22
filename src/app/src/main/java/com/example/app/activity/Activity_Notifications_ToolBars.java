@@ -17,6 +17,8 @@ import com.example.app.R;
 import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
+import com.example.app.model.ProgramDTO;
+import com.example.app.model.ScheduleDTO;
 
 import java.util.ArrayList;
 
@@ -105,9 +107,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
                 }*/
-
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
-                listView.setAdapter(listAdapter);
                 break;
             case "Quản lý lớp học":
                 toolbar.setTitle("Lớp học");
@@ -120,7 +120,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                         "10 buổi", "10.000.000",
                         "Hehe","Đoán coi"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
-                listView.setAdapter(listAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -130,7 +129,21 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     }
                 });
                 break;
+            case "Quản lý lịch học":
+                toolbar.setTitle("Lịch học");
+                dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_schedule_manage_item, dataArrayList);
+                break;
+            case "Quản lý chương trình học":
+                toolbar.setTitle("Chương trình");
+                dataArrayList.add(new ProgramDTO("PRO1", "Hê hê"
+                        , "10", "10", "Đào tạo tiếng Anh"
+                        , "10", "10", "10", "10"
+                        , 10, "10", "10"));
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_education_program_manage_item, dataArrayList);
+                break;
         }
+        listView.setAdapter(listAdapter);
         setSupportActionBar(toolbar);
     }
 
@@ -153,6 +166,16 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 Intent addClass = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Class.class);
                 addClass.putExtra("classID", "");
                 startActivity(addClass);
+                break;
+            case "Quản lý lịch học":
+                Intent addSchedule = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Schedule.class);
+                addSchedule.putExtra("idSchedule", "");
+                startActivity(addSchedule);
+                break;
+            case "Quản lý chương trình học":
+                Intent addProgram = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Schedule.class);
+                addProgram.putExtra("idProgram", "");
+                startActivity(addProgram);
                 break;
         }
         return super.onOptionsItemSelected(item);
