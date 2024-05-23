@@ -14,11 +14,15 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
+import com.example.app.adapter.ClassDAO;
+import com.example.app.adapter.PotentialStudentDAO;
+import com.example.app.model.ClassDTO;
 import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Activity_Notifications_ToolBars extends AppCompatActivity {
     Toolbar toolbar;
@@ -62,6 +66,14 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
                 }*/
+                String[] whereArgs = new String[] {"0"};
+                String whereClause = "STATUS = ?";
+                List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(
+                        Activity_Notifications_ToolBars.this).SelectStudent(Activity_Notifications_ToolBars.this, whereClause, whereArgs);
+
+                for(int i = 0; i < listPotentialStudent.size(); i++) {
+                    dataArrayList.add(listPotentialStudent.get(i));
+                }
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
@@ -87,6 +99,9 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
         super.onStart();
         dataArrayList.clear();
 
+        String[] whereArgs = new String[] {"0"};
+        String whereClause = "STATUS = ?";
+
         switch (message) {
             //Nhân viên ghi danh
             case "Quản lý thông tin học viên":
@@ -97,7 +112,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 /*dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
                         , "Nữ", "Ký túc xá khu A"
                         , "Mẫu giáo","10"));*/
-                String[] whereArgs = new String[] {"0"};
                 /*List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
                         Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
                 );
@@ -105,6 +119,14 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
                 }*/
+
+
+                List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(
+                        Activity_Notifications_ToolBars.this).SelectStudent(Activity_Notifications_ToolBars.this, whereClause, whereArgs);
+
+                for(int i = 0; i < listPotentialStudent.size(); i++) {
+                    dataArrayList.add(listPotentialStudent.get(i));
+                }
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 listView.setAdapter(listAdapter);
@@ -119,6 +141,14 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
                         "Hehe","Đoán coi"));
+
+                List<ClassDTO> listClass = ClassDAO.getInstance(
+                        Activity_Notifications_ToolBars.this).selectClass(Activity_Notifications_ToolBars.this,
+                        whereClause, whereArgs);
+                for (int i = 0; i < listClass.size(); i++) {
+                    dataArrayList.add(listClass.get(i));
+                }
+
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 listView.setAdapter(listAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
