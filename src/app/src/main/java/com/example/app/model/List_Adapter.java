@@ -16,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.app.R;
+import com.example.app.activity.Activity_Add_Account;
 import com.example.app.activity.Activity_Add_Class;
 import com.example.app.activity.Activity_Add_Official_Student;
 import com.example.app.activity.Activity_Add_Potential_Student;
+import com.example.app.activity.Activity_Add_Program;
+import com.example.app.activity.Activity_Add_Schedule;
 import com.example.app.activity.Activity_Notifications_ToolBars_Second_Layer;
 
 import java.util.ArrayList;
@@ -26,11 +29,13 @@ import java.util.ArrayList;
 public class List_Adapter extends ArrayAdapter {
     private Context mContext;
     private ArrayList<Object> arrayDataList;
+    int idLayout;
 
     public List_Adapter(@NonNull Context context,int idLayout, ArrayList<Object> arrayDataList) {
         super(context, idLayout, arrayDataList);
         mContext = context;
         this.arrayDataList = arrayDataList;
+        this.idLayout = idLayout;
     }
 
     @NonNull
@@ -38,40 +43,44 @@ public class List_Adapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Object item = arrayDataList.get(position);
         if (item instanceof List_Information) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             List_Information_View(convertView, position);
         }
         else if (item instanceof NotificationDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_notification_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             List_Notifications_View(convertView, position);
         }
         else if (item instanceof ExamScoreDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_score_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             List_Score_View(convertView, position);
         }
         else if (item instanceof ProgramDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_education_program_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             List_Education_Program_View(convertView, position);
         }
         else if (item instanceof ClassDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_class_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             List_Class_View(convertView, position);
         }
         else if (item instanceof ClassDTO_Manage) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_class_to_manage_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             List_Class_Manage_View(convertView, position);
         }
         else if (item instanceof PotentialStudentDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_potential_student_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             PotentialStudentDTO_View(convertView, position);
         }
         else if (item instanceof OfficialStudentDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_offfical_student_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             OfficialStudentDTO_View(convertView, position);
         }
         else if (item instanceof ScheduleDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_schedule_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
             Schedule_View(convertView, position);
+        }
+        else if (item instanceof AccountDTO) {
+            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+            Account_View(convertView, position);
         }
         else
             throw new IllegalArgumentException("Unknown data type: " + item.getClass().getName());
@@ -146,8 +155,62 @@ public class List_Adapter extends ArrayAdapter {
         read.setText(listEducationProgram.getReadingScore());
         tuitionFees.setText(listEducationProgram.getTuitionFees());
         certificate.setText(listEducationProgram.getIdCertificate());
-    }
 
+        Button editProgram, removeProgram, detailProgram;
+        if (convertView.findViewById(R.id.edit_program) != null) {
+            removeProgram = convertView.findViewById(R.id.remove_program);
+            removeProgram.setTag(position);
+            removeProgram.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Xác nhận xóa");
+                    builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                    // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            int position = (int) v.getTag();
+                            arrayDataList.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+
+                    // Nút "Hủy": Không làm gì cả, đóng dialog
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Tạo và hiển thị AlertDialog
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            });
+
+            editProgram = convertView.findViewById(R.id.edit_program);
+            editProgram.setTag(position);
+            editProgram.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent editProgram = new Intent(getContext(), Activity_Add_Program.class);
+                    editProgram.putExtra("idProgram", idProgram.getText());
+                    mContext.startActivity(editProgram);
+                }
+            });
+
+            detailProgram = convertView.findViewById(R.id.detailBtn);
+            detailProgram.setTag(position);
+            detailProgram.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+    }
     private void List_Class_View (@Nullable View convertView, int position) {
         TextView classID, className, startDate, endDate, programID, teacherName;
         ClassDTO listClass = (ClassDTO) arrayDataList.get(position);
@@ -167,7 +230,6 @@ public class List_Adapter extends ArrayAdapter {
         teacherName.setText(listClass.getIdTeacher());
         teacherName.setText(listClass.getIdTeacher());
     }
-
     private void List_Class_Manage_View (@Nullable View convertView, int position) {
         TextView classID, className, startDate, endDate, programID, teacherName, staffID;
         ClassDTO_Manage listClass = (ClassDTO_Manage) arrayDataList.get(position);
@@ -227,14 +289,23 @@ public class List_Adapter extends ArrayAdapter {
         editClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = (int) v.getTag();
                 Intent editClass = new Intent(getContext(), Activity_Add_Class.class);
                 editClass.putExtra("classID", classID.getText());
                 mContext.startActivity(editClass);
             }
         });
-    }
 
+        Button detailBtn = convertView.findViewById(R.id.detailBtn);
+        detailBtn.setTag(position);
+        detailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
+                intent.putExtra("classID", classID.getText());
+                mContext.startActivity(intent);
+            }
+        });
+    }
     private void PotentialStudentDTO_View (@Nullable View convertView, int position) {
         TextView studentName, phoneNumber, gender, address, level, appointmentNumber;
         studentName = convertView.findViewById(R.id.student_name);
@@ -299,7 +370,6 @@ public class List_Adapter extends ArrayAdapter {
             }
         });
     }
-
     private void OfficialStudentDTO_View (@Nullable View convertView, int position) {
         TextView studentName, phoneNumber, gender, address, birthday;
         studentName = convertView.findViewById(R.id.student_name);
@@ -360,17 +430,6 @@ public class List_Adapter extends ArrayAdapter {
                 mContext.startActivity(addPotential);
             }
         });
-
-        Button detailBtn = convertView.findViewById(R.id.detailBtn);
-        detailBtn.setTag(position);
-        detailBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
-                intent.putExtra("classID", "1");
-                mContext.startActivity(intent);
-            }
-        });
     }
     private void Schedule_View (@Nullable View convertView, int position) {
         TextView dayOfWeek, startTime, endTime, idClass, idClassroom;
@@ -387,5 +446,110 @@ public class List_Adapter extends ArrayAdapter {
         endTime.setText(listSchedule.getEndTime());
         idClass.setText(listSchedule.getIdClass());
         idClassroom.setText(listSchedule.getIdClassroom());
+
+        Button editSchedule, removeSchedule;
+        if (convertView.findViewById(R.id.edit_schedule) != null) {
+            editSchedule = convertView.findViewById(R.id.edit_schedule);
+            editSchedule.setTag(position);
+            editSchedule.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), Activity_Add_Schedule.class);
+                    intent.putExtra("idSchedule", "1");
+                    mContext.startActivity(intent);
+                }
+            });
+
+            removeSchedule = convertView.findViewById(R.id.remove_schedule);
+            removeSchedule.setTag(position);
+            removeSchedule.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Xác nhận xóa");
+                    builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                    // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            int position = (int) v.getTag();
+                            arrayDataList.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+
+                    // Nút "Hủy": Không làm gì cả, đóng dialog
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Tạo và hiển thị AlertDialog
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            });
+        }
     }
+    private void Account_View (@Nullable View convertView, int position) {
+        TextView idAccount, idUser, username, password;
+        AccountDTO listAccount = (AccountDTO) arrayDataList.get(position);
+
+        idAccount = convertView.findViewById(R.id.idAccount);
+        idUser = convertView.findViewById(R.id.idUser);
+        username = convertView.findViewById(R.id.username);
+        password = convertView.findViewById(R.id.password);
+
+        idAccount.setText(listAccount.getIdAccount());
+        idUser.setText(listAccount.getIdUser());
+        username.setText(listAccount.getUserName());
+        password.setText(listAccount.getPassWord());
+
+        Button remove = convertView.findViewById(R.id.remove_account);
+        remove.setTag(position);
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xác nhận xóa");
+                builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int position = (int) v.getTag();
+                        arrayDataList.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                // Nút "Hủy": Không làm gì cả, đóng dialog
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Tạo và hiển thị AlertDialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button edit = convertView.findViewById(R.id.edit_account);
+        edit.setTag(position);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Activity_Add_Account.class);
+                intent.putExtra("idAccount", "1");
+                mContext.startActivity(intent);
+            }
+        });
+    }
+
+
 }

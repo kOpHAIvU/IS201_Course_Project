@@ -22,26 +22,21 @@
             android:layout_height="wrap_content"
             android:background="@drawable/login_background"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/baseline_account_circle_24" />
-
             <TextView
-                android:id="@+id/student_name"
-                android:layout_width="175dp"
+                android:id="@+id/idClass"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:layout_gravity="center"
-                android:textSize="17dp"
+                android:textSize="20dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="Tuyết Loan"/>
+                android:text="IS201"/>
 
             <Button
-                android:id="@+id/edit_student"
+                android:id="@+id/edit_schedule"
                 android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -54,7 +49,7 @@
                 android:textSize="12dp"/>
 
             <Button
-                android:id="@+id/remove_student"
+                android:id="@+id/remove_schedule"
                 android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -69,96 +64,103 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="SĐT:"/>
-            <TextView
-                android:id="@+id/phone_number"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="0912345678"
-                android:textSize="15dp"/>
-            <View
-                android:layout_width="25dp"
-                android:layout_height="20dp"/>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Thứ trong tuần: "
                 android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="Phái: "/>
+                android:textSize="17dp"/>
             <TextView
-                android:id="@+id/gender"
+                android:id="@+id/day_of_week"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nam"
-                android:textSize="15dp"/>
+                android:text="Thứ 8"
+                android:textSize="17dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Ngày bắt đầu: "
                 android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="Địa chỉ: "/>
+                android:textSize="17dp"/>
             <TextView
-                android:id="@+id/address"
+                android:id="@+id/start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"/>
+                android:text="Thứ 8"
+                android:textSize="17dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Ngày kết thúc: "
                 android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="Trình độ: "/>
+                android:textSize="17dp"/>
             <TextView
-                android:id="@+id/level"
+                android:id="@+id/end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"/>
+                android:text="Thứ 8"
+                android:textSize="17dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Mã lớp: "
                 android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="Ngày sinh: "/>
+                android:textSize="17dp"/>
             <TextView
-                android:id="@+id/birthday"
+                android:id="@+id/id_class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"/>
+                android:text="Thứ 8"
+                android:textSize="17dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã lớp: "
+                android:textStyle="bold"
+                android:textSize="17dp"/>
+            <TextView
+                android:id="@+id/id_classroom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thứ 8"
+                android:textSize="17dp"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -15,12 +15,13 @@ import android.widget.ListView;
 import com.example.app.R;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.OfficialStudentDTO;
+import com.example.app.model.ProgramDTO;
 
 import java.util.ArrayList;
 
 public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActivity {
-    private String message;
-    //Toolbar toolbar;
+    private String message1, message2;
+    Toolbar toolbar;
     private List_Adapter listAdapter;
     private ListView listView;
     private ArrayList<Object> dataArrayList;
@@ -30,27 +31,36 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications_tool_bars_second_layer);
 
-        //toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         listView = findViewById(R.id.notification_listview);
         returnBtn = findViewById(R.id.return_btn);
-        message = getIntent().getStringExtra("classID");
+        message1 = getIntent().getStringExtra("classID");
+        message2 = getIntent().getStringExtra("idProgram");
         dataArrayList = new ArrayList<>();
 
-        /*returnBtn.setOnClickListener(new View.OnClickListener() {
+        returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
-        });*/
+        });
 
-        if (!message.equals("")) {
+        if (!message1.equals("")) {
             //toolbar.setTitle("Chi tiết lớp học");
             dataArrayList.add(new OfficialStudentDTO("1", "1","1", "1", "1", "1", 1));
             listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_offfical_student_item, dataArrayList);
         }
 
+        if (!message2.equals("")) {
+            dataArrayList.add(new ProgramDTO("PRO1", "Hê hê"
+                    , "10", "10", "Đào tạo tiếng Anh"
+                    , "10", "10", "10", "10"
+                    , 10, "10", "10"));
+            listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_education_program_manage_item, dataArrayList);
+        }
+
         listView.setAdapter(listAdapter);
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -62,10 +72,13 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (!message.equals("")) {
+        if (!message1.equals("")) {
             Intent addOffical = new Intent(Activity_Notifications_ToolBars_Second_Layer.this, Activity_Add_Official_Student.class);
             addOffical.putExtra("classID", "");
             startActivity(addOffical);
+        }
+        if (!message2.equals("")) {
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:background="@drawable/ripple_effect">
         <LinearLayout
@@ -23,25 +23,19 @@
             android:background="@drawable/login_background"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/baseline_account_circle_24" />
-
             <TextView
-                android:id="@+id/student_name"
-                android:layout_width="175dp"
+                android:id="@+id/idAccount"
+                android:layout_width="215dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
                 android:textSize="17dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="Tuyết Loan"/>
+                android:text="id"/>
 
             <Button
-                android:id="@+id/edit_student"
+                android:id="@+id/edit_account"
                 android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -54,7 +48,7 @@
                 android:textSize="12dp"/>
 
             <Button
-                android:id="@+id/remove_student"
+                android:id="@+id/remove_account"
                 android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -75,49 +69,13 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="SĐT:"/>
-            <TextView
-                android:id="@+id/phone_number"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="0912345678"
-                android:textSize="15dp"/>
-            <View
-                android:layout_width="25dp"
-                android:layout_height="20dp"/>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:text="Phái: "/>
+                android:text="Chức vụ: "/>
             <TextView
-                android:id="@+id/gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nam"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="Địa chỉ: "/>
-            <TextView
-                android:id="@+id/address"
+                android:id="@+id/idUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>
@@ -134,9 +92,9 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:text="Trình độ: "/>
+                android:text="Tài khoản: "/>
             <TextView
-                android:id="@+id/level"
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>
@@ -153,9 +111,9 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:text="Ngày sinh: "/>
+                android:text="Mật khẩu: "/>
             <TextView
-                android:id="@+id/birthday"
+                android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>

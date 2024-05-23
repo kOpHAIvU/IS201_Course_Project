@@ -18,6 +18,15 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Activity_Add_Account"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Activity_Add_Program"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Activity_Add_Schedule"
+            android:exported="false" />
+        <activity
             android:name=".activity.Activity_Add_Official_Student"
             android:exported="false" />
         <activity
