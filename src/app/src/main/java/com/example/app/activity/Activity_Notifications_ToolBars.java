@@ -14,14 +14,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
-<<<<<<< HEAD
 import com.example.app.adapter.ClassDAO;
 import com.example.app.adapter.PotentialStudentDAO;
-import com.example.app.model.ClassDTO;
-=======
 import com.example.app.model.AccountDTO;
 import com.example.app.model.CertificateDTO;
->>>>>>> b5619122b1c7a57e9174c51913d9154fe7590d75
+import com.example.app.model.ClassDTO;
 import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
@@ -54,7 +51,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 finish();
             }
         });
-<<<<<<< HEAD
 
         switch (message) {
             //Nhân viên ghi danh
@@ -100,8 +96,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
         }
         listView.setAdapter(listAdapter);
         setSupportActionBar(toolbar);
-=======
->>>>>>> b5619122b1c7a57e9174c51913d9154fe7590d75
     }
 
     @Override
@@ -129,9 +123,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
                 }*/
-<<<<<<< HEAD
-
-
                 List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(
                         Activity_Notifications_ToolBars.this).SelectStudent(Activity_Notifications_ToolBars.this, whereClause, whereArgs);
 
@@ -139,8 +130,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     dataArrayList.add(listPotentialStudent.get(i));
                 }
 
-=======
->>>>>>> b5619122b1c7a57e9174c51913d9154fe7590d75
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
             case "Quản lý lớp học":
