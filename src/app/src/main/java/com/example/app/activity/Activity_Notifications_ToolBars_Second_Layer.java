@@ -35,7 +35,7 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
         listView = findViewById(R.id.notification_listview);
         returnBtn = findViewById(R.id.return_btn);
         message1 = getIntent().getStringExtra("classID");
-        message2 = getIntent().getStringExtra("idProgram");
+        message2 = getIntent().getStringExtra("idCertificate");
         dataArrayList = new ArrayList<>();
 
         returnBtn.setOnClickListener(new View.OnClickListener() {
@@ -52,10 +52,10 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
         }
 
         if (!message2.equals("")) {
-            dataArrayList.add(new ProgramDTO("PRO1", "Hê hê"
-                    , "10", "10", "Đào tạo tiếng Anh"
-                    , "10", "10", "10", "10"
-                    , 10, "10", "10"));
+            dataArrayList.add(new ProgramDTO("1", "1"
+                    , "1", "1", "1"
+                    , "1", "1", "1"
+                    , "1", 10, "1", "1"));
             listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_education_program_manage_item, dataArrayList);
         }
 
@@ -78,7 +78,9 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
             startActivity(addOffical);
         }
         if (!message2.equals("")) {
-
+            Intent addProgram = new Intent(Activity_Notifications_ToolBars_Second_Layer.this, Activity_Add_Program.class);
+            addProgram.putExtra("idProgram", "");
+            startActivity(addProgram);
         }
         return super.onOptionsItemSelected(item);
     }
