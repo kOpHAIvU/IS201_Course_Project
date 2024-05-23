@@ -14,8 +14,14 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
+<<<<<<< HEAD
+import com.example.app.adapter.ClassDAO;
+import com.example.app.adapter.PotentialStudentDAO;
+import com.example.app.model.ClassDTO;
+=======
 import com.example.app.model.AccountDTO;
 import com.example.app.model.CertificateDTO;
+>>>>>>> b5619122b1c7a57e9174c51913d9154fe7590d75
 import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
@@ -23,6 +29,7 @@ import com.example.app.model.ProgramDTO;
 import com.example.app.model.ScheduleDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Activity_Notifications_ToolBars extends AppCompatActivity {
     Toolbar toolbar;
@@ -47,12 +54,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        dataArrayList.clear();
+<<<<<<< HEAD
 
         switch (message) {
             //Nhân viên ghi danh
@@ -61,17 +63,26 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 /*dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
                         , "Nam", "Ký túc xá khu A"
                         , "Chưa học", "Đại học","10"));*/
-                /*dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
+                dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
                         , "Nữ", "Ký túc xá khu A"
-                        , "Mẫu giáo","10"));*/
-                String[] whereArgs = new String[] {"0"};
-                /*List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
+                        , "Mẫu giáo","10"));
+                /*String[] whereArgs = new String[] {"0"};
+                List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
                         Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
                 );
                 for (int i = 0; i < listPotentialStudent.size(); i++) {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
                 }*/
+                String[] whereArgs = new String[] {"0"};
+                String whereClause = "STATUS = ?";
+                List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(
+                        Activity_Notifications_ToolBars.this).SelectStudent(Activity_Notifications_ToolBars.this, whereClause, whereArgs);
+
+                for(int i = 0; i < listPotentialStudent.size(); i++) {
+                    dataArrayList.add(listPotentialStudent.get(i));
+                }
+
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
             case "Quản lý lớp học":
@@ -84,6 +95,72 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
                         "Hehe","Đoán coi"));
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
+                break;
+        }
+        listView.setAdapter(listAdapter);
+        setSupportActionBar(toolbar);
+=======
+>>>>>>> b5619122b1c7a57e9174c51913d9154fe7590d75
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        dataArrayList.clear();
+
+        String[] whereArgs = new String[] {"0"};
+        String whereClause = "STATUS = ?";
+
+        switch (message) {
+            //Nhân viên ghi danh
+            case "Quản lý thông tin học viên":
+                toolbar.setTitle("Học viên tiềm năng");
+                /*dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
+                        , "Nam", "Ký túc xá khu A"
+                        , "Chưa học", "Đại học","10"));*/
+                /*dataArrayList.add(new PotentialStudentDTO("1","Hoàng Thiện", "0912345678"
+                        , "Nữ", "Ký túc xá khu A"
+                        , "Mẫu giáo","10"));*/
+                /*List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(Activity_Notifications_ToolBars.this).SelectStudent(
+                        Activity_Notifications_ToolBars.this, "STATUS = ?", whereArgs
+                );
+                for (int i = 0; i < listPotentialStudent.size(); i++) {
+                    Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
+                    dataArrayList.add(listPotentialStudent.get(i));
+                }*/
+<<<<<<< HEAD
+
+
+                List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(
+                        Activity_Notifications_ToolBars.this).SelectStudent(Activity_Notifications_ToolBars.this, whereClause, whereArgs);
+
+                for(int i = 0; i < listPotentialStudent.size(); i++) {
+                    dataArrayList.add(listPotentialStudent.get(i));
+                }
+
+=======
+>>>>>>> b5619122b1c7a57e9174c51913d9154fe7590d75
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
+                break;
+            case "Quản lý lớp học":
+                toolbar.setTitle("Lớp học");
+                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "Hehe","Đoán coi"));
+                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "Hehe","Đoán coi"));
+
+                List<ClassDTO> listClass = ClassDAO.getInstance(
+                        Activity_Notifications_ToolBars.this).selectClass(Activity_Notifications_ToolBars.this,
+                        whereClause, whereArgs);
+                for (int i = 0; i < listClass.size(); i++) {
+                    dataArrayList.add(listClass.get(i));
+                }
+
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
