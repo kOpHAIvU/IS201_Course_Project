@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.example.app.R;
 import com.example.app.activity.Activity_Add_Account;
+import com.example.app.activity.Activity_Add_Certificate;
 import com.example.app.activity.Activity_Add_Class;
 import com.example.app.activity.Activity_Add_Official_Student;
 import com.example.app.activity.Activity_Add_Potential_Student;
@@ -42,46 +43,29 @@ public class List_Adapter extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Object item = arrayDataList.get(position);
-        if (item instanceof List_Information) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        if (item instanceof List_Information)
             List_Information_View(convertView, position);
-        }
-        else if (item instanceof NotificationDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof NotificationDTO)
             List_Notifications_View(convertView, position);
-        }
-        else if (item instanceof ExamScoreDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof ExamScoreDTO)
             List_Score_View(convertView, position);
-        }
-        else if (item instanceof ProgramDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof ProgramDTO)
             List_Education_Program_View(convertView, position);
-        }
-        else if (item instanceof ClassDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof ClassDTO)
             List_Class_View(convertView, position);
-        }
-        else if (item instanceof ClassDTO_Manage) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof ClassDTO_Manage)
             List_Class_Manage_View(convertView, position);
-        }
-        else if (item instanceof PotentialStudentDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof PotentialStudentDTO)
             PotentialStudentDTO_View(convertView, position);
-        }
-        else if (item instanceof OfficialStudentDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof OfficialStudentDTO)
             OfficialStudentDTO_View(convertView, position);
-        }
-        else if (item instanceof ScheduleDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof ScheduleDTO)
             Schedule_View(convertView, position);
-        }
-        else if (item instanceof AccountDTO) {
-            convertView = LayoutInflater.from(getContext()).inflate(idLayout, parent, false);
+        else if (item instanceof AccountDTO)
             Account_View(convertView, position);
-        }
+        else if (item instanceof  CertificateDTO)
+            Certificate_View(convertView, position);
         else
             throw new IllegalArgumentException("Unknown data type: " + item.getClass().getName());
 
@@ -129,7 +113,7 @@ public class List_Adapter extends ArrayAdapter {
     }
 
     private void List_Education_Program_View (@Nullable View convertView, int position) {
-        TextView idProgram, programName, inputScore, outputScore, content, speak, write, read, listen, tuitionFees, certificate;
+        TextView idProgram, programName, inputScore, outputScore, content, speak, write, read, listen, tuitionFees, certificate, studyPeriod;
         idProgram = convertView.findViewById(R.id.idProgram);
         programName = convertView.findViewById(R.id.program_name);
         inputScore = convertView.findViewById(R.id.inputScore);
@@ -139,6 +123,7 @@ public class List_Adapter extends ArrayAdapter {
         write = convertView.findViewById(R.id.writing);
         listen = convertView.findViewById(R.id.listening);
         read = convertView.findViewById(R.id.reading);
+        studyPeriod = convertView.findViewById(R.id.studyPeriod);
         tuitionFees = convertView.findViewById(R.id.tuitionFees);
         certificate = convertView.findViewById(R.id.certificate);
 
@@ -153,7 +138,8 @@ public class List_Adapter extends ArrayAdapter {
         write.setText(listEducationProgram.getWritingScore());
         listen.setText(listEducationProgram.getListeningScore());
         read.setText(listEducationProgram.getReadingScore());
-        tuitionFees.setText(listEducationProgram.getTuitionFees());
+        studyPeriod.setText(listEducationProgram.getStudy_period());
+        tuitionFees.setText(String.valueOf(listEducationProgram.getTuitionFees()));
         certificate.setText(listEducationProgram.getIdCertificate());
 
         Button editProgram, removeProgram, detailProgram;
@@ -201,14 +187,13 @@ public class List_Adapter extends ArrayAdapter {
                 }
             });
 
-            detailProgram = convertView.findViewById(R.id.detailBtn);
+            /*detailProgram = convertView.findViewById(R.id.detailBtn);
             detailProgram.setTag(position);
             detailProgram.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                 }
-            });
+            });*/
         }
     }
     private void List_Class_View (@Nullable View convertView, int position) {
@@ -302,6 +287,7 @@ public class List_Adapter extends ArrayAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
                 intent.putExtra("classID", classID.getText());
+                intent.putExtra("idCertificate", "");
                 mContext.startActivity(intent);
             }
         });
@@ -363,9 +349,8 @@ public class List_Adapter extends ArrayAdapter {
         editPotentialStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = (int) v.getTag();
                 Intent addPotential = new Intent(getContext(), Activity_Add_Potential_Student.class);
-                addPotential.putExtra("studentID", "");
+                addPotential.putExtra("studentID", "1");
                 mContext.startActivity(addPotential);
             }
         });
@@ -492,6 +477,74 @@ public class List_Adapter extends ArrayAdapter {
                 }
             });
         }
+    }
+    private void Certificate_View (@Nullable View convertView, int position) {
+        TextView idCertificate, name, content;
+        CertificateDTO listCertificate = (CertificateDTO) arrayDataList.get(position);
+
+        idCertificate = convertView.findViewById(R.id.idCertificate);
+        name = convertView.findViewById(R.id.name);
+        content = convertView.findViewById(R.id.content);
+
+        idCertificate.setText(listCertificate.getIdCertificate());
+        name.setText(listCertificate.getName());
+        content.setText(listCertificate.getContent());
+
+        Button removeCertificate = convertView.findViewById(R.id.remove_certificate);
+        removeCertificate.setTag(position);
+        removeCertificate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xác nhận xóa");
+                builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int position = (int) v.getTag();
+                        arrayDataList.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                // Nút "Hủy": Không làm gì cả, đóng dialog
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Tạo và hiển thị AlertDialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button editCertificate = convertView.findViewById(R.id.edit_certificate);
+        editCertificate.setTag(position);
+        editCertificate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addCertificate = new Intent(getContext(), Activity_Add_Certificate.class);
+                addCertificate.putExtra("idCertificate", "1");
+                mContext.startActivity(addCertificate);
+            }
+        });
+
+        Button detailBtn = convertView.findViewById(R.id.detailBtn);
+        detailBtn.setTag(position);
+        detailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
+                intent.putExtra("idCertificate", "1");
+                intent.putExtra("classID", "");
+                mContext.startActivity(intent);
+            }
+        });
+
     }
     private void Account_View (@Nullable View convertView, int position) {
         TextView idAccount, idUser, username, password;

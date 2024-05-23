@@ -11,17 +11,23 @@ import android.widget.Toast;
 
 import com.example.app.R;
 
-public class Activity_Add_Account extends AppCompatActivity {
-    EditText idAccount, idUser, username, password;
+public class Activity_Add_Certificate extends AppCompatActivity {
+    EditText idCertificate, name, content;
     Button exitBtn, doneBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_account);
-        idAccount = findViewById(R.id.idAccount);
-        idUser = findViewById(R.id.idUser);
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
+        setContentView(R.layout.activity_add_certificate);
+        String message = getIntent().getStringExtra("idCertificate");
+
+        idCertificate = findViewById(R.id.idCertificate);
+        name = findViewById(R.id.name);
+        content = findViewById(R.id.content);
+
+        if (!message.equals("")) {
+
+        }
 
         exitBtn = findViewById(R.id.exit_btn);
         exitBtn.setOnClickListener(new View.OnClickListener() {
@@ -35,15 +41,13 @@ public class Activity_Add_Account extends AppCompatActivity {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (idAccount.getText().toString().equals("") || idUser.getText().toString().equals("")
-                        || username.getText().toString().equals("") || password.getText().toString().equals("")) {
-                    Toast.makeText(Activity_Add_Account.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
+                if (idCertificate.getText().toString().equals("") || name.getText().toString().equals("") || content.getText().toString().equals("")) {
+                    Toast.makeText(Activity_Add_Certificate.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
                 } else {
                     finish();
                 }
             }
         });
-
 
     }
 }

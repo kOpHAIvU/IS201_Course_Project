@@ -16,9 +16,15 @@ import android.widget.ListView;
 import com.example.app.R;
 import com.example.app.adapter.ClassDAO;
 import com.example.app.adapter.PotentialStudentDAO;
+<<<<<<< HEAD
 import com.example.app.model.ClassDTO;
 import com.example.app.model.AccountDTO;
 import com.example.app.model.CertificateDTO;
+=======
+import com.example.app.model.AccountDTO;
+import com.example.app.model.CertificateDTO;
+import com.example.app.model.ClassDTO;
+>>>>>>> refs/remotes/origin/main
 import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
@@ -51,7 +57,10 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 finish();
             }
         });
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/main
 
         switch (message) {
             //Nhân viên ghi danh
@@ -97,7 +106,10 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
         }
         listView.setAdapter(listAdapter);
         setSupportActionBar(toolbar);
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/main
     }
 
     @Override
@@ -125,8 +137,11 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
                 }*/
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> refs/remotes/origin/main
                 List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(
                         Activity_Notifications_ToolBars.this).SelectStudent(Activity_Notifications_ToolBars.this, whereClause, whereArgs);
 
@@ -172,11 +187,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
             case "Quản lý chứng chỉ":
                 toolbar.setTitle("Chương trình");
                 dataArrayList.add(new CertificateDTO("1", "1", "1"));
-                /*dataArrayList.add(new ProgramDTO("PRO1", "Hê hê"
-                        , "10", "10", "Đào tạo tiếng Anh"
-                        , "10", "10", "10", "10"
-                        , 10, "10", "10"));*/
-                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_education_program_manage_item, dataArrayList);
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_certificate_item, dataArrayList);
                 break;
             case "Quản lý tài khoản":
                 toolbar.setTitle("Tài khoản");
@@ -205,7 +216,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 break;
             case "Quản lý lớp học":
                 Intent addClass = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Class.class);
-                addClass.putExtra("classID", "");
+                addClass.putExtra("classID", "1");
                 startActivity(addClass);
                 break;
             case "Quản lý lịch học":
@@ -213,10 +224,10 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 addSchedule.putExtra("idSchedule", "");
                 startActivity(addSchedule);
                 break;
-            case "Quản lý chương trình học":
-                Intent addProgram = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Schedule.class);
-                addProgram.putExtra("idProgram", "");
-                startActivity(addProgram);
+            case "Quản lý chứng chỉ":
+                Intent addCertificate = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Certificate.class);
+                addCertificate.putExtra("idCertificate", "1");
+                startActivity(addCertificate);
                 break;
             case "Quản lý tài khoản":
                 Intent addAccount = new Intent();
