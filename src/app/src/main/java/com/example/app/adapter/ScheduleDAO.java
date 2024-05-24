@@ -12,7 +12,9 @@ import com.example.app.model.ScheduleDTO;
 import com.example.app.model.TeachingDTO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ScheduleDAO {
     public static ScheduleDAO instance;
@@ -126,18 +128,18 @@ public class ScheduleDAO {
     }
     public List<ScheduleDTO> SelectScheduleByIdStudent(Context context, String idUser, int type) {
         List<ScheduleDTO> listSchedule = new ArrayList<>();
+        Set<String> idClass = new HashSet<>();
 
         if (type == 1) {
             List<TeachingDTO> teaching = TeachingDAO.getInstance(context).SelectTeaching(context,
                     "ID_STUDENT = ? AND STATUS = ?", new String[] {idUser, "0"});
             for (int i = 0; i < teaching.size(); i++) {
-                String idClass = teaching.get(i).getIdClass();
-                Log.d("List Schedule of Object: ", idClass);
+                idClass.add(teaching.get(i).getIdClass()) ;
+            }
+
+            for (String id : idClass) {
                 listSchedule.addAll(ScheduleDAO.getInstance(context).SelectSchedule(context,
-                        "ID_CLASS = ?", new String[] {idClass}));
-                for (int j = 0; j < listSchedule.size(); j++) {
-                    Log.d("List Schedule of Object: ", listSchedule.get(j).toString());
-                }
+                        "ID_CLASS = ?", new String[] {id}));
             }
         }
         else{

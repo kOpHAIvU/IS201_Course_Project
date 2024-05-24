@@ -7,9 +7,12 @@ import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.ClassDTO;
+import com.example.app.model.TeachingDTO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ClassDAO {
 
@@ -21,6 +24,7 @@ public class ClassDAO {
         }
         return instance;
     }
+
     public int InsertClass(Context context, ClassDTO classDTO) {
         int rowEffect = -1;
         int maxId = DataProvider.getInstance(context).getMaxId("CLASS", "ID_CLASS");
@@ -50,6 +54,7 @@ public class ClassDAO {
         return rowEffect;
     }
 
+
     public int UpdateClass(Context context, ClassDTO classDTO, String whereClause, String[] whereArgs) {
         int rowEffect = -1;
 
@@ -77,6 +82,7 @@ public class ClassDAO {
 
         return rowEffect;
     }
+
 
     public List<ClassDTO> selectClass (Context context, String whereClause, String[] whereArgs) {
         List<ClassDTO> listClass = new ArrayList<>();
@@ -128,4 +134,31 @@ public class ClassDAO {
         }
         return listClass;
     }
+
+
+    public List<ClassDTO> SelectClassByIdUser(Context context, String idUser, int type) {
+
+        List<ClassDTO> listClass = new ArrayList<>();
+        Set<String> idClass = new HashSet<>();
+
+        if (type == 1) {
+            List<TeachingDTO> teaching = TeachingDAO.getInstance(context).SelectTeaching(context,
+                    "ID_STUDENT = ? and STATUS = ?", new String[] {idUser, "0"});
+            for (int i = 0; i < teaching.size(); i++) {
+                idClass.add(teaching.get(i).getIdClass());
+            }
+
+            for (String id : idClass) {
+                listClass.addAll(ClassDAO.getInstance(context).selectClass(context,
+                        "ID_CLASS = ? AND STATUS = ?", new String[] {id, "0"}));
+            }
+        } else {
+            listClass.addAll(ClassDAO.getInstance(context).selectClass(context, "STATUS = ?",
+                    new String[] {"0"}));
+        }
+
+        return listClass;
+
+    }
+
 }
