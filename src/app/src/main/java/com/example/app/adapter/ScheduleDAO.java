@@ -124,20 +124,26 @@ public class ScheduleDAO {
 
         return listSchedule;
     }
-    public List<ScheduleDTO> SelectScheduleByIdStudent(Context context, String idStudent) {
+    public List<ScheduleDTO> SelectScheduleByIdStudent(Context context, String idUser, int type) {
         List<ScheduleDTO> listSchedule = new ArrayList<>();
-        String whereClause = "ID_STUDENT = ?";
-        String[] whereArgs = new String[] {idStudent};
-        String idClass = null;
 
-        List<TeachingDTO> teaching = TeachingDAO.getInstance(context).SelectTeaching(context,
-                whereClause, whereArgs);
-        for (int i = 0; i < teaching.size(); i++)  {
-            idClass = teaching.get(i).getIdClass();
+        if (type == 1) {
+            List<TeachingDTO> teaching = TeachingDAO.getInstance(context).SelectTeaching(context,
+                    "ID_STUDENT = ? AND STATUS = ?", new String[] {idUser, "0"});
+            for (int i = 0; i < teaching.size(); i++) {
+                String idClass = teaching.get(i).getIdClass();
+                Log.d("List Schedule of Object: ", idClass);
+                listSchedule.addAll(ScheduleDAO.getInstance(context).SelectSchedule(context,
+                        "ID_CLASS = ?", new String[] {idClass}));
+                for (int j = 0; j < listSchedule.size(); j++) {
+                    Log.d("List Schedule of Object: ", listSchedule.get(j).toString());
+                }
+            }
         }
-
-        listSchedule = ScheduleDAO.getInstance(context).SelectSchedule(context, "ID_CLASS = ?",
-                new String[] {idClass});
+        else{
+            listSchedule = ScheduleDAO.getInstance(context).SelectSchedule(context, "STATUS = 0",
+                    new String[] {"0"});
+        }
 
         return listSchedule;
     }

@@ -18,6 +18,7 @@ import com.example.app.adapter.CollectionTuitionFeesDAO;
 import com.example.app.adapter.DataProvider;
 import com.example.app.adapter.ExamScoreDAO;
 import com.example.app.adapter.ExaminationDAO;
+import com.example.app.adapter.ScheduleDAO;
 import com.example.app.adapter.StaffDAO;
 import com.example.app.adapter.TeacherDAO;
 import com.example.app.adapter.TeachingDAO;
@@ -25,6 +26,7 @@ import com.example.app.model.CertificateDTO;
 import com.example.app.model.CollectionTuitionFeesDTO;
 import com.example.app.model.ExamScoreDTO;
 import com.example.app.model.ExaminationDTO;
+import com.example.app.model.ScheduleDTO;
 import com.example.app.model.StaffDTO;
 import com.example.app.model.TeacherDTO;
 import com.example.app.model.TeachingDTO;
@@ -247,14 +249,6 @@ public class Activity_Login extends AppCompatActivity {
         StaffDTO staff3 = new StaffDTO("STA3", "Nguyen Thi E", "TP HCM", "03435555333", "Nữ","22/2/2022", 10000000, "3", 0);
         StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff3);
 */
-
-        TeachingDTO teaching1 = new TeachingDTO(null, "STU1", "CLS1");
-        TeachingDTO teaching2 = new TeachingDTO(null, "STU2", "CLS1");
-        TeachingDAO.getInstance(Activity_Login.this).InsertDate(Activity_Login.this,
-                teaching1);
-        TeachingDAO.getInstance(Activity_Login.this).InsertDate(Activity_Login.this,
-                teaching2);
-
 
     }
 }

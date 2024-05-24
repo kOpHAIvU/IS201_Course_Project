@@ -54,4 +54,16 @@ public class ScheduleDTO {
     public void setIdClassroom(String idClassroom) {
         this.idClassroom = idClassroom;
     }
+
+    @Override
+    public String toString() {
+        return "ScheduleDTO{" +
+                "idSchedule='" + idSchedule + '\'' +
+                ", dayOfWeek='" + dayOfWeek + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", idClass='" + idClass + '\'' +
+                ", idClassroom='" + idClassroom + '\'' +
+                '}';
+    }
 }

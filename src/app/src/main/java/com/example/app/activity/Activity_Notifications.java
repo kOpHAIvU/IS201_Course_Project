@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -70,9 +71,19 @@ public class Activity_Notifications extends AppCompatActivity {
 
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_notification_item, dataArrayList);
                 break;
-///private String idExamScore, idExam, idStudent, speaking, writing, listening, reading;
 
-                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_score_item, dataArrayList);
+            case "Tra cứu điểm":
+
+                int typeExamScore = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
+                        Activity_Login.username, Activity_Login.password);
+                List<ExamScoreDTO> listExamScore = ExamScoreDAO.getInstance(Activity_Notifications.this).SelectExamScoreById(
+                        Activity_Notifications.this, Activity_Login.idUser, typeExamScore );
+                for (int i = 0; i < listExamScore.size(); i++) {
+                    Log.d("Exam Score of Student: ", listExamScore.get(i).toString());
+                    dataArrayList.add(listExamScore.get(i));
+                }
+                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_notification_item, dataArrayList);
+
                 break;
 
             case "Tra cứu chương trình đào tạo":
@@ -96,16 +107,16 @@ public class Activity_Notifications extends AppCompatActivity {
 
             case "Lịch học":
 
-                String whereClauseSchedule = "STATUS = ?" ;
-                String[] whereArgsSchedule = new String[] {"0"};
+                int type = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
+                        Activity_Login.username, Activity_Login.password);
                 List<ScheduleDTO> listSchedule = ScheduleDAO.getInstance(
-                        Activity_Notifications.this).SelectSchedule(Activity_Notifications.this,
-                        whereClauseSchedule, whereArgsSchedule);
+                        Activity_Notifications.this).SelectScheduleByIdStudent(Activity_Notifications.this,
+                        Activity_Login.idUser, type);
                 for (int i = 0; i < listSchedule.size(); i++) {
                     dataArrayList.add(listSchedule.get(i));
                 }
 
-                dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
+               // dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_schedule_item, dataArrayList);
                 break;
             case "Quản lý thông tin phòng học":

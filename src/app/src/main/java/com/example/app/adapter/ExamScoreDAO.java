@@ -145,7 +145,7 @@ public class ExamScoreDAO {
         if (type == 1) {
             listExamScore = ExamScoreDAO.getInstance(context).SelectExamScore(context,
                     "ID_STUDENT = ? AND STATUS = ?", new String[] {idUser, "0"} );
-        } else {
+        } else if (type == 2 || type == 3)  {
             listExamScore = ExamScoreDAO.getInstance(context).SelectExamScore(context,
                     "STATUS = ?", new String[] {"0"});
         }
