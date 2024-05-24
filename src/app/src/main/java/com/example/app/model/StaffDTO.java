@@ -1,16 +1,32 @@
 package com.example.app.model;
 
 public class StaffDTO {
+    @Override
+    public String toString() {
+        return "StaffDTO{" +
+                "idStaff='" + idStaff + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", status=" + status +
+                ", salary=" + salary +
+                ", gender='" + gender + '\'' +
+                ", birthday='" + birthday + '\'' +
+                '}';
+    }
+
     private String idStaff;
     private String fullName;
     private String address;
     private String phoneNumber;
     private String type;
     private int status;
+    private int salary;
     private String gender;
     private String birthday;
 
-    public StaffDTO(String idStaff, String fullName, String address, String phoneNumber, String gender, String birthday, String type, int status) {
+    public StaffDTO(String idStaff, String fullName, String address, String phoneNumber, String gender, String birthday, int salary, String type, int status) {
         this.idStaff = idStaff;
         this.fullName = fullName;
         this.address = address;
@@ -19,6 +35,7 @@ public class StaffDTO {
         this.status = status;
         this.gender = gender;
         this.birthday = birthday;
+        this.salary = salary;
     }
 
 
@@ -89,17 +106,11 @@ public class StaffDTO {
         this.birthday = birthday;
     }
 
-    @Override
-    public String toString() {
-        return "StaffDTO{" +
-                "idStaff='" + idStaff + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", type='" + type + '\'' +
-                ", status=" + status +
-                ", gender='" + gender + '\'' +
-                ", birthday='" + birthday + '\'' +
-                '}';
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 }

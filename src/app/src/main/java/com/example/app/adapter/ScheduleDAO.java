@@ -6,8 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
+import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.ProgramDTO;
 import com.example.app.model.ScheduleDTO;
+import com.example.app.model.TeachingDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +121,23 @@ public class ScheduleDAO {
                 listSchedule.add(new ScheduleDTO(idSchedule, day, start, end, idClass, idClassroom));
             } while (cursor.moveToNext());
         }
+
+        return listSchedule;
+    }
+    public List<ScheduleDTO> SelectScheduleByIdStudent(Context context, String idStudent) {
+        List<ScheduleDTO> listSchedule = new ArrayList<>();
+        String whereClause = "ID_STUDENT = ?";
+        String[] whereArgs = new String[] {idStudent};
+        String idClass = null;
+
+        List<TeachingDTO> teaching = TeachingDAO.getInstance(context).SelectTeaching(context,
+                whereClause, whereArgs);
+        for (int i = 0; i < teaching.size(); i++)  {
+            idClass = teaching.get(i).getIdClass();
+        }
+
+        listSchedule = ScheduleDAO.getInstance(context).SelectSchedule(context, "ID_CLASS = ?",
+                new String[] {idClass});
 
         return listSchedule;
     }

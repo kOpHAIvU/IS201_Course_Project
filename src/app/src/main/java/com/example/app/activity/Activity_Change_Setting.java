@@ -33,6 +33,7 @@ public class Activity_Change_Setting extends AppCompatActivity {
     String address = "";
     String phoneNumber = "";
     String gender = "";
+    int salary;
     boolean isUpdate;
     int type;
     String birthday = "";
@@ -134,6 +135,10 @@ public class Activity_Change_Setting extends AppCompatActivity {
                     int genderIndex = cursor.getColumnIndex("GENDER");
                     if (genderIndex != -1) {
                         gender = cursor.getString(genderIndex);
+                    }
+                    int salaryIndex = cursor.getColumnIndex("SALARY");
+                    if (salaryIndex != -1) {
+                        salary = cursor.getInt(salaryIndex);
                     }
                     int typeIndex = cursor.getColumnIndex("TYPE");
                     if (typeIndex != -1) {
@@ -242,7 +247,7 @@ public class Activity_Change_Setting extends AppCompatActivity {
                                 }
                             } else {
                                 StaffDTO staff = new StaffDTO(idUser, fullName, addressUpdate, phoneNumberUpdate,
-                                        genderUpdate, birthdayUpdate, String.valueOf(type), 0);
+                                        genderUpdate, birthdayUpdate, salary,  String.valueOf(type), 0);
                                 String whereClauseUpdateInf = "ID_STAFF = ?";
                                 String[] whereArgUpdateInf =  new String[]{Activity_Login.idUser};
 

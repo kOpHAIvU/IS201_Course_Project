@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 62;
+    private static final int DATABASE_VERSION = 69;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -40,7 +40,7 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("EXCEPTION CREATE CERTIFICATE",  e.getMessage());
         }
-
+        db.execSQL("DROP TABLE STAFF");
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS STAFF (" +
                     "ID_STAFF TEXT PRIMARY KEY, " +
@@ -49,6 +49,7 @@ public class DataProvider extends SQLiteOpenHelper {
                     "PHONE_NUMBER TEXT, " +
                     "GENDER TEXT, " +
                     "BIRTHDAY TEXT," +
+                    "SALARY INTEGER, " +
                     "TYPE TEXT," +
                     "STATUS INTEGER)");
             Log.d("CREATE STAFF", "Database created successfully");
@@ -174,7 +175,7 @@ public class DataProvider extends SQLiteOpenHelper {
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS EXAM_SCORE (" +
-                    "ID_EXAM_SCORE INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "ID_EXAM_SCORE TEXT PRIMARY KEY, " +
                     "ID_EXAM TEXT , " +
                     "ID_STUDENT TEXT, " +
                     "SPEAKING_SCORE REAL, " +
@@ -191,7 +192,7 @@ public class DataProvider extends SQLiteOpenHelper {
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS TEACHING (" +
-                    "ID_TEACHING INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "ID_TEACHING TEXT PRIMARY KEY , " +
                     "ID_STUDENT TEXT , " +
                     "ID_CLASS TEXT, " +
                     "STATUS INTEGER, " +
@@ -237,7 +238,7 @@ public class DataProvider extends SQLiteOpenHelper {
             Log.d("CREATE ACCOUNT",  e.getMessage());
         }
 
-        try {
+/*        try {
             db.execSQL("CREATE TABLE IF NOT EXISTS REPORT (" +
                     "ID_REPORT TEXT PRIMARY KEY, " +
                     "REPORT_TIME TEXT," +
@@ -245,7 +246,7 @@ public class DataProvider extends SQLiteOpenHelper {
             Log.d("CREATE REPORT", "Database created successfully");
         } catch ( Exception e) {
             Log.d("CREATE REPORT",  e.getMessage());
-        }
+        }*/
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS NOTIFICATION (" +

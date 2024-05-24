@@ -8,6 +8,10 @@ import android.util.Log;
 
 import com.example.app.model.AccountDTO;
 import com.example.app.model.OfficialStudentDTO;
+import com.example.app.model.PotentialStudentDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OfficialStudentDAO {
     public static OfficialStudentDAO instance;
@@ -97,5 +101,54 @@ public class OfficialStudentDAO {
             Log.d("Select Student: ", e.getMessage());
         }
         return cursor;
+    }
+
+    public List<OfficialStudentDTO> SelectStudentVer2(Context context, String whereClause, String[] whereArgs) {
+        List<OfficialStudentDTO> listStudent = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = DataProvider.getInstance(context).selectData("OFFICIAL_STUDENT", new String[]{"*"},  whereClause, whereArgs, null);
+        }catch(SQLException e) {
+            Log.d("Select Student: ", e.getMessage());
+        }
+        String name = "", phoneNumber = "", gender = "", address = "", birthday = "", id = "";
+
+        if (cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex("ID_STUDENT");
+                if (idIndex!= -1) {
+                    id = cursor.getString(idIndex);
+                }
+                int fullNameIndex = cursor.getColumnIndex("FULLNAME");
+                if (fullNameIndex!= -1) {
+                    name = cursor.getString(fullNameIndex);
+                }
+                int addressIndex = cursor.getColumnIndex("ADDRESS");
+                if (addressIndex!= -1) {
+                    address = cursor.getString(addressIndex);
+                }
+                int phoneNumberIndex = cursor.getColumnIndex("PHONE_NUMBER");
+                if (phoneNumberIndex != -1) {
+                    phoneNumber = cursor.getString(phoneNumberIndex);
+                }
+                int genderIndex = cursor.getColumnIndex("GENDER");
+                if (genderIndex != -1) {
+                    gender = cursor.getString(genderIndex);
+                }
+                int birthdayIndex = cursor.getColumnIndex("BIRTHDAY");
+                if (birthdayIndex != -1) {
+                    birthday = cursor.getString(birthdayIndex);
+                }
+                OfficialStudentDTO student = new OfficialStudentDTO(id, name, address,
+                        phoneNumber, gender, birthday, 0);
+                listStudent.add(student);
+
+                Log.d("Find Potential Student", name + " " + address + " " + phoneNumber + " " + gender);
+
+            } while (cursor.moveToNext());
+        }
+
+        return listStudent;
     }
 }

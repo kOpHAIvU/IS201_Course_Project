@@ -13,12 +13,10 @@ import com.example.app.adapter.ClassDAO;
 import com.example.app.adapter.ExamScoreDAO;
 import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.ProgramDAO;
-<<<<<<< HEAD
 import com.example.app.adapter.ScheduleDAO;
+import com.example.app.model.CertificateDTO;
 import com.example.app.model.ClassDTO;
-=======
 import com.example.app.model.ClassroomDTO;
->>>>>>> e12fc43aa98922c1e18b19f45b920df200ee7f62
 import com.example.app.model.List_Adapter;
 import com.example.app.model.NotificationDTO;
 import com.example.app.model.ExamScoreDTO;
@@ -69,7 +67,7 @@ public class Activity_Notifications extends AppCompatActivity {
 ///private String idExamScore, idExam, idStudent, speaking, writing, listening, reading;
             case "Tra cứu điểm":
                //dataArrayList.add(new ExamScoreDTO("IS201", "5","9","8","9", "5", "6"));
-                //dataArrayList.add(new ExamScoreDTO("NT106", "9","8","6","10", "5", "6"));
+                dataArrayList.add(new ExamScoreDTO("NT106", "9","8","6","10", "5", "6"));
 
                 int type = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
                         Activity_Login.username, Activity_Login.password);
@@ -116,10 +114,30 @@ public class Activity_Notifications extends AppCompatActivity {
                 dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_schedule_item, dataArrayList);
                 break;
-            //Nhân viên học vụ
             case "Quản lý thông tin phòng học":
                 dataArrayList.add(new ClassroomDTO("1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_classroom_item, dataArrayList);
+                break;
+            case "Xem các lớp học":
+                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "Hehe","Đoán coi"));
+                dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "Hehe","Đoán coi"));
+                List<ClassDTO> listClass = ClassDAO.getInstance(
+                        Activity_Notifications.this).selectClass(Activity_Notifications.this,
+                        whereClause, whereArgs);
+                for (int i = 0; i < listClass.size(); i++) {
+                    dataArrayList.add(listClass.get(i));
+                }
+                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_class_for_teacher_item, dataArrayList);
+                break;
+            case "Xem chứng chỉ":
+                dataArrayList.add(new CertificateDTO("1", "1", "1"));
+                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_certificate_item, dataArrayList);
                 break;
 
         }

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.app.model.ExamScoreDTO;
 import com.example.app.model.ExaminationDTO;
+import com.example.app.model.OfficialStudentDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +33,10 @@ public class ExamScoreDAO {
         values.put("ID_EXAM_SCORE", "ESC" + String.valueOf(maxId + 1));
         values.put("ID_EXAM", score.getIdExam());
         values.put("ID_STUDENT", score.getIdStudent());
-        values.put("SPEAKING_SCORE", score.getSpeaking());
-        values.put("LISTENING_SCORE", score.getListening());
-        values.put("READING_SCORE", score.getReading());
-        values.put("WRITING_SCORE", score.getWriting());
+        values.put("SPEAKING_SCORE", Double.parseDouble(score.getSpeaking()));
+        values.put("LISTENING_SCORE", Double.parseDouble(score.getListening()));
+        values.put("READING_SCORE", Double.parseDouble(score.getReading()));
+        values.put("WRITING_SCORE", Double.parseDouble(score.getWriting()));
         values.put("STATUS", 0);
 
         try {
@@ -136,6 +137,20 @@ public class ExamScoreDAO {
         }
 
         return listScore;
+    }
+
+    public List<ExamScoreDTO> SelectExamScoreById(Context context, String idUser, int type) {
+        List<ExamScoreDTO> listExamScore = new ArrayList<>();
+
+        if (type == 1) {
+            listExamScore = ExamScoreDAO.getInstance(context).SelectExamScore(context,
+                    "ID_STUDENT = ? AND STATUS = ?", new String[] {idUser, "0"} );
+        } else {
+            listExamScore = ExamScoreDAO.getInstance(context).SelectExamScore(context,
+                    "STATUS = ?", new String[] {"0"});
+        }
+
+        return listExamScore;
     }
 
 }

@@ -2,10 +2,15 @@ package com.example.app.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.CertificateDTO;
+import com.example.app.model.ClassDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CertificateDAO {
     public static CertificateDAO instance;
@@ -61,6 +66,42 @@ public class CertificateDAO {
         }
 
         return rowEffect;
+    }
+
+    public List<CertificateDTO> SelectCertificate(Context context, String whereClause, String[] whereArgs) {
+        List<CertificateDTO> listCertificate = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = DataProvider.getInstance(context).selectData("CLASS", new String[]{"*"}, whereClause, whereArgs, null);
+        } catch (SQLException e) {
+            Log.d("Select Class: ", e.getMessage());
+        }
+
+        String idCertificate = "", name = "", content = "";
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int idCertificateIndex = cursor.getColumnIndex("ID_CERTIFICATE");
+                if (idCertificateIndex != -1) {
+                    idCertificate = cursor.getString(idCertificateIndex);
+                }
+                int nameIndex = cursor.getColumnIndex("NAME");
+                if (nameIndex!= -1) {
+                    name = cursor.getString(nameIndex);
+                }
+                int contentIndex = cursor.getColumnIndex("CONTENT");
+                if (contentIndex != -1) {
+                   content = cursor.getString(contentIndex);
+                }
+
+                listCertificate.add(new CertificateDTO(idCertificate, name, content));
+
+            } while (cursor.moveToNext());
+        }
+
+        return listCertificate;
     }
 
 }

@@ -8,6 +8,10 @@ import android.util.Log;
 
 import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.StaffDTO;
+import com.example.app.model.TeacherDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StaffDAO {
     public static StaffDAO instance;
@@ -30,6 +34,7 @@ public class StaffDAO {
         values.put("PHONE_NUMBER", staff.getPhoneNumber());
         values.put("GENDER", staff.getGender());
         values.put("BIRTHDAY", staff.getBirthday());
+        values.put("SALARY", staff.getSalary());
         values.put("TYPE", staff.getType());
         values.put("STATUS", staff.getStatus());
 
@@ -67,6 +72,7 @@ public class StaffDAO {
         values.put("PHONE_NUMBER", staff.getPhoneNumber());
         values.put("GENDER", staff.getGender());
         values.put("BIRTHDAY", staff.getBirthday());
+        values.put("SALARY", staff.getSalary());
         values.put("TYPE", staff.getType());
         values.put("STATUS", staff.getStatus());
 
@@ -87,5 +93,56 @@ public class StaffDAO {
             Log.d("Select Staff: ", e.getMessage());
         }
         return cursor;
+    }
+
+    public List<StaffDTO> SelectStaffVer2 (Context context, String whereClause, String[] whereArgs) {
+        List<StaffDTO> listStaff = new ArrayList<>();
+        Cursor cursor = StaffDAO.getInstance(context).SelectStaff(context, whereClause, whereArgs);
+
+        String idStaff = "", fullName = "", address = "", phoneNumber = "", gender = "", birthday = "";
+        int salary = 0, type = -1;
+
+        if (cursor.moveToFirst()) {
+            do {
+                int idStaffIndex = cursor.getColumnIndex("ID_STAFF");
+                if (idStaffIndex != -1) {
+                    idStaff = cursor.getString(idStaffIndex);
+                }
+                int fullNameIndex = cursor.getColumnIndex("FULLNAME");
+                if (fullNameIndex != -1) {
+                    fullName = cursor.getString(fullNameIndex);
+                }
+                int addressIndex = cursor.getColumnIndex("ADDRESS");
+                if (addressIndex != -1) {
+                    address = cursor.getString(addressIndex);
+                }
+                int phoneNumberIndex = cursor.getColumnIndex("PHONE_NUMBER");
+                if (phoneNumberIndex != -1) {
+                    phoneNumber = cursor.getString(phoneNumberIndex);
+                }
+                int genderIndex = cursor.getColumnIndex("GENDER");
+                if (genderIndex != -1) {
+                    gender = cursor.getString(genderIndex);
+                }
+                int birthdayIndex = cursor.getColumnIndex("BIRTHDAY");
+                if (birthdayIndex != -1) {
+                    birthday = cursor.getString(birthdayIndex);
+                }
+                int salaryIndex = cursor.getColumnIndex("SALARY");
+                if (salaryIndex != -1) {
+                    salary = cursor.getInt(salaryIndex);
+                }
+                int typeIndex = cursor.getColumnIndex("TYPE");
+                if (typeIndex != -1) {
+                    type = cursor.getInt(typeIndex);
+                }
+
+                listStaff.add(new StaffDTO(idStaff, fullName, address, phoneNumber, gender, birthday,
+                        salary, String.valueOf(type), 0));
+
+            } while (cursor.moveToNext());
+        }
+
+        return listStaff;
     }
 }

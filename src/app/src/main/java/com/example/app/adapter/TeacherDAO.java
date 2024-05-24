@@ -26,7 +26,7 @@ public class TeacherDAO {
     public void insertTeacher(Context context, TeacherDTO teacher) {
         ContentValues values = new ContentValues();
 
-        int maxId = DataProvider.getInstance(context).getMaxId("TEACHER", "ID_TEACHER");
+        int maxId = DataProvider.getInstance(context).getMaxId("TEACHERS", "ID_TEACHER");
 
         values.put("ID_TEACHER", "TEA" + String.valueOf(maxId + 1));
         values.put("FULLNAME", teacher.getFullName());
@@ -35,6 +35,8 @@ public class TeacherDAO {
         values.put("GENDER", teacher.getGender());
         values.put("SALARY", teacher.getSalary());
         //values.put("STATUS", teacher.getStatus());
+
+        Log.d("Id max of teacher: ", String.valueOf(maxId + 1));
 
         try {
             int rowEffect = DataProvider.getInstance(context).insertData("TEACHERS", values);

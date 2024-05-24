@@ -1,11 +1,11 @@
 package com.example.app.model;
 
-public class CollectionTuitionFees_DTO {
+public class CollectionTuitionFeesDTO {
 
    private String idBill, idStudent, collectionDate, money;
 
-    public CollectionTuitionFees_DTO(String idBill, String idStudent,
-                                     String collectionDate, String money) {
+    public CollectionTuitionFeesDTO(String idBill, String idStudent,
+                                    String collectionDate, String money) {
         this.idBill = idBill;
         this.idStudent = idStudent;
         this.collectionDate = collectionDate;

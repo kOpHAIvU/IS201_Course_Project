@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
-import com.example.app.model.CollectionTuitionFees_DTO;
+import com.example.app.model.ClassDTO;
+import com.example.app.model.CollectionTuitionFeesDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class CollectionTuitionFeesDAO {
             "TOTAL_MONEY INTEGER, " +
             "STATUS INTEGER," +*/
 
-    public int InsertCollection_Tuition_Fees(Context context, CollectionTuitionFees_DTO collection) {
+    public int InsertCollection_Tuition_Fees(Context context, CollectionTuitionFeesDTO collection) {
         int rowEffect = -1;
 
         ContentValues values = new ContentValues();
@@ -52,7 +53,7 @@ public class CollectionTuitionFeesDAO {
         return rowEffect;
     }
 
-    public int UpdateCollection_Tuition_Fees(Context context, CollectionTuitionFees_DTO collection,
+    public int UpdateCollection_Tuition_Fees(Context context, CollectionTuitionFeesDTO collection,
                                              String whereClause, String[] whereArg) {
         int rowEffect = -1;
         ContentValues values = new ContentValues();
@@ -78,8 +79,8 @@ public class CollectionTuitionFeesDAO {
         return rowEffect;
     }
 
-    public List<CollectionTuitionFees_DTO> SelectCollectionTuitionFees(Context context, String whereClause, String[] whereArg) {
-        List<CollectionTuitionFees_DTO> listCollection = new ArrayList<>();
+    public List<CollectionTuitionFeesDTO> SelectCollectionTuitionFees(Context context, String whereClause, String[] whereArg) {
+        List<CollectionTuitionFeesDTO> listCollection = new ArrayList<>();
         Cursor cursor = null;
 
         try {
@@ -87,6 +88,31 @@ public class CollectionTuitionFeesDAO {
                     new String[]{"*"},  whereClause, whereArg, null);
         } catch(SQLException e) {
             Log.d("Select Collection Tuition Fees: ", e.getMessage());
+        }
+
+        String idBill = "", idStudent = "", collectionDate = "", money = "";
+        if (cursor.moveToFirst()) {
+            do {
+
+                int idBillIndex = cursor.getColumnIndex("ID_BILL");
+                if (idBillIndex != -1) {
+                    idBill = cursor.getString(idBillIndex);
+                }
+                int idStudentIndex = cursor.getColumnIndex("ID_STUDENT");
+                if (idStudentIndex!= -1) {
+                    idStudent = cursor.getString(idStudentIndex);
+                }
+                int collectionDateIndex = cursor.getColumnIndex("COLLECTION_DATE");
+                if (collectionDateIndex != -1) {
+                    collectionDate = cursor.getString(collectionDateIndex);
+                }
+                int moneyIndex = cursor.getColumnIndex("TOTAL_MONEY");
+                if (moneyIndex != -1) {
+                    money = cursor.getString(moneyIndex);
+                }
+                listCollection.add(new CollectionTuitionFeesDTO(idBill, idStudent, collectionDate, money));
+
+            } while (cursor.moveToNext());
         }
 
         return listCollection;
