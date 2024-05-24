@@ -35,8 +35,8 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
         toolbar = findViewById(R.id.toolbar);
         listView = findViewById(R.id.notification_listview);
         returnBtn = findViewById(R.id.return_btn);
-        message1 = getIntent().getStringExtra("classID");
-        message2 = getIntent().getStringExtra("idCertificate");
+        /*message1 = getIntent().getStringExtra("classID");
+        message2 = getIntent().getStringExtra("idCertificate");*/
         dataArrayList = new ArrayList<>();
 
         returnBtn.setOnClickListener(new View.OnClickListener() {
@@ -46,19 +46,26 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
             }
         });
 
-        if (!message1.equals("")) {
+        toolbar.setTitle("Học viên");
+
+        dataArrayList.add(new OfficialStudentDTO("1","1","1","1","1","1",1));
+        listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_offfical_student_item, dataArrayList);
+
+
+
+        /*if (!message1.equals("")) {
             //toolbar.setTitle("Chi tiết lớp học");
             dataArrayList.add(new ExamScoreDTO("1","1","1","1","1","1","1"));
             listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_score_manage_item, dataArrayList);
-        }
+        }*/
 
-        if (!message2.equals("")) {
+        /*if (!message2.equals("")) {
             dataArrayList.add(new ProgramDTO("1", "1"
                     , "1", "1", "1"
                     , "1", "1", "1"
                     , "1", 10, "1", "1"));
             listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_education_program_item, dataArrayList);
-        }
+        }*/
 
         listView.setAdapter(listAdapter);
         setSupportActionBar(toolbar);
@@ -73,7 +80,10 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (!message1.equals("")) {
+        Intent addOffical = new Intent(Activity_Notifications_ToolBars_Second_Layer.this, Activity_Add_Exam_Score.class);
+        addOffical.putExtra("studentID", "");
+        startActivity(addOffical);
+        /*if (!message1.equals("")) {
             Intent addOffical = new Intent(Activity_Notifications_ToolBars_Second_Layer.this, Activity_Add_Exam_Score.class);
             addOffical.putExtra("studentID", "");
             startActivity(addOffical);
@@ -82,7 +92,7 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
             Intent addProgram = new Intent(Activity_Notifications_ToolBars_Second_Layer.this, Activity_Add_Program.class);
             addProgram.putExtra("idProgram", "");
             startActivity(addProgram);
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 }

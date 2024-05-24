@@ -203,14 +203,14 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="25dp"
-                android:src="@drawable/baseline_indeterminate_check_box_24" />
+                android:src="@drawable/birth_icon" />
 
             <EditText
                 android:id="@+id/input_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Trĩ"
+                android:text="11/11/1111"
                 android:textColor="@color/black"
                 android:textSize="17dp" />
         </LinearLayout>

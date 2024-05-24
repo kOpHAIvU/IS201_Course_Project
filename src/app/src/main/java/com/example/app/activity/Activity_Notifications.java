@@ -2,22 +2,15 @@ package com.example.app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
 
-import com.example.app.adapter.AccountDAO;
-import com.example.app.adapter.ClassDAO;
-import com.example.app.adapter.ExamScoreDAO;
 import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.ProgramDAO;
-import com.example.app.adapter.ScheduleDAO;
 import com.example.app.model.CertificateDTO;
 import com.example.app.model.ClassDTO;
 
@@ -73,16 +66,16 @@ public class Activity_Notifications extends AppCompatActivity {
                 break;
 
             case "Tra cứu điểm":
-
-                int typeExamScore = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
+                dataArrayList.add(new ExamScoreDTO("1","1","1","1","1","1","1"));
+                /*int typeExamScore = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
                         Activity_Login.username, Activity_Login.password);
                 List<ExamScoreDTO> listExamScore = ExamScoreDAO.getInstance(Activity_Notifications.this).SelectExamScoreById(
                         Activity_Notifications.this, Activity_Login.idUser, typeExamScore );
                 for (int i = 0; i < listExamScore.size(); i++) {
                     Log.d("Exam Score of Student: ", listExamScore.get(i).toString());
                     dataArrayList.add(listExamScore.get(i));
-                }
-                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_notification_item, dataArrayList);
+                }*/
+                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_score_item, dataArrayList);
 
                 break;
 
@@ -106,17 +99,16 @@ public class Activity_Notifications extends AppCompatActivity {
                 break;
 
             case "Lịch học":
-
-                int type = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
+                /*int type = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
                         Activity_Login.username, Activity_Login.password);
                 List<ScheduleDTO> listSchedule = ScheduleDAO.getInstance(
                         Activity_Notifications.this).SelectScheduleByIdStudent(Activity_Notifications.this,
                         Activity_Login.idUser, type);
                 for (int i = 0; i < listSchedule.size(); i++) {
                     dataArrayList.add(listSchedule.get(i));
-                }
+                }*/
 
-               // dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
+               dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_schedule_item, dataArrayList);
                 break;
             case "Quản lý thông tin phòng học":
@@ -125,6 +117,10 @@ public class Activity_Notifications extends AppCompatActivity {
                 break;
             case "Xem các lớp học":
                 dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
+                        "Đại học", "Tuyết Loan",
+                        "10 buổi", "10.000.000",
+                        "Hehe","Đoán coi"));
+               /* dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
                         "Hehe","Đoán coi"));
@@ -137,12 +133,14 @@ public class Activity_Notifications extends AppCompatActivity {
                         whereClause, whereArgs);
                 for (int i = 0; i < listClass.size(); i++) {
                     dataArrayList.add(listClass.get(i));
-                }
+                }*/
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_class_for_teacher_item, dataArrayList);
                 break;
             case "Xem chứng chỉ":
                 dataArrayList.add(new CertificateDTO("1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_certificate_item, dataArrayList);
+                break;
+            case "Quản lý thông báo":
                 break;
 
         }

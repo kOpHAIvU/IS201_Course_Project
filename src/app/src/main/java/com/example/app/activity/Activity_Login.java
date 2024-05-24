@@ -14,18 +14,31 @@ import android.widget.Toast;
 import com.example.app.R;
 import com.example.app.adapter.AccountDAO;
 import com.example.app.adapter.CertificateDAO;
+import com.example.app.adapter.ClassDAO;
+import com.example.app.adapter.ClassroomDAO;
 import com.example.app.adapter.CollectionTuitionFeesDAO;
 import com.example.app.adapter.DataProvider;
 import com.example.app.adapter.ExamScoreDAO;
 import com.example.app.adapter.ExaminationDAO;
+import com.example.app.adapter.NotificationDAO;
+import com.example.app.adapter.OfficialStudentDAO;
+import com.example.app.adapter.PotentialStudentDAO;
+import com.example.app.adapter.ProgramDAO;
 import com.example.app.adapter.ScheduleDAO;
 import com.example.app.adapter.StaffDAO;
 import com.example.app.adapter.TeacherDAO;
 import com.example.app.adapter.TeachingDAO;
+import com.example.app.model.AccountDTO;
 import com.example.app.model.CertificateDTO;
+import com.example.app.model.ClassDTO;
+import com.example.app.model.ClassroomDTO;
 import com.example.app.model.CollectionTuitionFeesDTO;
 import com.example.app.model.ExamScoreDTO;
 import com.example.app.model.ExaminationDTO;
+import com.example.app.model.NotificationDTO;
+import com.example.app.model.OfficialStudentDTO;
+import com.example.app.model.PotentialStudentDTO;
+import com.example.app.model.ProgramDTO;
 import com.example.app.model.ScheduleDTO;
 import com.example.app.model.StaffDTO;
 import com.example.app.model.TeacherDTO;
@@ -93,22 +106,21 @@ public class Activity_Login extends AppCompatActivity {
             }
         });
 
-
-/*        // Insert data in OFFICIAL_STUDENT
+        // Insert data in OFFICIAL_STUDENT
 
         OfficialStudentDTO student1 = new OfficialStudentDTO("STU1", "Nguyen Van A", "Binh Dinh", "034343434", "Nam", "22/2/2022", 0);
         OfficialStudentDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, student1);
         OfficialStudentDTO student2 = new OfficialStudentDTO("STU2", "Le Thi B", "Binh Duong","0232323222", "Nữ", "22/2/2022", 0 );
         OfficialStudentDAO.getInstance(Activity_Login.this).insertOfficialStudent(Activity_Login.this, student2);
 
-        // Insert data in STAFF
+        /*// Insert data in STAFF
 
-        StaffDTO staff1 = new StaffDTO("STA1", "Nguyen Thi C", "TP HCM", "0343333333", "Nữ", "22/2/2022", "1", 0);
+        StaffDTO staff1 = new StaffDTO("STA1", "Nguyen Thi C", "TP HCM", "0343333333", "Nữ", "22/2/2022", 1, "1",1);
         StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff1);
-        StaffDTO staff2 = new StaffDTO("STA2", "Nguyen Thi D", "TP HCM", "03435555333", "Nữ","22/2/2022", "2", 0);
+        StaffDTO staff2 = new StaffDTO("STA2", "Nguyen Thi D", "TP HCM", "03435555333", "Nữ","22/2/2022", 1, "1",1);
         StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff2);
-        StaffDTO staff3 = new StaffDTO("STA3", "Nguyen Thi E", "TP HCM", "03435555333", "Nữ","22/2/2022", "3", 0);
-        StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff3);
+        StaffDTO staff3 = new StaffDTO("STA3", "Nguyen Thi E", "TP HCM", "03435555333", "Nữ","22/2/2022", 1, "1",1);
+        StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff3);*/
 
         // Insert data in TEACHERS
 
@@ -182,9 +194,9 @@ public class Activity_Login extends AppCompatActivity {
         ScheduleDAO.getInstance(Activity_Login.this).InsertSchedule(Activity_Login.this,
                 schedule1);
         ScheduleDAO.getInstance(Activity_Login.this).InsertSchedule(Activity_Login.this,
-                schedule2);*/
+                schedule2);
 
-        /*// Insert data in Certificate
+        // Insert data in Certificate
 
         CertificateDTO certificate1 = new CertificateDTO(null, "Ielts Academic",
                 "Ielts Academic được công nhận rộng rãi như là yêu cầu ngôn ngữ đầu " +
@@ -238,17 +250,16 @@ public class Activity_Login extends AppCompatActivity {
         TeachingDAO.getInstance(Activity_Login.this).InsertDate(Activity_Login.this,
                 teaching1);
         TeachingDAO.getInstance(Activity_Login.this).InsertDate(Activity_Login.this,
-                teaching2);*/
+                teaching2);
 
         // Insert data in STAFF
 
-       /* StaffDTO staff1 = new StaffDTO("STA1", "Nguyen Thi C", "TP HCM", "0343333333", "Nữ", "22/2/2022", 2000000,"1", 0);
+        StaffDTO staff1 = new StaffDTO("STA1", "Nguyen Thi C", "TP HCM", "0343333333", "Nữ", "22/2/2022", 2000000,"1", 0);
         StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff1);
         StaffDTO staff2 = new StaffDTO("STA2", "Nguyen Thi D", "TP HCM", "03435555333", "Nữ","22/2/2022", 5000000, "2", 0);
         StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff2);
         StaffDTO staff3 = new StaffDTO("STA3", "Nguyen Thi E", "TP HCM", "03435555333", "Nữ","22/2/2022", 10000000, "3", 0);
         StaffDAO.getInstance(Activity_Login.this).insertStaff(Activity_Login.this, staff3);
-*/
 
     }
 }

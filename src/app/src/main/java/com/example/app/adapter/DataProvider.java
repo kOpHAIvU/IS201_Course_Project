@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DataProvider extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ENGLISH_CENTER_MANAGEMENT.db";
     private static DataProvider instance;
-    private static final int DATABASE_VERSION = 70;
+    private static final int DATABASE_VERSION = 75;
     private DataProvider(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -40,7 +40,7 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("EXCEPTION CREATE CERTIFICATE",  e.getMessage());
         }
-        db.execSQL("DROP TABLE STAFF");
+        //db.execSQL("DROP TABLE STAFF");
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS STAFF (" +
                     "ID_STAFF TEXT PRIMARY KEY, " +
@@ -189,7 +189,7 @@ public class DataProvider extends SQLiteOpenHelper {
         } catch ( Exception e) {
             Log.d("CREATE EXAM_SCORE",  e.getMessage());
         }
-        db.execSQL("DELETE FROM TEACHING");
+        //db.execSQL("DELETE FROM TEACHING");
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS TEACHING (" +
                     "ID_TEACHING TEXT PRIMARY KEY , " +

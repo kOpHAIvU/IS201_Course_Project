@@ -34,18 +34,22 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
         super.onStart();
         if (dataArrayList.isEmpty()) {
             //Học viên
-            dataArrayList.add(new List_Information("Thông báo hệ thống", R.drawable.tb_he_thong));
             dataArrayList.add(new List_Information("Tra cứu điểm", R.drawable.score_icon));
             dataArrayList.add(new List_Information("Tra cứu chương trình đào tạo", R.drawable.chuong_trinh_dt));
+            dataArrayList.add(new List_Information("Thông báo hệ thống", R.drawable.tb_he_thong));
             dataArrayList.add(new List_Information("Lịch học", R.drawable.baseline_schedule_24));
 
             //Nhân viên ghi danh
             dataArrayList.add(new List_Information("Quản lý học viên", R.drawable.quanlylophoc));
+            dataArrayList.add(new List_Information("Quản lý lớp học", R.drawable.lophoc));
 
             //Nhân viên học vụ
             dataArrayList.add(new List_Information("Xem các lớp học", R.drawable.lophoc));
             dataArrayList.add(new List_Information("Xem chứng chỉ", R.drawable.chuong_trinh_dt));
-            dataArrayList.add(new List_Information("Quản lý lịch học", R.drawable.baseline_schedule_24));
+            //dataArrayList.add(new List_Information("Quản lý lịch học", R.drawable.baseline_schedule_24));
+
+            //Nhân viên hv + ghi danh
+            dataArrayList.add(new List_Information("Quản lý thông báo", R.drawable.tb_he_thong));
 
             //Quản lý
             dataArrayList.add(new List_Information("Quản lý tài khoản", R.drawable.quanlytaikhoan));

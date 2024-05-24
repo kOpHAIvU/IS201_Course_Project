@@ -19,13 +19,14 @@ import androidx.core.content.ContextCompat;
 
 import com.example.app.R;
 import com.example.app.activity.Activity_Add_Account;
-import com.example.app.activity.Activity_Add_Certificate;
 import com.example.app.activity.Activity_Add_Class;
 import com.example.app.activity.Activity_Add_Exam_Score;
 import com.example.app.activity.Activity_Add_Official_Student;
 import com.example.app.activity.Activity_Add_Potential_Student;
 import com.example.app.activity.Activity_Add_Program;
 import com.example.app.activity.Activity_Add_Schedule;
+import com.example.app.activity.Activity_Add_Staff;
+import com.example.app.activity.Activity_Notifications_Second_Layer;
 import com.example.app.activity.Activity_Notifications_ToolBars_Second_Layer;
 
 import java.util.ArrayList;
@@ -233,16 +234,70 @@ public class List_Adapter extends ArrayAdapter {
         endDate.setText(listClass.getEndDate());
         programID.setText(listClass.getIdProgram());
         teacherName.setText(listClass.getIdTeacher());
-
-        if (convertView.findViewById(R.id.detailBtn) != null) {
-            Button detilBtn = convertView.findViewById(R.id.detailBtn);
-            detilBtn.setTag(position);
-            detilBtn.setOnClickListener(new View.OnClickListener() {
+        if (convertView.findViewById(R.id.edit_class) != null) {
+            //Tính năng thêm/xóa lớp của nhân viên ghi danh
+            Button editClass = convertView.findViewById(R.id.edit_class);
+            editClass.setTag(position);
+            editClass.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
+                    Intent intent = new Intent(getContext(), Activity_Add_Class.class);
                     intent.putExtra("classID", "1");
-                    intent.putExtra("idCertificate", "");
+                    mContext.startActivity(intent);
+                }
+            });
+            Button removeClass = convertView.findViewById(R.id.remove_class);
+            removeClass.setTag(position);
+            removeClass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Xác nhận xóa");
+                    builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                    // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            int position = (int) v.getTag();
+                            arrayDataList.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+
+                    // Nút "Hủy": Không làm gì cả, đóng dialog
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Tạo và hiển thị AlertDialog
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            });
+        }
+
+        if (convertView.findViewById(R.id.detailBtn) != null) {
+            TextView staffID = convertView.findViewById(R.id.staffID);
+            staffID.setText(listClass.getIdStaff());
+            Button detailBtn = convertView.findViewById(R.id.detailBtn);
+            detailBtn.setTag(position);
+            detailBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent;
+                    if (convertView.findViewById(R.id.edit_class) != null) {
+                        //Nhân viên ghi danh
+                        intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
+                        intent.putExtra("classID", "1");
+                    } else {
+                        //Nhân viên học vụ
+                        intent = new Intent(getContext(), Activity_Notifications_Second_Layer.class);
+                        intent.putExtra("classID", "1");
+                        intent.putExtra("idCertificate", "");
+                    }
                     mContext.startActivity(intent);
                 }
             });
@@ -528,7 +583,7 @@ public class List_Adapter extends ArrayAdapter {
         detailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
+                Intent intent = new Intent(getContext(), Activity_Notifications_Second_Layer.class);
                 intent.putExtra("idCertificate", "1");
                 intent.putExtra("classID", "");
                 mContext.startActivity(intent);
@@ -613,6 +668,140 @@ public class List_Adapter extends ArrayAdapter {
 
     private void Staff_View (@Nullable View convertView, int position) {
         StaffDTO listStaff = (StaffDTO) arrayDataList.get(position);
+        TextView idStaff, fullName, address, phoneNumber, gender, birthday, type;
+        idStaff = convertView.findViewById(R.id.idStaff);
+        idStaff.setText(listStaff.getIdStaff());
+
+        fullName = convertView.findViewById(R.id.fullName);
+        fullName.setText(listStaff.getFullName());
+
+        address = convertView.findViewById(R.id.address);
+        address.setText(listStaff.getAddress());
+
+        phoneNumber = convertView.findViewById(R.id.phoneNumber);
+        phoneNumber.setText(listStaff.getPhoneNumber());
+
+        gender = convertView.findViewById(R.id.gender);
+        gender.setText(listStaff.getGender());
+
+        birthday = convertView.findViewById(R.id.birthday);
+        birthday.setText(listStaff.getBirthday());
+
+        type = convertView.findViewById(R.id.type);
+        type.setText("Nhân viên ghi danh");
+
+        Button removeStaff = convertView.findViewById(R.id.remove_staff);
+        removeStaff.setTag(position);
+        removeStaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xác nhận xóa");
+                builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int position = (int) v.getTag();
+                        arrayDataList.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                // Nút "Hủy": Không làm gì cả, đóng dialog
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Tạo và hiển thị AlertDialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button editStaff = convertView.findViewById(R.id.edit_staff);
+        editStaff.setTag(position);
+        editStaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Activity_Add_Staff.class);
+                intent.putExtra("idStaff", listStaff.getIdStaff());
+                intent.putExtra("idTeacher", "");
+                mContext.startActivity(intent);
+            }
+        });
+    }
+
+    private void Teacher_View (@Nullable View convertView, int position) {
+        TeacherDTO listStaff = (TeacherDTO) arrayDataList.get(position);
+        TextView idStaff, fullName, address, phoneNumber, gender, birthday, type;
+        idStaff = convertView.findViewById(R.id.idStaff);
+        idStaff.setText(listStaff.getIdTeacher());
+
+        fullName = convertView.findViewById(R.id.fullName);
+        fullName.setText(listStaff.getFullName());
+
+        address = convertView.findViewById(R.id.address);
+        address.setText(listStaff.getAddress());
+
+        phoneNumber = convertView.findViewById(R.id.phoneNumber);
+        phoneNumber.setText(listStaff.getPhoneNumber());
+
+        gender = convertView.findViewById(R.id.gender);
+        gender.setText(listStaff.getGender());
+
+        birthday = convertView.findViewById(R.id.birthday);
+        birthday.setText(listStaff.getBirthday());
+
+        type = convertView.findViewById(R.id.type);
+        type.setText("Giáo viên");
+
+        Button removeStaff = convertView.findViewById(R.id.remove_staff);
+        removeStaff.setTag(position);
+        removeStaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Xác nhận xóa");
+                builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int position = (int) v.getTag();
+                        arrayDataList.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                // Nút "Hủy": Không làm gì cả, đóng dialog
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Tạo và hiển thị AlertDialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button editStaff = convertView.findViewById(R.id.edit_staff);
+        editStaff.setTag(position);
+        editStaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Activity_Add_Staff.class);
+                intent.putExtra("idStaff", "");
+                intent.putExtra("idTeacher", listStaff.getIdTeacher());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
 }

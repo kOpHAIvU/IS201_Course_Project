@@ -18,6 +18,9 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Activity_Notifications_Second_Layer"
+            android:exported="false" />
+        <activity
             android:name=".activity.Activity_Add_Exam_Score"
             android:exported="false" />
         <activity
