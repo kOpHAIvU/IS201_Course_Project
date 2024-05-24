@@ -57,8 +57,6 @@ public class List_Adapter extends ArrayAdapter {
             List_Education_Program_View(convertView, position);
         else if (item instanceof ClassDTO)
             List_Class_View(convertView, position);
-        else if (item instanceof ClassDTO_Manage)
-            List_Class_Manage_View(convertView, position);
         else if (item instanceof PotentialStudentDTO)
             PotentialStudentDTO_View(convertView, position);
         else if (item instanceof OfficialStudentDTO)
@@ -117,13 +115,14 @@ public class List_Adapter extends ArrayAdapter {
             idStudent = convertView.findViewById(R.id.idStudent);
             idStudent.setText(listScore.getIdStudent());
             studentName = convertView.findViewById(R.id.studentName);
+            studentName.setText("Haha");
             Button editScore = convertView.findViewById(R.id.edit_score);
             editScore.setTag(position);
             editScore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), Activity_Add_Exam_Score.class);
-                    intent.putExtra("idStudent", "");
+                    intent.putExtra("idStudent", "1");
                     mContext.startActivity(intent);
                 }
             });
@@ -243,12 +242,13 @@ public class List_Adapter extends ArrayAdapter {
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
                     intent.putExtra("classID", "1");
+                    intent.putExtra("idCertificate", "");
                     mContext.startActivity(intent);
                 }
             });
         }
     }
-    private void List_Class_Manage_View (@Nullable View convertView, int position) {
+    /*private void List_Class_Manage_View (@Nullable View convertView, int position) {
         TextView classID, className, startDate, endDate, programID, teacherName, staffID;
         ClassDTO_Manage listClass = (ClassDTO_Manage) arrayDataList.get(position);
 
@@ -324,7 +324,7 @@ public class List_Adapter extends ArrayAdapter {
                 mContext.startActivity(intent);
             }
         });
-    }
+    }*/
     private void PotentialStudentDTO_View (@Nullable View convertView, int position) {
         TextView studentName, phoneNumber, gender, address, level, appointmentNumber;
         studentName = convertView.findViewById(R.id.student_name);
@@ -522,49 +522,6 @@ public class List_Adapter extends ArrayAdapter {
         idCertificate.setText(listCertificate.getIdCertificate());
         name.setText(listCertificate.getName());
         content.setText(listCertificate.getContent());
-
-        Button removeCertificate = convertView.findViewById(R.id.remove_certificate);
-        removeCertificate.setTag(position);
-        removeCertificate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Xác nhận xóa");
-                builder.setMessage("Bạn có chắc chắn muốn xóa không?");
-                // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
-                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int position = (int) v.getTag();
-                        arrayDataList.remove(position);
-                        notifyDataSetChanged();
-                    }
-                });
-
-                // Nút "Hủy": Không làm gì cả, đóng dialog
-                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                // Tạo và hiển thị AlertDialog
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-            }
-        });
-
-        Button editCertificate = convertView.findViewById(R.id.edit_certificate);
-        editCertificate.setTag(position);
-        editCertificate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addCertificate = new Intent(getContext(), Activity_Add_Certificate.class);
-                addCertificate.putExtra("idCertificate", "1");
-                mContext.startActivity(addCertificate);
-            }
-        });
 
         Button detailBtn = convertView.findViewById(R.id.detailBtn);
         detailBtn.setTag(position);

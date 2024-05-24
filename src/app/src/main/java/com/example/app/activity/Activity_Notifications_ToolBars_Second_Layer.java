@@ -57,7 +57,7 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
                     , "1", "1", "1"
                     , "1", "1", "1"
                     , "1", 10, "1", "1"));
-            listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_education_program_manage_item, dataArrayList);
+            listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_education_program_item, dataArrayList);
         }
 
         listView.setAdapter(listAdapter);
