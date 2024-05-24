@@ -132,7 +132,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
-            case "Xem các lớp học":
+            /*case "Xem các lớp học":
                 toolbar.setTitle("Lớp học");
                 dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
@@ -150,7 +150,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     dataArrayList.add(listClass.get(i));
                 }
 
-                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_for_teacher_item, dataArrayList);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -159,17 +159,17 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-                break;
+                break;*/
             case "Quản lý lịch học":
                 toolbar.setTitle("Lịch học");
                 dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_schedule_manage_item, dataArrayList);
                 break;
-            case "Quản lý chứng chỉ":
+            /*case "Xem chứng chỉ":
                 toolbar.setTitle("Chương trình");
                 dataArrayList.add(new CertificateDTO("1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_certificate_item, dataArrayList);
-                break;
+                break;*/
             case "Quản lý tài khoản":
                 toolbar.setTitle("Tài khoản");
                 dataArrayList.add(new AccountDTO("1", "1", "1", "1"));
@@ -195,21 +195,21 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 addPotential.putExtra("studentID", "");
                 startActivity(addPotential);
                 break;
-            case "Xem các lớp học":
+            /*case "Xem các lớp học":
                 Intent addClass = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Class.class);
                 addClass.putExtra("classID", "1");
                 startActivity(addClass);
-                break;
+                break;*/
             case "Quản lý lịch học":
                 Intent addSchedule = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Schedule.class);
                 addSchedule.putExtra("idSchedule", "");
                 startActivity(addSchedule);
                 break;
-            case "Quản lý chứng chỉ":
+            /*case "Xem chứng chỉ":
                 Intent addCertificate = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Certificate.class);
                 addCertificate.putExtra("idCertificate", "1");
                 startActivity(addCertificate);
-                break;
+                break;*/
             case "Quản lý tài khoản":
                 Intent addAccount = new Intent();
                 addAccount.putExtra("idAccount", "");

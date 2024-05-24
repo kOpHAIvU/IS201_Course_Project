@@ -44,7 +44,7 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
 
             //Nhân viên học vụ
             dataArrayList.add(new List_Information("Xem các lớp học", R.drawable.lophoc));
-            dataArrayList.add(new List_Information("Quản lý chứng chỉ", R.drawable.chuong_trinh_dt));
+            dataArrayList.add(new List_Information("Xem chứng chỉ", R.drawable.chuong_trinh_dt));
             dataArrayList.add(new List_Information("Quản lý lịch học", R.drawable.baseline_schedule_24));
 
             //Quản lý
@@ -65,7 +65,8 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
         Intent intent;
         if (selectedText == "Thông báo hệ thống" || selectedText == "Tra cứu điểm"
                 || selectedText == "Tra cứu chương trình đào tạo" || selectedText == "Lịch học"
-                || selectedText == "Quản lý thông tin phòng học") {
+                || selectedText == "Quản lý thông tin phòng học" || selectedText == "Xem các lớp học"
+                || selectedText == "Xem chứng chỉ") {
             intent = new Intent(getContext(), Activity_Notifications.class);
             intent.putExtra("message", selectedText);
         } else {
