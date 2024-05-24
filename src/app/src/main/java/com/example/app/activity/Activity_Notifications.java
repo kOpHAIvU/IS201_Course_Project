@@ -8,8 +8,13 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
+import com.example.app.adapter.AccountDAO;
+import com.example.app.adapter.ClassDAO;
+import com.example.app.adapter.ExamScoreDAO;
 import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.ProgramDAO;
+import com.example.app.adapter.ScheduleDAO;
+import com.example.app.model.ClassDTO;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.NotificationDTO;
 import com.example.app.model.ExamScoreDTO;
@@ -57,10 +62,20 @@ public class Activity_Notifications extends AppCompatActivity {
 
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_notification_item, dataArrayList);
                 break;
-
+///private String idExamScore, idExam, idStudent, speaking, writing, listening, reading;
             case "Tra cứu điểm":
-                //dataArrayList.add(new ExamScoreDTO("IS201", "10","9","8","9"));
-                //dataArrayList.add(new ExamScoreDTO("NT106", "9","8","10","10"));
+               //dataArrayList.add(new ExamScoreDTO("IS201", "5","9","8","9", "5", "6"));
+                //dataArrayList.add(new ExamScoreDTO("NT106", "9","8","6","10", "5", "6"));
+
+                int type = AccountDAO.getInstance(Activity_Notifications.this).GetObjectLogin(Activity_Notifications.this,
+                        Activity_Login.username, Activity_Login.password);
+                List<ExamScoreDTO> listExamScore = ExamScoreDAO.getInstance(Activity_Notifications.this).SelectExamScoreById(
+                        Activity_Notifications.this, Activity_Login.idUser, type );
+
+                for (int i = 0; i < listExamScore.size(); i++) {
+                    dataArrayList.add(listExamScore.get(i));
+                }
+
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_score_item, dataArrayList);
                 break;
 
@@ -84,15 +99,15 @@ public class Activity_Notifications extends AppCompatActivity {
                 break;
 
             case "Lịch học":
-                /*String whereClauseClass = "STATUS = ?";
-                String[] whereArgsClass = new String[] {"0"};
 
-                List<ClassDTO> listClass = ClassDAO.getInstance(Activity_Notifications.this).selectClass(Activity_Notifications.this,
-                        whereClauseClass, whereArgsClass);
-
-                for (int i = 0; i < listClass.size(); i++) {
-                    dataArrayList.add(listClass.get(i));
-                }*/
+                String whereClauseSchedule = "STATUS = ?" ;
+                String[] whereArgsSchedule = new String[] {"0"};
+                List<ScheduleDTO> listSchedule = ScheduleDAO.getInstance(
+                        Activity_Notifications.this).SelectSchedule(Activity_Notifications.this,
+                        whereClauseSchedule, whereArgsSchedule);
+                for (int i = 0; i < listSchedule.size(); i++) {
+                    dataArrayList.add(listSchedule.get(i));
+                }
 
                 dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_schedule_item, dataArrayList);

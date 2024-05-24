@@ -16,15 +16,9 @@ import android.widget.ListView;
 import com.example.app.R;
 import com.example.app.adapter.ClassDAO;
 import com.example.app.adapter.PotentialStudentDAO;
-<<<<<<< HEAD
-import com.example.app.model.ClassDTO;
-import com.example.app.model.AccountDTO;
-import com.example.app.model.CertificateDTO;
-=======
 import com.example.app.model.AccountDTO;
 import com.example.app.model.CertificateDTO;
 import com.example.app.model.ClassDTO;
->>>>>>> refs/remotes/origin/main
 import com.example.app.model.ClassDTO_Manage;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.PotentialStudentDTO;
@@ -57,10 +51,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 finish();
             }
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/main
 
         switch (message) {
             //Nhân viên ghi danh
@@ -106,10 +96,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
         }
         listView.setAdapter(listAdapter);
         setSupportActionBar(toolbar);
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/main
     }
 
     @Override
@@ -137,11 +123,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                     Log.d("List potential Student: " ,listPotentialStudent.get(i).toString());
                     dataArrayList.add(listPotentialStudent.get(i));
                 }*/
-<<<<<<< HEAD
-
-
-=======
->>>>>>> refs/remotes/origin/main
                 List<PotentialStudentDTO> listPotentialStudent = PotentialStudentDAO.getInstance(
                         Activity_Notifications_ToolBars.this).SelectStudent(Activity_Notifications_ToolBars.this, whereClause, whereArgs);
 
