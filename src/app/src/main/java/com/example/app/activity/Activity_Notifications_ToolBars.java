@@ -81,7 +81,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
-            case "Quản lý lớp học":
+            case "Xem các lớp học":
                 toolbar.setTitle("Lớp học");
                 dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
@@ -108,7 +108,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
 
         switch (message) {
             //Nhân viên ghi danh
-            case "Quản lý thông tin học viên":
+            case "Quản lý học viên":
                 toolbar.setTitle("Học viên tiềm năng");
                 /*dataArrayList.add(new PotentialStudentDTO("Tuyết Loan", "0912345678"
                         , "Nam", "Ký túc xá khu A"
@@ -132,7 +132,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
-            case "Quản lý lớp học":
+            case "Xem các lớp học":
                 toolbar.setTitle("Lớp học");
                 dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
                         "Đại học", "Tuyết Loan",
@@ -190,12 +190,12 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (message) {
-            case "Quản lý thông tin học viên":
+            case "Quản lý học viên":
                 Intent addPotential = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Potential_Student.class);
                 addPotential.putExtra("studentID", "");
                 startActivity(addPotential);
                 break;
-            case "Quản lý lớp học":
+            case "Xem các lớp học":
                 Intent addClass = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Class.class);
                 addClass.putExtra("classID", "1");
                 startActivity(addClass);

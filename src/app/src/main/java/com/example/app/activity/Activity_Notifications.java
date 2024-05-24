@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.example.app.R;
 import com.example.app.adapter.NotificationDAO;
 import com.example.app.adapter.ProgramDAO;
+import com.example.app.model.ClassroomDTO;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.NotificationDTO;
 import com.example.app.model.ExamScoreDTO;
@@ -98,17 +99,9 @@ public class Activity_Notifications extends AppCompatActivity {
                 listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_schedule_item, dataArrayList);
                 break;
             //Nhân viên học vụ
-
-            case "Quản lý lớp học":
-                break;
-            case "Quản lý chương trình học":
-                break;
-            //Quản lys
-            case "Quản lý tài khoản":
-                break;
             case "Quản lý thông tin phòng học":
-                break;
-            case "Quản lý thông tin nhân viên/giáo viên":
+                dataArrayList.add(new ClassroomDTO("1", "1"));
+                listAdapter = new List_Adapter(Activity_Notifications.this, R.layout.list_classroom_item, dataArrayList);
                 break;
 
         }
