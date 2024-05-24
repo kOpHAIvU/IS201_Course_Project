@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.app.R;
+import com.example.app.model.ExamScoreDTO;
 import com.example.app.model.List_Adapter;
 import com.example.app.model.OfficialStudentDTO;
 import com.example.app.model.ProgramDTO;
@@ -47,8 +48,8 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
 
         if (!message1.equals("")) {
             //toolbar.setTitle("Chi tiết lớp học");
-            dataArrayList.add(new OfficialStudentDTO("1", "1","1", "1", "1", "1", 1));
-            listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_offfical_student_item, dataArrayList);
+            dataArrayList.add(new ExamScoreDTO("1","1","1","1","1","1","1"));
+            listAdapter = new List_Adapter(Activity_Notifications_ToolBars_Second_Layer.this, R.layout.list_score_manage_item, dataArrayList);
         }
 
         if (!message2.equals("")) {
@@ -73,8 +74,8 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (!message1.equals("")) {
-            Intent addOffical = new Intent(Activity_Notifications_ToolBars_Second_Layer.this, Activity_Add_Official_Student.class);
-            addOffical.putExtra("classID", "");
+            Intent addOffical = new Intent(Activity_Notifications_ToolBars_Second_Layer.this, Activity_Add_Exam_Score.class);
+            addOffical.putExtra("studentID", "");
             startActivity(addOffical);
         }
         if (!message2.equals("")) {

@@ -10,15 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.example.app.R;
 import com.example.app.activity.Activity_Add_Account;
 import com.example.app.activity.Activity_Add_Certificate;
 import com.example.app.activity.Activity_Add_Class;
+import com.example.app.activity.Activity_Add_Exam_Score;
 import com.example.app.activity.Activity_Add_Official_Student;
 import com.example.app.activity.Activity_Add_Potential_Student;
 import com.example.app.activity.Activity_Add_Program;
@@ -66,6 +69,8 @@ public class List_Adapter extends ArrayAdapter {
             Account_View(convertView, position);
         else if (item instanceof  CertificateDTO)
             Certificate_View(convertView, position);
+        else if (item instanceof ClassroomDTO)
+            Classroom_View(convertView, position);
         else
             throw new IllegalArgumentException("Unknown data type: " + item.getClass().getName());
 
@@ -81,7 +86,6 @@ public class List_Adapter extends ArrayAdapter {
         listImage.setImageResource(listData.getImg());
         listName.setText(listData.getName());
     }
-
     private void List_Notifications_View (@Nullable View convertView, int position) {
         TextView title, poster, description;
         title = convertView.findViewById(R.id.title);
@@ -94,16 +98,42 @@ public class List_Adapter extends ArrayAdapter {
         poster.setText(listNotifications.getPoster());
         description.setText(listNotifications.getDescription());
     }
-
     private void List_Score_View (@Nullable View convertView, int position) {
-        TextView courseID, speak, write, listen, read;
-        courseID = convertView.findViewById(R.id.courseID);
-        speak = convertView.findViewById(R.id.speaking_score);
-        write = convertView.findViewById(R.id.writing_score);
-        listen = convertView.findViewById(R.id.listening_score);
-        read = convertView.findViewById(R.id.reading_score);
-
+        TextView speak, write, listen, read;
         ExamScoreDTO listScore = (ExamScoreDTO) arrayDataList.get(position);
+
+        speak = convertView.findViewById(R.id.speaking_score);
+        speak.setText(listScore.getSpeaking());
+        write = convertView.findViewById(R.id.writing_score);
+        write.setText(listScore.getWriting());
+        listen = convertView.findViewById(R.id.listening_score);
+        listen.setText(listScore.getListening());
+        read = convertView.findViewById(R.id.reading_score);
+        read.setText(listScore.getReading());
+
+        if (convertView.findViewById(R.id.edit_score) != null) {
+            //Giao diện nhân viên
+            TextView studentName, idStudent;
+            idStudent = convertView.findViewById(R.id.idStudent);
+            idStudent.setText(listScore.getIdStudent());
+            studentName = convertView.findViewById(R.id.studentName);
+            Button editScore = convertView.findViewById(R.id.edit_score);
+            editScore.setTag(position);
+            editScore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), Activity_Add_Exam_Score.class);
+                    intent.putExtra("idStudent", "");
+                    mContext.startActivity(intent);
+                }
+            });
+        } else {
+            //Giao diện học viên
+            TextView courseID;
+            courseID = convertView.findViewById(R.id.courseID);
+            courseID.setText(listScore.getIdExam());
+        }
+
 
 /*        courseID.setText(listScore.courseID);
         speak.setText(listScore.speak);
@@ -111,7 +141,6 @@ public class List_Adapter extends ArrayAdapter {
         listen.setText(listScore.listen);
         read.setText(listScore.read);*/
     }
-
     private void List_Education_Program_View (@Nullable View convertView, int position) {
         TextView idProgram, programName, inputScore, outputScore, content, speak, write, read, listen, tuitionFees, certificate, studyPeriod;
         idProgram = convertView.findViewById(R.id.idProgram);
@@ -142,7 +171,7 @@ public class List_Adapter extends ArrayAdapter {
         tuitionFees.setText(String.valueOf(listEducationProgram.getTuitionFees()));
         certificate.setText(listEducationProgram.getIdCertificate());
 
-        Button editProgram, removeProgram, detailProgram;
+        Button editProgram, removeProgram;
         if (convertView.findViewById(R.id.edit_program) != null) {
             removeProgram = convertView.findViewById(R.id.remove_program);
             removeProgram.setTag(position);
@@ -186,14 +215,6 @@ public class List_Adapter extends ArrayAdapter {
                     mContext.startActivity(editProgram);
                 }
             });
-
-            /*detailProgram = convertView.findViewById(R.id.detailBtn);
-            detailProgram.setTag(position);
-            detailProgram.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });*/
         }
     }
     private void List_Class_View (@Nullable View convertView, int position) {
@@ -213,7 +234,19 @@ public class List_Adapter extends ArrayAdapter {
         endDate.setText(listClass.getEndDate());
         programID.setText(listClass.getIdProgram());
         teacherName.setText(listClass.getIdTeacher());
-        teacherName.setText(listClass.getIdTeacher());
+
+        if (convertView.findViewById(R.id.detailBtn) != null) {
+            Button detilBtn = convertView.findViewById(R.id.detailBtn);
+            detilBtn.setTag(position);
+            detilBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), Activity_Notifications_ToolBars_Second_Layer.class);
+                    intent.putExtra("classID", "1");
+                    mContext.startActivity(intent);
+                }
+            });
+        }
     }
     private void List_Class_Manage_View (@Nullable View convertView, int position) {
         TextView classID, className, startDate, endDate, programID, teacherName, staffID;
@@ -603,6 +636,26 @@ public class List_Adapter extends ArrayAdapter {
             }
         });
     }
+    private void Classroom_View (@Nullable View convertView, int position) {
+        ClassroomDTO listClassromm = (ClassroomDTO) arrayDataList.get(position);
+        TextView idClassroom, nameClassroom, name;
+        idClassroom = convertView.findViewById(R.id.idClassroom);
+        nameClassroom = convertView.findViewById(R.id.nameRoom);
+        name = convertView.findViewById(R.id.name);
 
+        idClassroom.setText(listClassromm.getIdRoom());
+        nameClassroom.setText(listClassromm.getName());
+
+        LinearLayout layout;
+        layout = convertView.findViewById(R.id.linear_layout);
+        if (true) {
+            name.setText("Hê hê");
+            layout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.red_border));
+        } else layout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.blue_border));
+    }
+
+    private void Staff_View (@Nullable View convertView, int position) {
+        StaffDTO listStaff = (StaffDTO) arrayDataList.get(position);
+    }
 
 }

@@ -40,17 +40,17 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
             dataArrayList.add(new List_Information("Lịch học", R.drawable.baseline_schedule_24));
 
             //Nhân viên ghi danh
-            dataArrayList.add(new List_Information("Quản lý thông tin học viên", R.drawable.quanlylophoc));
+            dataArrayList.add(new List_Information("Quản lý học viên", R.drawable.quanlylophoc));
 
             //Nhân viên học vụ
-            dataArrayList.add(new List_Information("Quản lý lớp học", R.drawable.lophoc));
+            dataArrayList.add(new List_Information("Xem các lớp học", R.drawable.lophoc));
             dataArrayList.add(new List_Information("Quản lý chứng chỉ", R.drawable.chuong_trinh_dt));
             dataArrayList.add(new List_Information("Quản lý lịch học", R.drawable.baseline_schedule_24));
 
             //Quản lý
             dataArrayList.add(new List_Information("Quản lý tài khoản", R.drawable.quanlytaikhoan));
             dataArrayList.add(new List_Information("Quản lý thông tin phòng học", R.drawable.classroom));
-            dataArrayList.add(new List_Information("Quản lý thông tin nhân viên/giáo viên", R.drawable.quanlynhansu));
+            dataArrayList.add(new List_Information("Quản lý nhân viên/giáo viên", R.drawable.quanlynhansu));
         }
 
         listAdapter = new List_Adapter(getActivity(), R.layout.list_item, dataArrayList);
@@ -63,7 +63,9 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
         List_Information selectedData = (List_Information) listAdapter.getItem(position);
         String selectedText = selectedData.getName();
         Intent intent;
-        if (selectedText == "Thông báo hệ thống" || selectedText == "Tra cứu điểm" || selectedText == "Tra cứu chương trình đào tạo" || selectedText == "Lịch học") {
+        if (selectedText == "Thông báo hệ thống" || selectedText == "Tra cứu điểm"
+                || selectedText == "Tra cứu chương trình đào tạo" || selectedText == "Lịch học"
+                || selectedText == "Quản lý thông tin phòng học") {
             intent = new Intent(getContext(), Activity_Notifications.class);
             intent.putExtra("message", selectedText);
         } else {
