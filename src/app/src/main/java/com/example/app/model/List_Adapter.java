@@ -21,6 +21,7 @@ import com.example.app.R;
 import com.example.app.activity.Activity_Add_Account;
 import com.example.app.activity.Activity_Add_Class;
 import com.example.app.activity.Activity_Add_Exam_Score;
+import com.example.app.activity.Activity_Add_Notification;
 import com.example.app.activity.Activity_Add_Official_Student;
 import com.example.app.activity.Activity_Add_Potential_Student;
 import com.example.app.activity.Activity_Add_Program;
@@ -89,13 +90,57 @@ public class List_Adapter extends ArrayAdapter {
         TextView title, poster, description;
         title = convertView.findViewById(R.id.title);
         poster = convertView.findViewById(R.id.poster);
-        description = convertView.findViewById(R.id.description);
+        description = convertView.findViewById(R.id.content);
 
         NotificationDTO listNotifications = (NotificationDTO) arrayDataList.get(position);
 
         title.setText(listNotifications.getTitle());
         poster.setText(listNotifications.getPoster());
         description.setText(listNotifications.getDescription());
+
+        if (convertView.findViewById(R.id.edit_notification) != null) {
+            Button remove = convertView.findViewById(R.id.remove_notification);
+            remove.setTag(position);
+            remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Xác nhận xóa");
+                    builder.setMessage("Bạn có chắc chắn muốn xóa không?");
+                    // Nút "Đồng ý": Thực hiện xóa và thông báo ListView
+                    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            int position = (int) v.getTag();
+                            arrayDataList.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+
+                    // Nút "Hủy": Không làm gì cả, đóng dialog
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Tạo và hiển thị AlertDialog
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            });
+            Button edit = convertView.findViewById(R.id.edit_notification);
+            edit.setTag(position);
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), Activity_Add_Notification.class);
+                    intent.putExtra("idNotification", "1");
+                    mContext.startActivity(intent);
+                }
+            });
+        }
     }
     private void List_Score_View (@Nullable View convertView, int position) {
         TextView speak, write, listen, read;

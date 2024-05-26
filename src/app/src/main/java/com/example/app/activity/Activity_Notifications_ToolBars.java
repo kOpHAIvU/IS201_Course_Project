@@ -17,6 +17,7 @@ import com.example.app.adapter.PotentialStudentDAO;
 import com.example.app.model.AccountDTO;
 import com.example.app.model.ClassDTO;
 import com.example.app.model.List_Adapter;
+import com.example.app.model.NotificationDTO;
 import com.example.app.model.PotentialStudentDTO;
 import com.example.app.model.StaffDTO;
 
@@ -82,44 +83,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
 
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_potential_student_item, dataArrayList);
                 break;
-            /*case "Xem các lớp học":
-                toolbar.setTitle("Lớp học");
-                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
-                        "Đại học", "Tuyết Loan",
-                        "10 buổi", "10.000.000",
-                        "Hehe","Đoán coi"));
-                dataArrayList.add(new ClassDTO_Manage("IS201","Môn gì đó",
-                        "Đại học", "Tuyết Loan",
-                        "10 buổi", "10.000.000",
-                        "Hehe","Đoán coi"));
-
-                List<ClassDTO> listClass = ClassDAO.getInstance(
-                        Activity_Notifications_ToolBars.this).selectClass(Activity_Notifications_ToolBars.this,
-                        whereClause, whereArgs);
-                for (int i = 0; i < listClass.size(); i++) {
-                    dataArrayList.add(listClass.get(i));
-                }
-
-                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_for_teacher_item, dataArrayList);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(Activity_Notifications_ToolBars.this, Activity_Notifications_ToolBars_Second_Layer.class);
-                        intent.putExtra("classID","1");
-                        startActivity(intent);
-                    }
-                });
-                break;*/
-            /*case "Quản lý lịch học":
-                toolbar.setTitle("Lịch học");
-                dataArrayList.add(new ScheduleDTO("1", "1", "1", "1", "1", "1"));
-                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_schedule_manage_item, dataArrayList);
-                break;*/
-            /*case "Xem chứng chỉ":
-                toolbar.setTitle("Chương trình");
-                dataArrayList.add(new CertificateDTO("1", "1", "1"));
-                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_certificate_item, dataArrayList);
-                break;*/
             case "Quản lý tài khoản":
                 toolbar.setTitle("Tài khoản");
                 dataArrayList.add(new AccountDTO("1", "1", "1", "1"));
@@ -138,6 +101,11 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                         "10 buổi", "10.000.000",
                         "Hehe","Đoán coi"));
                 listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_class_to_manage_item, dataArrayList);
+                break;
+            case "Quản lý thông báo":
+                toolbar.setTitle("Thông báo");
+                dataArrayList.add(new NotificationDTO("1","1","1","1"));
+                listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, R.layout.list_notification_manage_item, dataArrayList);
                 break;
         }
         listView.setAdapter(listAdapter);
@@ -159,21 +127,6 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 addPotential.putExtra("studentID", "");
                 startActivity(addPotential);
                 break;
-            /*case "Xem các lớp học":
-                Intent addClass = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Class.class);
-                addClass.putExtra("classID", "1");
-                startActivity(addClass);
-                break;*/
-            /*case "Quản lý lịch học":
-                Intent addSchedule = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Schedule.class);
-                addSchedule.putExtra("idSchedule", "");
-                startActivity(addSchedule);
-                break;*/
-            /*case "Xem chứng chỉ":
-                Intent addCertificate = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Certificate.class);
-                addCertificate.putExtra("idCertificate", "1");
-                startActivity(addCertificate);
-                break;*/
             case "Quản lý tài khoản":
                 Intent addAccount = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Account.class);
                 addAccount.putExtra("idAccount", "");
@@ -187,8 +140,13 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 break;
             case "Quản lý lớp học":
                 Intent addClass = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Class.class);
-                addClass.putExtra("classID", "1");
+                addClass.putExtra("classID", "");
                 startActivity(addClass);
+                break;
+            case "Quản lý thông báo":
+                Intent intent = new Intent(Activity_Notifications_ToolBars.this, Activity_Add_Notification.class);
+                intent.putExtra("idNotification", "");
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
