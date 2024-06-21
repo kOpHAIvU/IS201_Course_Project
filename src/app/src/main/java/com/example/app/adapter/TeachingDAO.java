@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
+import com.example.app.model.AccountDTO;
 import com.example.app.model.ScheduleDTO;
 import com.example.app.model.TeachingDTO;
 
@@ -22,7 +23,7 @@ public class TeachingDAO {
         return instance;
     }
 
-    public int InsertDate(Context context, TeachingDTO teaching) {
+    public int InsertTeaching(Context context, TeachingDTO teaching) {
 
         int rowEffect = -1;
         ContentValues values = new ContentValues();
@@ -47,11 +48,11 @@ public class TeachingDAO {
         return rowEffect;
     }
 
-    public int UpdateDate(Context context, TeachingDTO teaching, String whereClause, String[] whereArgs)  {
+    public int UpdateTeaching(Context context, TeachingDTO teaching, String whereClause, String[] whereArgs)  {
         int rowEffect = -1;
         ContentValues values = new ContentValues();
 
-        values.put("ID_TEACHING", teaching.getIdTeaching());
+
         values.put("ID_STUDENT", teaching.getIdStudent());
         values.put("ID_CLASS",teaching.getIdClass());
         values.put("STATUS", 0);
@@ -103,6 +104,60 @@ public class TeachingDAO {
         }
 
         return listTeaching;
+    }
+
+    public int DeleteTeaching(Context context, TeachingDTO teaching, String whereClause, String[] whereArgs) {
+        int rowEffect = -1;
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
+
+        try {
+            rowEffect = DataProvider.getInstance(context).updateData("TEACHING", values,
+                    "ID_TEACHING = ? AND STATUS = ?", new String[] {teaching.getIdTeaching(), "0"});
+            if (rowEffect > 0) {
+                Log.d("Delete teaching ", "success");
+            }
+        } catch (SQLException e) {
+            Log.d("Delete teaching Error: ", e.getMessage());
+        }
+
+        return rowEffect;
+    }
+
+    public int DeleteTeachingByIdClass(Context context, String whereClause, String[] whereArgs) {
+        int rowEffect = -1;
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
+
+        try {
+            rowEffect = DataProvider.getInstance(context).updateData("TEACHING", values,
+                    whereClause, whereArgs);
+            if (rowEffect > 0) {
+                Log.d("Delete teaching ", "success");
+            }
+        } catch (SQLException e) {
+            Log.d("Delete teaching Error: ", e.getMessage());
+        }
+
+        return rowEffect;
+    }
+
+    public int DeleteAccount(Context context, AccountDTO account, String whereClause, String[] whereArgs)  {
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
+        int rowEffect = -1;
+
+        try {
+            rowEffect = DataProvider.getInstance(context).updateData("ACCOUNT", values,
+                    "ID_ACCOUNT = ?", new String[] {account.getIdAccount()});
+            if (rowEffect > 0) {
+                Log.d("Delete account ", "success");
+            }
+        } catch (SQLException e) {
+            Log.d("Delete account Error: ", e.getMessage());
+        }
+
+        return  rowEffect;
     }
 
 }

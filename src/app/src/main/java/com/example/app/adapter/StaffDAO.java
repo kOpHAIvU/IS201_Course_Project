@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.util.Log;
 
 import com.example.app.model.OfficialStudentDTO;
+import com.example.app.model.PotentialStudentDTO;
 import com.example.app.model.StaffDTO;
 import com.example.app.model.TeacherDTO;
 
@@ -23,8 +24,9 @@ public class StaffDAO {
         return instance;
     }
 
-    public void insertStaff(Context context, StaffDTO staff) {
+    public int insertStaff(Context context, StaffDTO staff) {
         ContentValues values = new ContentValues();
+        int rowEffect = -1;
 
         int maxId = DataProvider.getInstance(context).getMaxId("STAFF", "ID_STAFF");
 
@@ -36,10 +38,10 @@ public class StaffDAO {
         values.put("BIRTHDAY", staff.getBirthday());
         values.put("SALARY", staff.getSalary());
         values.put("TYPE", staff.getType());
-        values.put("STATUS", staff.getStatus());
+        values.put("STATUS", 0);
 
         try {
-            int rowEffect = DataProvider.getInstance(context).insertData("STAFF", values);
+            rowEffect = DataProvider.getInstance(context).insertData("STAFF", values);
             Log.d("Staff information: ", staff.toString());
             if (rowEffect > 0 ) {
                 Log.d("Insert Staff: ", "success");
@@ -49,6 +51,7 @@ public class StaffDAO {
         } catch (SQLException e) {
             Log.d("Insert Staff Error: ", e.getMessage());
         }
+        return rowEffect;
     }
 
     public void deleteStaff(Context context, String whereClause, String[] whereArgs)  {
@@ -66,7 +69,7 @@ public class StaffDAO {
 
     public int updateStaff(Context context, StaffDTO staff, String whereClause, String[] whereArgs) {
         ContentValues values = new ContentValues();
-        values.put("ID_STAFF", staff.getIdStaff());
+
         values.put("FULLNAME", staff.getFullName());
         values.put("ADDRESS",staff.getAddress());
         values.put("PHONE_NUMBER", staff.getPhoneNumber());
@@ -145,4 +148,35 @@ public class StaffDAO {
 
         return listStaff;
     }
+
+    public int DeleteStaff(Context context, StaffDTO staff, String whereClause, String[] whereArgs) {
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
+        int rowEffect = -1;
+
+        try {
+            rowEffect = DataProvider.getInstance(context).updateData("STAFF", values,
+                    whereClause, whereArgs);
+        } catch (SQLException e) {
+            Log.d("Delete staff Error: ", e.getMessage());
+        }
+
+        return  rowEffect;
+    }
+
+    public int deletePotentialStudent(Context context, PotentialStudentDTO student, String whereClause, String[] whereArgs) {
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
+        int rowEffect = -1;
+
+        try {
+            rowEffect = DataProvider.getInstance(context).updateData("POTENTIAL_STUDENT", values,
+                    "ID_STUDENT = ?", new String[] {student.getStudentID()});
+        } catch (SQLException e) {
+            Log.d("Delete potential Student Error: ", e.getMessage());
+        }
+
+        return  rowEffect;
+    }
+
 }

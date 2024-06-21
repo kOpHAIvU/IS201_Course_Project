@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
+import com.example.app.model.PotentialStudentDTO;
 import com.example.app.model.StaffDTO;
 import com.example.app.model.TeacherDTO;
 import com.example.app.model.TeachingDTO;
@@ -23,8 +24,9 @@ public class TeacherDAO {
         return instance;
     }
 
-    public void insertTeacher(Context context, TeacherDTO teacher) {
+    public int insertTeacher(Context context, TeacherDTO teacher) {
         ContentValues values = new ContentValues();
+        int rowEffect = -1;
 
         int maxId = DataProvider.getInstance(context).getMaxId("TEACHERS", "ID_TEACHER");
 
@@ -34,12 +36,13 @@ public class TeacherDAO {
         values.put("PHONE_NUMBER", teacher.getPhoneNumber());
         values.put("GENDER", teacher.getGender());
         values.put("SALARY", teacher.getSalary());
-        //values.put("STATUS", teacher.getStatus());
+        values.put("BIRTHDAY", teacher.getBirthday());
+        values.put("STATUS", 0);
 
         Log.d("Id max of teacher: ", String.valueOf(maxId + 1));
 
         try {
-            int rowEffect = DataProvider.getInstance(context).insertData("TEACHERS", values);
+            rowEffect = DataProvider.getInstance(context).insertData("TEACHERS", values);
             if (rowEffect > 0 ) {
                 Log.d("Insert Teacher: ", "success");
             } else {
@@ -48,6 +51,7 @@ public class TeacherDAO {
         } catch (SQLException e) {
             Log.d("Insert Teacher Error: ", e.getMessage());
         }
+        return rowEffect;
     }
 
     public void deleteTeacher(Context context, String whereClause, String[] whereArgs)  {
@@ -63,9 +67,10 @@ public class TeacherDAO {
         }
     }
 
-    public void updateTeacher(Context context, TeacherDTO teacher, String whereClause, String[] whereArgs) {
+    public int updateTeacher(Context context, TeacherDTO teacher, String whereClause, String[] whereArgs) {
         ContentValues values = new ContentValues();
-        values.put("ID_TEACHER", teacher.getIdTeacher());
+        int rowsUpdated= -1;
+
         values.put("FULLNAME", teacher.getFullName());
         values.put("ADDRESS",teacher.getAddress());
         values.put("PHONE_NUMBER", teacher.getPhoneNumber());
@@ -74,7 +79,7 @@ public class TeacherDAO {
         //values.put("STATUS", teacher.getStatus());
 
         try {
-            int rowsUpdated = DataProvider.getInstance(context).updateData("TEACHERS", values, whereClause, whereArgs);
+            rowsUpdated = DataProvider.getInstance(context).updateData("TEACHERS", values, whereClause, whereArgs);
             if (rowsUpdated > 0) {
                 Log.d("Update Teacher: ", "Success");
             } else {
@@ -83,6 +88,8 @@ public class TeacherDAO {
         } catch (SQLException e) {
             Log.e("Update Teacher Error: ", e.getMessage());
         }
+
+        return rowsUpdated;
     }
 
     public List<TeacherDTO> SelectTeacher(Context context, String whereClause, String[] whereArg) {
@@ -133,4 +140,20 @@ public class TeacherDAO {
 
         return teachers;
     }
+
+    public int DeleteTeacher(Context context, TeacherDTO teacher, String whereClause, String[] whereArgs) {
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
+        int rowEffect = -1;
+
+        try {
+            rowEffect = DataProvider.getInstance(context).updateData("TEACHERS", values,
+                    whereClause, whereArgs);
+        } catch (SQLException e) {
+            Log.d("Delete teacher Error: ", e.getMessage());
+        }
+
+        return  rowEffect;
+    }
+
 }

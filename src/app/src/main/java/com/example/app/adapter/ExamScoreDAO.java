@@ -57,10 +57,6 @@ public class ExamScoreDAO {
         int rowEffect = -1;
 
         ContentValues values = new ContentValues();
-
-        values.put("ID_EXAM_SCORE", score.getIdExamScore());
-        values.put("ID_EXAM", score.getIdExam());
-        values.put("ID_STUDENT", score.getIdStudent());
         values.put("SPEAKING_SCORE", score.getSpeaking());
         values.put("LISTENING_SCORE", score.getListening());
         values.put("READING_SCORE", score.getReading());
@@ -148,9 +144,28 @@ public class ExamScoreDAO {
         } else if (type == 2 || type == 3)  {
             listExamScore = ExamScoreDAO.getInstance(context).SelectExamScore(context,
                     "STATUS = ?", new String[] {"0"});
+        } else {
+            return listExamScore;
         }
 
         return listExamScore;
+    }
+
+    public int DeleteExamScore(Context context, String whereClause, String[] whereArgs) {
+        int rowEffect = -1;
+        ContentValues values = new ContentValues();
+        values.put("STATUS", 1);
+
+        try {
+            rowEffect = DataProvider.getInstance(context).updateData("EXAM_SCORE", values,
+                    whereClause, whereArgs);
+            if (rowEffect > 0) {
+                Log.d("Delete exam score ", "success");
+            }
+        } catch (SQLException e) {
+            Log.d("Delete exam score error: ", e.getMessage());
+        }
+        return rowEffect;
     }
 
 }
