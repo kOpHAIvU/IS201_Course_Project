@@ -39,15 +39,17 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
             int type = AccountDAO.getInstance(getContext()).GetObjectLogin(getContext(),
                     Activity_Login.username, Activity_Login.password);
 
+            //dataArrayList.add(new List_Information("Tra cứu chương trình đào tạo", R.drawable.score_icon));
+
             if (type == 1)  {
                 //Học viên
                 dataArrayList.add(new List_Information("Tra cứu điểm", R.drawable.score_icon));
                 dataArrayList.add(new List_Information("Xem chứng chỉ", R.drawable.chuong_trinh_dt));
                 dataArrayList.add(new List_Information("Thông báo hệ thống", R.drawable.tb_he_thong));
+                dataArrayList.add(new List_Information("Xem các lớp học", R.drawable.lophoc));
                 dataArrayList.add(new List_Information("Lịch học", R.drawable.baseline_schedule_24));
             } else if (type == 2) {
                 //Nhân viên ghi danh
-                dataArrayList.add(new List_Information("Quản lý học viên", R.drawable.quanlylophoc));
                 dataArrayList.add(new List_Information("Xem chứng chỉ", R.drawable.chuong_trinh_dt));
                 dataArrayList.add(new List_Information("Quản lý lớp học", R.drawable.lophoc));
                 //Nhân viên hv + ghi danh
@@ -81,12 +83,15 @@ public class Fragment_Information extends Fragment implements AdapterView.OnItem
         String selectedText = selectedData.getName();
         Intent intent;
         if (selectedText == "Thông báo hệ thống" || selectedText == "Tra cứu điểm"
-                || selectedText == "Tra cứu chương trình đào tạo" || selectedText == "Lịch học"
+                || selectedText == "Tra cứu chương trình đào tạo"
                 || selectedText == "Xem các lớp học" || selectedText == "Xem chứng chỉ"
                 || selectedText == "Lịch sử thu") {
             intent = new Intent(getContext(), Activity_Notifications.class);
             intent.putExtra("message", selectedText);
-        } else if (selectedText == "Quản lý thông tin phòng học")
+        } else if(selectedText == "Lịch học"){
+            intent = new Intent(getContext(), Activity_Schedule.class);
+        }
+        else if (selectedText == "Quản lý thông tin phòng học")
             intent = new Intent(getContext(), Activity_List_Room.class);
         else {
             if (selectedText == "Quản lý doanh thu")

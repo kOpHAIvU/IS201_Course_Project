@@ -54,12 +54,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
         dataArrayList = new ArrayList<>();
         list = new ArrayList<>();
 
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        returnBtn.setOnClickListener(v -> finish());
     }
 
     @Override
@@ -134,8 +129,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
                 break;
             case "Quản lý lớp học":
                 toolbar.setTitle("Lớp học");
-                /*dataArrayList.add(new ClassDTO("IS201","Môn gì đó",
-                        "Đại học", "Tuyết Loan",
+                /*dataAn ly "Đại học", "Tuyết Loan",
                         "10 buổi", "10.000.000",
                         "Hehe","Đoán coi"));*/
 
@@ -208,6 +202,7 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
 
         if (id == R.id.search) {
             SearchView searchView = (SearchView) item.getActionView();
+            assert searchView != null;
             searchView.setQueryHint("Search here");
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -226,48 +221,56 @@ public class Activity_Notifications_ToolBars extends AppCompatActivity {
     }
 
     private void filterList(String text) {
-            list.clear();
-            for (int i = 0; i < dataArrayList.size(); i++) {
-                Object item = dataArrayList.get(i);
-                switch (message) {
-                    case "Quản lý học viên":
-                        PotentialStudentDTO potentialStudentDTO = (PotentialStudentDTO) item;
-                        if (potentialStudentDTO.getStudentName().toLowerCase().contains(text.toLowerCase()))
-                            list.add(potentialStudentDTO);
-                        break;
-                    case "Quản lý tài khoản":
-                        AccountDTO accountDTO = (AccountDTO) item;
-                        if (accountDTO.getUserName().toLowerCase().contains(text.toLowerCase()))
-                            list.add(accountDTO);
-                        break;
-                    case "Quản lý nhân viên/giáo viên":
-                        if (item instanceof StaffDTO) {
-                            StaffDTO staffDTO = (StaffDTO) item;
-                            if (staffDTO.getFullName().toLowerCase().contains(text.toLowerCase()))
-                                list.add(staffDTO);
-                        } else if (item instanceof TeacherDTO) {
-                            TeacherDTO staffDTO = (TeacherDTO) item;
-                            if (staffDTO.getFullName().toLowerCase().contains(text.toLowerCase()))
-                                list.add(staffDTO);
-                        }
-                        break;
-                    case "Quản lý lớp học":
-                        ClassDTO classDTO = (ClassDTO) item;
-                        if (classDTO.getClassName().toLowerCase().contains(text.toLowerCase()))
-                            list.add(classDTO);
-                        break;
-                    case "Quản lý thông báo":
-                        NotificationDTO notificationDTO = (NotificationDTO) item;
-                        if (notificationDTO.getTitle().toLowerCase().contains(text.toLowerCase()))
-                            list.add(notificationDTO);
-                        break;
+        list.clear();
+        text = text.toLowerCase();
+
+        if (text.isEmpty()) {
+            listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, idLayout, dataArrayList);
+            listView.setAdapter(listAdapter);
+            listAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        for (Object item : dataArrayList) {
+            if (item instanceof PotentialStudentDTO) {
+                PotentialStudentDTO potentialStudentDTO = (PotentialStudentDTO) item;
+                if (potentialStudentDTO.getStudentName().toLowerCase().contains(text)) {
+                    list.add(potentialStudentDTO);
+                }
+            } else if (item instanceof AccountDTO) {
+                AccountDTO accountDTO = (AccountDTO) item;
+                if (accountDTO.getUserName().toLowerCase().contains(text)) {
+                    list.add(accountDTO);
+                }
+            } else if (item instanceof StaffDTO) {
+                StaffDTO staffDTO = (StaffDTO) item;
+                if (staffDTO.getFullName().toLowerCase().contains(text)) {
+                    list.add(staffDTO);
+                }
+            } else if (item instanceof TeacherDTO) {
+                TeacherDTO teacherDTO = (TeacherDTO) item;
+                if (teacherDTO.getFullName().toLowerCase().contains(text)) {
+                    list.add(teacherDTO);
+                }
+            } else if (item instanceof ClassDTO) {
+                ClassDTO classDTO = (ClassDTO) item;
+                if (classDTO.getClassName().toLowerCase().contains(text)) {
+                    list.add(classDTO);
+                }
+            } else if (item instanceof NotificationDTO) {
+                NotificationDTO notificationDTO = (NotificationDTO) item;
+                if (notificationDTO.getTitle().toLowerCase().contains(text)) {
+                    list.add(notificationDTO);
                 }
             }
-            if (list.isEmpty())
-                Toast.makeText(this, "Không tìm thấy dữ liệu nào", Toast.LENGTH_SHORT).show();
-            else {
-                listAdapter.setFilterList(list);
-                //listAdapter.notifyDataSetChanged();
-            }
+        }
+
+        if (list.isEmpty()) {
+            Toast.makeText(this, "Không tìm thấy dữ liệu nào", Toast.LENGTH_SHORT).show();
+        } else {
+            listAdapter = new List_Adapter(Activity_Notifications_ToolBars.this, idLayout, list);
+            listView.setAdapter(listAdapter);
+            listAdapter.notifyDataSetChanged();
+        }
     }
 }

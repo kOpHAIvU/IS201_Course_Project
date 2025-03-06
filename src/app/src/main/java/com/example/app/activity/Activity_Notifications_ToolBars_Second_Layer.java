@@ -53,17 +53,12 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
 
         toolbar = findViewById(R.id.toolbar);
         listView = findViewById(R.id.notification_listview);
-        returnBtn = findViewById(R.id.return_btn);
+        returnBtn = findViewById(R.id.return_to_frag_btn);
 
         dataArrayList = new ArrayList<>();
         list = new ArrayList<>();
 
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        returnBtn.setOnClickListener(v -> finish());
 
         listView.setAdapter(listAdapter);
         setSupportActionBar(toolbar);
@@ -253,8 +248,7 @@ public class Activity_Notifications_ToolBars_Second_Layer extends AppCompatActiv
         if (list.isEmpty())
             Toast.makeText(this, "Không tìm thấy dữ liệu nào", Toast.LENGTH_SHORT).show();
         else {
-            listAdapter.setFilterList(list);
-            //listAdapter.notifyDataSetChanged();
+//            listAdapter.setFilterList(list);
         }
     }
 }

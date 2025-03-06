@@ -1,17 +1,43 @@
-Hướng dẫn cài đặt ứng dung trên thiết bị Android:
+<h1 align="center">
+    IS201.O21 - Phân tích thiết kế hệ thống thông tin
+</h1>
 
-* Lưu ý: Ứng dung này chỉ cho phép cài đặt trên các thiết bị thật hoặc thiết bị ảo có phiên bản Android từ 11 (tức API > 31) trở lên, các phiên bản 
+<h2>
+   Subject   
+</h2>
 
-Bước 1. Tải phiên bản IDE Android Studio phiên bản mới nhất trên web chính thức của Android Developer, có thể tham khảo link dưới đây
+- **Tên môn học:** Phân tích thiết kế hệ thống thông tin
+- **Mã môn học:** IS201
+- **Mã lớp:** IS201.O21
+- **Giảng viên:** Đỗ Thị Minh Phụng
 
-https://developer.android.com/studio?gad_source=1&gclid=CjwKCAjw1K-zBhBIEiwAWeCOF6Nk46kPyv4do9zQ0CdJW32wchYgn7-X_nynakittUbZ2-i0vMPxfRoCnsAQAvD_BwE&gclsrc=aw.ds
+<h2>
+   Introduction
+</h2>
 
-Bước 2. Cài đặt Android Studio và tạo máy ảo có API từ 31 trở lên (phiên bản Android từ 11 trở lên) vì source code được cài đặt cho máy ảo có API 31 trở lên, việc cài đặt ứng dụng các phiên bản thấp hơn có thể gây ra lỗi cấu hình, có thể tham khảo link hướng dẫn cài đặt dưới đây.
+- **Members information**
 
-https://www.youtube.com/watch?v=je_waU6BLTs
-
-Bước 3. Sau khi đã cài đặt thành công môi trường cũng như máy ảo thì tiến hành pull source code trong thư mục src từ link GitHub dưới đây. Có thể thực thi trên thiết bị ảo hoặc sử dung thiết bị thật
-
-Trong trường hợp người muốn thực thi trên thiết bị thật thì có thể sử dung 2 cách
-- Cách 1: Sử dung day cáp: Trước khi thực thi code, người dung tiến hành kích hoạt chế độ Nhà phát triển (Developer Mode) và kích hoạt Gỡ lỗi USB (USB Debugging) trên thiết bị và sau đó thực thi source code
-- Cách 2: Tiến hành xuất file APK và thực thi file đó trên thiết bị thật 
+<table align="center">
+      <tr>
+       <th>Full name</th>
+       <th>Student ID</th>
+       <th>Class</th>
+       <th>Email</th>
+       <th>Work rate</th>
+      </tr>
+      <tr>
+       <td>Lê Hoàng Vũ</td>
+       <td>22521691</td>
+       <td>MMTT2022.3</td>
+       <td>22521691@gm.uit.edu.vn</td>  
+       <td>100%</td>  
+      </tr>
+      <tr>
+       <td>Nguyễn Thị Tuyết Loạn</td>
+       <td>22520783</td>
+       <td>KTPM2022.1</td>
+       <td>22520783@gm.uit.edu.vn</td>
+        <td>100%</td>    
+      </tr>
+      <tr>
+</table>

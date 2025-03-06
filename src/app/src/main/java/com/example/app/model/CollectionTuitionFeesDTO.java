@@ -2,7 +2,7 @@ package com.example.app.model;
 
 public class CollectionTuitionFeesDTO {
 
-   private String idBill, idStudent, collectionDate, money;
+    private String idBill, idStudent, collectionDate, money;
 
     public CollectionTuitionFeesDTO(String idBill, String idStudent,
                                     String collectionDate, String money) {
